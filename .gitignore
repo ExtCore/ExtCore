@@ -1,0 +1,5 @@
+.svn/
+.vs/
+artifacts/
+*.xproj.user
+*.lock.json

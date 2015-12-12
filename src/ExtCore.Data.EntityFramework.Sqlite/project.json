@@ -1,0 +1,13 @@
+﻿{
+  "authors": [ "Dmitry Sikorsky" ],
+  "dependencies": {
+    "EntityFramework.Sqlite": "7.0.0-rc1-final",
+    "ExtCore.Data.Abstractions": "1.0.0-alpha1",
+    "ExtCore.Data.Models.Abstractions": "1.0.0-alpha1"
+  },
+  "frameworks": {
+    "dnx451": { },
+    "dnxcore50": { }
+  },
+  "version": "1.0.0-alpha1"
+}
