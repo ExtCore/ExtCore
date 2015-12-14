@@ -1,5 +1,7 @@
 # ExtCore 1.0.0-alpha2
 
+[![Join the chat at https://gitter.im/ExtCore/ExtCore](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ExtCore/ExtCore?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## Introduction
 
 ExtCore is free, open source and cross-platform framework for creating extendable applications based on ASP.NET 5.
