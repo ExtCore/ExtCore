@@ -17,11 +17,11 @@ namespace ExtCore.WebApplication.Controllers
     {
       foreach (Assembly assembly in ExtensionManager.Assemblies)
       {
-        name = assembly.GetName().Name + "." + name;
+        string fullName = assembly.GetName().Name + "." + name;
 
-        if (assembly.GetManifestResourceNames().Contains(name))
+        if (assembly.GetManifestResourceNames().Contains(fullName))
         {
-          Stream stream = assembly.GetManifestResourceStream(name);
+          Stream stream = assembly.GetManifestResourceStream(fullName);
           
           return this.Stream(stream);
         }
