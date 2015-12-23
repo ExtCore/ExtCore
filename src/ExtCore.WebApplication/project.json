@@ -3,7 +3,7 @@
     "Dmitry Sikorsky"
   ],
   "dependencies": {
-    "ExtCore.Infrastructure": "1.0.0-alpha2",
+    "ExtCore.Infrastructure": "1.0.0-alpha3",
     "Microsoft.AspNet.FileProviders.Embedded": "1.0.0-rc1-final",
     "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
     "Microsoft.AspNet.Session": "1.0.0-rc1-final",
@@ -13,5 +13,5 @@
     "dnx451": {},
     "dnxcore50": {}
   },
-  "version": "1.0.0-alpha2"
+  "version": "1.0.0-alpha3"
 }

@@ -23,20 +23,23 @@ namespace ExtCore.WebApplication
     private string applicationBasePath;
     private IAssemblyLoaderContainer assemblyLoaderContainer;
     private IAssemblyLoadContextAccessor assemblyLoadContextAccessor;
+    private ILibraryManager libraryManager;
 
-    public Startup(IHostingEnvironment hostingEnvironment, IApplicationEnvironment applicationEnvironment, IAssemblyLoaderContainer assemblyLoaderContainer, IAssemblyLoadContextAccessor assemblyLoadContextAccessor)
+    public Startup(IHostingEnvironment hostingEnvironment, IApplicationEnvironment applicationEnvironment, IAssemblyLoaderContainer assemblyLoaderContainer, IAssemblyLoadContextAccessor assemblyLoadContextAccessor, ILibraryManager libraryManager)
     {
       this.applicationBasePath = applicationEnvironment.ApplicationBasePath;
       this.assemblyLoaderContainer = assemblyLoaderContainer;
       this.assemblyLoadContextAccessor = assemblyLoadContextAccessor;
+      this.libraryManager = libraryManager;
     }
 
     public virtual void ConfigureServices(IServiceCollection services)
     {
-      IEnumerable<Assembly> assemblies = AssemblyManager.LoadAssemblies(
+      IEnumerable<Assembly> assemblies = AssemblyManager.GetAssemblies(
         this.applicationBasePath.Substring(0, this.applicationBasePath.LastIndexOf("src")) + "artifacts\\bin\\Extensions",
         this.assemblyLoaderContainer,
-        this.assemblyLoadContextAccessor
+        this.assemblyLoadContextAccessor,
+        this.libraryManager
       );
 
       ExtensionManager.SetAssemblies(assemblies);

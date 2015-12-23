@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.PlatformAbstractions;
 
@@ -10,7 +11,7 @@ namespace ExtCore.WebApplication
 {
   public static class AssemblyManager
   {
-    public static IEnumerable<Assembly> LoadAssemblies(string path, IAssemblyLoaderContainer assemblyLoaderContainer, IAssemblyLoadContextAccessor assemblyLoadContextAccessor)
+    public static IEnumerable<Assembly> GetAssemblies(string path, IAssemblyLoaderContainer assemblyLoaderContainer, IAssemblyLoadContextAccessor assemblyLoadContextAccessor, ILibraryManager libraryManager)
     {
       List<Assembly> assemblies = new List<Assembly>();
 
@@ -26,7 +27,20 @@ namespace ExtCore.WebApplication
         }
       }
 
+      // We must not load all of the assemblies
+      foreach (Library library in libraryManager.GetLibraries())
+        if (AssemblyManager.IsCandidateLibrary(libraryManager, library))
+          assemblies.AddRange(library.Assemblies.Select(an => assemblyLoadContext.Load(an)));
+
       return assemblies;
+    }
+
+    private static bool IsCandidateLibrary(ILibraryManager libraryManager, Library library)
+    {
+      if (library.Dependencies.Any(d => d.Contains("ExtCore.Infrastructure")))
+        return true;
+
+      return false;
     }
   }
 }
