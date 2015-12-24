@@ -22,7 +22,7 @@ namespace ExtCore.WebApplication
     {
       get
       {
-        return this.defaultAssemblyProvider.CandidateAssemblies.Concat(ExtensionManager.Assemblies);
+        return this.defaultAssemblyProvider.CandidateAssemblies.Concat(ExtensionManager.Assemblies).Distinct();
       }
     }
   }
