@@ -1,13 +1,13 @@
 ﻿{
   "authors": [ "Dmitry Sikorsky" ],
   "dependencies": {
-    "ExtCore.Data.Abstractions": "1.0.0-alpha4",
-    "ExtCore.Infrastructure": "1.0.0-alpha4",
+    "ExtCore.Data.Abstractions": "1.0.0-alpha5",
+    "ExtCore.Infrastructure": "1.0.0-alpha5",
     "Microsoft.AspNet.Mvc": "6.0.0-rc1-final"
   },
   "frameworks": {
     "dnx451": { },
     "dnxcore50": { }
   },
-  "version": "1.0.0-alpha4"
+  "version": "1.0.0-alpha5"
 }

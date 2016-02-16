@@ -21,12 +21,15 @@ namespace ExtCore.WebApplication
     protected IConfigurationRoot configurationRoot;
 
     private string applicationBasePath;
+
+    private IHostingEnvironment hostingEnvironment;
     private IAssemblyLoaderContainer assemblyLoaderContainer;
     private IAssemblyLoadContextAccessor assemblyLoadContextAccessor;
     private ILibraryManager libraryManager;
 
     public Startup(IHostingEnvironment hostingEnvironment, IApplicationEnvironment applicationEnvironment, IAssemblyLoaderContainer assemblyLoaderContainer, IAssemblyLoadContextAccessor assemblyLoadContextAccessor, ILibraryManager libraryManager)
     {
+      this.hostingEnvironment = hostingEnvironment;
       this.applicationBasePath = applicationEnvironment.ApplicationBasePath;
       this.assemblyLoaderContainer = assemblyLoaderContainer;
       this.assemblyLoadContextAccessor = assemblyLoadContextAccessor;
@@ -43,12 +46,16 @@ namespace ExtCore.WebApplication
       );
 
       ExtensionManager.SetAssemblies(assemblies);
+
+      IFileProvider fileProvider = this.GetFileProvider(this.applicationBasePath);
+
+      this.hostingEnvironment.WebRootFileProvider = fileProvider;
       services.AddCaching();
       services.AddSession();
       services.AddMvc().AddPrecompiledRazorViews(ExtensionManager.Assemblies.ToArray());
       services.Configure<RazorViewEngineOptions>(options =>
         {
-          options.FileProvider = this.GetFileProvider(this.applicationBasePath);
+          options.FileProvider = fileProvider;
         }
       );
 
