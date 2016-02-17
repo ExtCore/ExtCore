@@ -5,12 +5,12 @@
 ## Introduction
 
 ExtCore is free, open source and cross-platform framework for creating modular and extendable web applications
-based on ASP.NET 5. It is built using the best and the most modern tools and languages (Visual Studio 2015, C#
+based on ASP.NET Core 1.0. It is built using the best and the most modern tools and languages (Visual Studio 2015, C#
 etc). Join our team!
 
 ExtCore allows you to decouple your application into the modules (or extensions) and reuse that modules in other
 applications in various combinations. Each ExtCore extension may consist of one or more projects and each project
-may include everything you want (as any other ASP.NET 5 project). Controllers, view components, views (added as
+may include everything you want (as any other ASP.NET Core 1.0 project). Controllers, view components, views (added as
 resources and/or precompiled), static content (added as resources) will be resolved automatically. These projects
 (extension pieces) may be added to the application directly as dependencies in project.json of your main
 application project (as source code or NuGet packages), or by copying compiled DLL-files to the Extensions
