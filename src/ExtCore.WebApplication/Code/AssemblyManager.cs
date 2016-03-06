@@ -17,6 +17,8 @@ namespace ExtCore.WebApplication
 
       IAssemblyLoadContext assemblyLoadContext = assemblyLoadContextAccessor.Default;
 
+      if (!Directory.Exists(path)) return assemblies;
+
       using (assemblyLoaderContainer.AddLoader(new DirectoryAssemblyLoader(path, assemblyLoadContext)))
       {
         foreach (string extensionPath in Directory.EnumerateFiles(path, "*.dll"))
