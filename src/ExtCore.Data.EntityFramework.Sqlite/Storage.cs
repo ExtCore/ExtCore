@@ -23,7 +23,7 @@ namespace ExtCore.Data.EntityFramework.Sqlite
 
     public TRepository GetRepository<TRepository>() where TRepository : IRepository
     {
-      foreach (Assembly assembly in Storage.Assemblies.Where(a => a.FullName.Contains("EntityFramework.Sqlite")))
+      foreach (Assembly assembly in Storage.Assemblies.Where(a => a.FullName.ToLower().Contains("entityframework.sqlite")))
       {
         foreach (Type type in assembly.GetTypes())
         {
