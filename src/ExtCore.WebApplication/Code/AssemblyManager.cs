@@ -16,19 +16,19 @@ namespace ExtCore.WebApplication
       List<Assembly> assemblies = new List<Assembly>();
 
       IAssemblyLoadContext assemblyLoadContext = assemblyLoadContextAccessor.Default;
-
-      if (!Directory.Exists(path)) return assemblies;
-
-      using (assemblyLoaderContainer.AddLoader(new DirectoryAssemblyLoader(path, assemblyLoadContext)))
+      //Need to skip "using" block in the case if directory doesn't exist and still execute the rest of the method to get available assemblies.
+      if (Directory.Exists(path))
       {
-        foreach (string extensionPath in Directory.EnumerateFiles(path, "*.dll"))
-        {
-          string extensionFilename = Path.GetFileNameWithoutExtension(extensionPath);
+          using (assemblyLoaderContainer.AddLoader(new DirectoryAssemblyLoader(path, assemblyLoadContext)))
+          {
+              foreach (string extensionPath in Directory.EnumerateFiles(path, "*.dll"))
+              {
+                  string extensionFilename = Path.GetFileNameWithoutExtension(extensionPath);
 
-          assemblies.Add(assemblyLoadContext.Load(extensionFilename));
-        }
+                  assemblies.Add(assemblyLoadContext.Load(extensionFilename));
+              }
+          }
       }
-
       // We must not load all of the assemblies
       foreach (Library library in libraryManager.GetLibraries())
         if (AssemblyManager.IsCandidateLibrary(libraryManager, library))
