@@ -23,7 +23,7 @@ namespace ExtCore.Data.EntityFramework.SqlServer
 
     public TRepository GetRepository<TRepository>() where TRepository : IRepository
     {
-      foreach (Assembly assembly in Storage.Assemblies.Where(a => a.FullName.Contains("EntityFramework.SqlServer")))
+      foreach (Assembly assembly in Storage.Assemblies.Where(a => a.FullName.ToLower().Contains("entityframework.sqlserver")))
       {
         foreach (Type type in assembly.GetTypes())
         {

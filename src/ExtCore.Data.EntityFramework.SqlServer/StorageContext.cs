@@ -31,7 +31,7 @@ namespace ExtCore.Data.EntityFramework.SqlServer
     {
       base.OnModelCreating(modelBuilder);
 
-      foreach (Assembly assembly in Storage.Assemblies.Where(a => a.FullName.Contains("EntityFramework.SqlServer")))
+      foreach (Assembly assembly in Storage.Assemblies.Where(a => a.FullName.ToLower().Contains("entityframework.sqlserver")))
       {
         foreach (Type type in assembly.GetTypes())
         {
