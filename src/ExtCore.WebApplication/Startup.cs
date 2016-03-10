@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using System.Reflection;
 using ExtCore.Infrastructure;
 using Microsoft.AspNet.Builder;
@@ -38,8 +39,10 @@ namespace ExtCore.WebApplication
 
     public virtual void ConfigureServices(IServiceCollection services)
     {
-      IEnumerable<Assembly> assemblies = AssemblyManager.GetAssemblies(
-        this.applicationBasePath.Substring(0, this.applicationBasePath.LastIndexOf("src")) + "artifacts\\bin\\Extensions",
+        //Getting ExtensionsDirectory from config
+        string path = this.configurationRoot["Data:ExtensionsDirectory"];            
+        IEnumerable<Assembly> assemblies = AssemblyManager.GetAssemblies(
+        Path.Combine( this.applicationBasePath.Substring(0, this.applicationBasePath.LastIndexOf("src")) + path),
         this.assemblyLoaderContainer,
         this.assemblyLoadContextAccessor,
         this.libraryManager
