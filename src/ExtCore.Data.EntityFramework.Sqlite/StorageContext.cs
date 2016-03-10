@@ -31,7 +31,7 @@ namespace ExtCore.Data.EntityFramework.Sqlite
     {
       base.OnModelCreating(modelBuilder);
 
-      foreach (Assembly assembly in Storage.Assemblies.Where(a => a.FullName.Contains("EntityFramework.Sqlite")))
+      foreach (Assembly assembly in Storage.Assemblies.Where(a => a.FullName.ToLower().Contains("entityframework.sqlite")))
       {
         foreach (Type type in assembly.GetTypes())
         {
