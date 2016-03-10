@@ -14,21 +14,21 @@ namespace ExtCore.WebApplication
     public static IEnumerable<Assembly> GetAssemblies(string path, IAssemblyLoaderContainer assemblyLoaderContainer, IAssemblyLoadContextAccessor assemblyLoadContextAccessor, ILibraryManager libraryManager)
     {
       List<Assembly> assemblies = new List<Assembly>();
-
       IAssemblyLoadContext assemblyLoadContext = assemblyLoadContextAccessor.Default;
-      //Need to skip "using" block in the case if directory doesn't exist and still execute the rest of the method to get available assemblies.
+
       if (Directory.Exists(path))
       {
-          using (assemblyLoaderContainer.AddLoader(new DirectoryAssemblyLoader(path, assemblyLoadContext)))
+        using (assemblyLoaderContainer.AddLoader(new DirectoryAssemblyLoader(path, assemblyLoadContext)))
+        {
+          foreach (string extensionPath in Directory.EnumerateFiles(path, "*.dll"))
           {
-              foreach (string extensionPath in Directory.EnumerateFiles(path, "*.dll"))
-              {
-                  string extensionFilename = Path.GetFileNameWithoutExtension(extensionPath);
+            string extensionFilename = Path.GetFileNameWithoutExtension(extensionPath);
 
-                  assemblies.Add(assemblyLoadContext.Load(extensionFilename));
-              }
+            assemblies.Add(assemblyLoadContext.Load(extensionFilename));
           }
+        }
       }
+
       // We must not load all of the assemblies
       foreach (Library library in libraryManager.GetLibraries())
         if (AssemblyManager.IsCandidateLibrary(libraryManager, library))
@@ -39,7 +39,7 @@ namespace ExtCore.WebApplication
 
     private static bool IsCandidateLibrary(ILibraryManager libraryManager, Library library)
     {
-      if (library.Dependencies.Any(d => d.Contains("ExtCore.Infrastructure")))
+      if (library.Dependencies.Any(d => d.ToLower().Contains("extcore.infrastructure")))
         return true;
 
       return false;
