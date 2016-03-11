@@ -1,0 +1,18 @@
+﻿{
+  "authors": [ "Dmitry Sikorsky" ],
+  "dependencies": {
+    "EntityFramework.Commands": "7.0.0-rc1-final",
+    "EntityFramework7.Npgsql": "3.1.0-rc1-3",
+    "ExtCore.Data.Abstractions": "1.0.0-alpha6",
+    "ExtCore.Data.Models.Abstractions": "1.0.0-alpha6",
+    "ExtCore.Infrastructure": "1.0.0-alpha6"
+  },
+  "commands": {
+    "ef": "EntityFramework.Commands"
+  },
+  "frameworks": {
+    "dnx451": { },
+    "dnxcore50": { }
+  },
+  "version": "1.0.0-alpha6"
+}
