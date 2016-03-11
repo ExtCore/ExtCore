@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0D7AEFA3-ABB0-4AF1-A4C1-F8E05C241753}"
 EndProject
@@ -25,6 +25,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{2D6E55F9-088D-463A-B457-7A3E2103F242}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ExtCore.Data", "src\ExtCore.Data\ExtCore.Data.xproj", "{67408620-150F-4B27-A4BD-55E36893936A}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ExtCore.Data.EntityFramework.PostgreSql", "ExtCore.Data.EntityFramework.PostgreSql\ExtCore.Data.EntityFramework.PostgreSql.xproj", "{6E76B6C3-26BD-4DE9-BC39-279D3C765113}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,6 +62,10 @@ Global
 		{67408620-150F-4B27-A4BD-55E36893936A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67408620-150F-4B27-A4BD-55E36893936A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67408620-150F-4B27-A4BD-55E36893936A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E76B6C3-26BD-4DE9-BC39-279D3C765113}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E76B6C3-26BD-4DE9-BC39-279D3C765113}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E76B6C3-26BD-4DE9-BC39-279D3C765113}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E76B6C3-26BD-4DE9-BC39-279D3C765113}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,5 +79,6 @@ Global
 		{244F7C5F-B96A-4A05-AC56-747CD7406368} = {0D7AEFA3-ABB0-4AF1-A4C1-F8E05C241753}
 		{2D6E55F9-088D-463A-B457-7A3E2103F242} = {0D7AEFA3-ABB0-4AF1-A4C1-F8E05C241753}
 		{67408620-150F-4B27-A4BD-55E36893936A} = {2D6E55F9-088D-463A-B457-7A3E2103F242}
+		{6E76B6C3-26BD-4DE9-BC39-279D3C765113} = {2D6E55F9-088D-463A-B457-7A3E2103F242}
 	EndGlobalSection
 EndGlobal
