@@ -1,6 +1,7 @@
 {
   "authors": [ "Dmitry Sikorsky" ],
   "dependencies": {
+    "EntityFramework.Commands": "7.0.0-rc1-final",
     "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
     "ExtCore.Data.Abstractions": "1.0.0-alpha6",
     "ExtCore.Data.Models.Abstractions": "1.0.0-alpha6",

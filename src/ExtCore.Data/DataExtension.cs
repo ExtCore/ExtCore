@@ -2,7 +2,6 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
-using System.Linq;
 using System.Reflection;
 using ExtCore.Data.Abstractions;
 using ExtCore.Infrastructure;
@@ -32,7 +31,7 @@ namespace ExtCore.Data
 
     public void ConfigureServices(IServiceCollection services)
     {
-      Type type = this.GetIStorageImplementationType();
+      Type type = ExtensionManager.GetImplementation<IStorage>(a => a.FullName.Contains("Data"));
 
       if (type != null)
       {
@@ -40,11 +39,6 @@ namespace ExtCore.Data
 
         if (connectionStringPropertyInfo != null)
           connectionStringPropertyInfo.SetValue(null, this.configurationRoot["Data:DefaultConnection:ConnectionString"]);
-
-        PropertyInfo assembliesPropertyInfo = type.GetProperty("Assemblies");
-
-        if (assembliesPropertyInfo != null)
-          assembliesPropertyInfo.SetValue(null, ExtensionManager.Assemblies);
 
         services.AddScoped(typeof(IStorage), type);
       }
@@ -56,16 +50,6 @@ namespace ExtCore.Data
 
     public void RegisterRoutes(IRouteBuilder routeBuilder)
     {
-    }
-
-    private Type GetIStorageImplementationType()
-    {
-      foreach (Assembly assembly in ExtensionManager.Assemblies.Where(a => a.FullName.Contains("Data")))
-        foreach (Type type in assembly.GetTypes())
-          if (typeof(IStorage).IsAssignableFrom(type) && type.GetTypeInfo().IsClass)
-            return type;
-
-      return null;
     }
   }
 }

@@ -2,8 +2,8 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using ExtCore.Infrastructure;
 using Microsoft.AspNet.Builder;
@@ -81,8 +81,6 @@ namespace ExtCore.WebApplication
 
       applicationBuilder.UseMvc(routeBuilder =>
         {
-          routeBuilder.MapRoute(name: "Resource", template: "resource", defaults: new { controller = "Resource", action = "Index" });
-
           foreach (IExtension extension in ExtensionManager.Extensions)
             extension.RegisterRoutes(routeBuilder);
         }

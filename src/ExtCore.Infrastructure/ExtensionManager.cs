@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace ExtCore.Infrastructure
@@ -27,28 +28,8 @@ namespace ExtCore.Infrastructure
     {
       get
       {
-        if (ExtensionManager.assemblies == null)
-          throw new InvalidOperationException("Assemblies not set");
-
         if (ExtensionManager.extensions == null)
-        {
-          List<IExtension> extensions = new List<IExtension>();
-
-          foreach (Assembly assembly in ExtensionManager.assemblies)
-          {
-            foreach (Type type in assembly.GetTypes())
-            {
-              if (typeof(IExtension).IsAssignableFrom(type) && type.GetTypeInfo().IsClass)
-              {
-                IExtension extension = (IExtension)Activator.CreateInstance(type);
-
-                extensions.Add(extension);
-              }
-            }
-          }
-
-          ExtensionManager.extensions = extensions;
-        }
+          ExtensionManager.extensions = ExtensionManager.GetInstances<IExtension>();
 
         return ExtensionManager.extensions;
       }
@@ -57,6 +38,80 @@ namespace ExtCore.Infrastructure
     public static void SetAssemblies(IEnumerable<Assembly> assemblies)
     {
       ExtensionManager.assemblies = assemblies;
+    }
+
+    public static Type GetImplementation<T>()
+    {
+      return ExtensionManager.GetImplementation<T>(null);
+    }
+
+    public static Type GetImplementation<T>(Func<Assembly, bool> predicate)
+    {
+      IEnumerable<Type> implementations = ExtensionManager.GetImplementations<T>(predicate);
+
+      if (implementations.Count() == 0)
+        throw new ArgumentException("Implementation of " + typeof(T) + " not found");
+
+      return implementations.FirstOrDefault();
+    }
+
+    public static IEnumerable<Type> GetImplementations<T>()
+    {
+      return ExtensionManager.GetImplementations<T>(null);
+    }
+
+    public static IEnumerable<Type> GetImplementations<T>(Func<Assembly, bool> predicate)
+    {
+      List<Type> implementations = new List<Type>();
+
+      foreach (Assembly assembly in ExtensionManager.GetAssemblies(predicate))
+        foreach (Type type in assembly.GetTypes())
+          if (typeof(T).IsAssignableFrom(type) && type.GetTypeInfo().IsClass)
+            implementations.Add(type);
+
+      return implementations;
+    }
+
+    public static T GetInstance<T>()
+    {
+      return ExtensionManager.GetInstance<T>(null);
+    }
+
+    public static T GetInstance<T>(Func<Assembly, bool> predicate)
+    {
+      IEnumerable<T> instances = ExtensionManager.GetInstances<T>(predicate);
+
+      if (instances.Count() == 0)
+        throw new ArgumentException("Instance of " + typeof(T) + " can't be created");
+
+      return instances.FirstOrDefault();
+    }
+
+    public static IEnumerable<T> GetInstances<T>()
+    {
+      return ExtensionManager.GetInstances<T>(null);
+    }
+
+    public static IEnumerable<T> GetInstances<T>(Func<Assembly, bool> predicate)
+    {
+      List<T> instances = new List<T>();
+
+      foreach (Type implementation in ExtensionManager.GetImplementations<T>())
+      {
+        T instance = (T)Activator.CreateInstance(implementation);
+
+        instances.Add(instance);
+      }
+
+      return instances;
+    }
+
+    private static IEnumerable<Assembly> GetAssemblies(Func<Assembly, bool> predicate)
+    {
+      if (predicate == null)
+        return ExtensionManager.Assemblies;
+
+      return ExtensionManager.Assemblies.Where(predicate);
     }
   }
 }

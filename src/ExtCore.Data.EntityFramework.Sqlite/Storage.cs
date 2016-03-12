@@ -1,43 +1,28 @@
 ﻿// Copyright © 2015 Dmitry Sikorsky. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using ExtCore.Data.Abstractions;
+using ExtCore.Infrastructure;
 
 namespace ExtCore.Data.EntityFramework.Sqlite
 {
   public class Storage : IStorage
   {
     public static string ConnectionString { get; set; }
-    public static IEnumerable<Assembly> Assemblies { get; set; }
 
     public StorageContext StorageContext { get; private set; }
 
     public Storage()
     {
-      this.StorageContext = new StorageContext(Storage.ConnectionString, Storage.Assemblies);
+      this.StorageContext = new StorageContext(Storage.ConnectionString);
     }
 
     public TRepository GetRepository<TRepository>() where TRepository : IRepository
     {
-      foreach (Assembly assembly in Storage.Assemblies.Where(a => a.FullName.ToLower().Contains("entityframework.sqlite")))
-      {
-        foreach (Type type in assembly.GetTypes())
-        {
-          if (typeof(TRepository).IsAssignableFrom(type) && type.GetTypeInfo().IsClass)
-          {
-            TRepository repository = (TRepository)Activator.CreateInstance(type);
+      TRepository repository = ExtensionManager.GetInstance<TRepository>(a => a.FullName.ToLower().Contains("entityframework.sqlite"));
 
-            repository.SetStorageContext(this.StorageContext);
-            return repository;
-          }
-        }
-      }
-
-      throw new ArgumentException("Implementation of " + typeof(TRepository) + " not found");
+      repository.SetStorageContext(this.StorageContext);
+      return repository;
     }
 
     public void Save()
