@@ -1,7 +1,6 @@
-{
-  "authors": [
-    "Dmitry Sikorsky"
-  ],
+﻿{
+  "authors": [ "Dmitry Sikorsky" ],
+  "copyright": "Copyright © 2015 Dmitry Sikorsky",
   "dependencies": {
     "ExtCore.Infrastructure": "1.0.0-alpha6",
     "Microsoft.AspNet.FileProviders.Embedded": "1.0.0-rc1-final",
@@ -9,9 +8,12 @@
     "Microsoft.AspNet.Session": "1.0.0-rc1-final",
     "Microsoft.AspNet.StaticFiles": "1.0.0-rc1-final"
   },
+  "description": "Free, open source and cross-platform framework for creating modular and extendable web applications based on ASP.NET Core 1.0.",
   "frameworks": {
-    "dnx451": {},
-    "dnxcore50": {}
+    "dnx451": { },
+    "dnxcore50": { }
   },
+  "iconUrl": "http://extcore.net/extcore_nuget_icon.png",
+  "projectUrl": "http://extcore.net/",
   "version": "1.0.0-alpha6"
 }

@@ -1,5 +1,6 @@
 ﻿{
   "authors": [ "Dmitry Sikorsky" ],
+  "copyright": "Copyright © 2015 Dmitry Sikorsky",
   "dependencies": {
     "EntityFramework.Commands": "7.0.0-rc1-final",
     "EntityFramework.Sqlite": "7.0.0-rc1-final",
@@ -7,9 +8,12 @@
     "ExtCore.Data.Models.Abstractions": "1.0.0-alpha6",
     "ExtCore.Infrastructure": "1.0.0-alpha6"
   },
+  "description": "Part of the ExtCore.Data ExtCore framework extension.",
   "frameworks": {
     "dnx451": { },
     "dnxcore50": { }
   },
+  "iconUrl": "http://extcore.net/extcore_nuget_icon.png",
+  "projectUrl": "http://extcore.net/",
   "version": "1.0.0-alpha6"
 }
