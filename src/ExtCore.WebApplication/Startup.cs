@@ -39,9 +39,10 @@ namespace ExtCore.WebApplication
 
     public virtual void ConfigureServices(IServiceCollection services)
     {
-      string extensionsPath = this.configurationRoot["Extensions:Path"];            
+      string extensionsPath = this.configurationRoot["Extensions:Path"];
+      int lastIndex = this.applicationBasePath.LastIndexOf("src");
       IEnumerable<Assembly> assemblies = AssemblyManager.GetAssemblies(
-        Path.Combine(this.applicationBasePath.Substring(0, this.applicationBasePath.LastIndexOf("src")) + extensionsPath),
+        Path.Combine(this.applicationBasePath.Substring(0, lastIndex<0?0:lastIndex ) + extensionsPath),
         this.assemblyLoaderContainer,
         this.assemblyLoadContextAccessor,
         this.libraryManager
