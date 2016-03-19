@@ -2,8 +2,8 @@
   "authors": [ "Dmitry Sikorsky" ],
   "copyright": "Copyright © 2015 Dmitry Sikorsky",
   "dependencies": {
-    "ExtCore.Data.Abstractions": "1.0.0-alpha6",
-    "ExtCore.Infrastructure": "1.0.0-alpha6",
+    "ExtCore.Data.Abstractions": "1.0.0-alpha7",
+    "ExtCore.Infrastructure": "1.0.0-alpha7",
     "Microsoft.AspNet.Mvc": "6.0.0-rc1-final"
   },
   "description": "Part of the ExtCore.Data ExtCore framework extension.",
@@ -13,5 +13,5 @@
   },
   "iconUrl": "http://extcore.net/extcore_nuget_icon.png",
   "projectUrl": "http://extcore.net/",
-  "version": "1.0.0-alpha6"
+  "version": "1.0.0-alpha7"
 }
