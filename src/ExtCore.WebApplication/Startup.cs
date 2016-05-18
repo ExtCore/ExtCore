@@ -50,7 +50,7 @@ namespace ExtCore.WebApplication
 
       ExtensionManager.SetAssemblies(assemblies);
 
-      IFileProvider fileProvider = this.GetFileProvider(this.applicationBasePath);
+      IFileProvider fileProvider = this.GetFileProvider();
 
       this.hostingEnvironment.WebRootFileProvider = fileProvider;
       services.AddCaching();
@@ -88,9 +88,13 @@ namespace ExtCore.WebApplication
       );
     }
 
-    public IFileProvider GetFileProvider(string path)
+    public IFileProvider GetFileProvider()
     {
-      IEnumerable<IFileProvider> fileProviders = new IFileProvider[] { new PhysicalFileProvider(path) };
+      IEnumerable<IFileProvider> fileProviders = new IFileProvider[] {
+        this.hostingEnvironment.WebRootFileProvider,
+        // Seems to be wrong (extra file provider), but views (file system only) can't be resolved without this line
+        new PhysicalFileProvider(this.applicationBasePath)
+      };
 
       return new CompositeFileProvider(
         fileProviders.Concat(

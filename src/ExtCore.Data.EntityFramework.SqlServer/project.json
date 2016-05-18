@@ -4,9 +4,9 @@
   "dependencies": {
     "EntityFramework.Commands": "7.0.0-rc1-final",
     "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
-    "ExtCore.Data.Abstractions": "1.0.0-alpha6",
-    "ExtCore.Data.Models.Abstractions": "1.0.0-alpha6",
-    "ExtCore.Infrastructure": "1.0.0-alpha6"
+    "ExtCore.Data.Abstractions": "1.0.0-alpha7",
+    "ExtCore.Data.Models.Abstractions": "1.0.0-alpha7",
+    "ExtCore.Infrastructure": "1.0.0-alpha7"
   },
   "description": "Part of the ExtCore.Data ExtCore framework extension.",
   "frameworks": {
@@ -15,5 +15,5 @@
   },
   "iconUrl": "http://extcore.net/extcore_nuget_icon.png",
   "projectUrl": "http://extcore.net/",
-  "version": "1.0.0-alpha6"
+  "version": "1.0.0-alpha7"
 }
