@@ -2,18 +2,25 @@
   "authors": [ "Dmitry Sikorsky" ],
   "copyright": "Copyright © 2015 Dmitry Sikorsky",
   "dependencies": {
-    "EntityFramework.Commands": "7.0.0-rc1-final",
-    "EntityFramework7.Npgsql": "3.1.0-rc1-3",
-    "ExtCore.Data.Abstractions": "1.0.0-alpha7",
-    "ExtCore.Data.Models.Abstractions": "1.0.0-alpha7",
-    "ExtCore.Infrastructure": "1.0.0-alpha7"
+    "ExtCore.Data.Abstractions": "1.0.0-alpha8",
+    "ExtCore.Data.Models.Abstractions": "1.0.0-alpha8",
+    "ExtCore.Infrastructure": "1.0.0-alpha8",
+    "NETStandard.Library": "1.5.0-rc2-24027",
+    "Npgsql.EntityFrameworkCore.PostgreSQL": "1.0.0-rc2-release1"
   },
   "description": "Part of the ExtCore.Data ExtCore framework extension.",
   "frameworks": {
-    "dnx451": { },
-    "dnxcore50": { }
+    "netstandard1.5": {
+      "imports": [
+        "dotnet5.6",
+        "dnxcore50",
+        "portable-net45+win8"
+      ]
+    }
   },
-  "iconUrl": "http://extcore.net/extcore_nuget_icon.png",
-  "projectUrl": "http://extcore.net/",
-  "version": "1.0.0-alpha7"
+  "packOptions": {
+    "iconUrl": "http://extcore.net/extcore_nuget_icon.png",
+    "projectUrl": "http://extcore.net/"
+  },
+  "version": "1.0.0-alpha8"
 }

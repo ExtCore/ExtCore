@@ -1,19 +1,18 @@
 ﻿// Copyright © 2015 Dmitry Sikorsky. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using ExtCore.Infrastructure;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.FileProviders;
-using Microsoft.AspNet.Hosting;
-using Microsoft.AspNet.Mvc.Infrastructure;
-using Microsoft.AspNet.Mvc.Razor;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Razor.Compilation;
+using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.PlatformAbstractions;
+using Microsoft.Extensions.FileProviders;
 
 namespace ExtCore.WebApplication
 {
@@ -21,59 +20,28 @@ namespace ExtCore.WebApplication
   {
     protected IConfigurationRoot configurationRoot;
 
-    private string applicationBasePath;
-
     private IHostingEnvironment hostingEnvironment;
-    private IAssemblyLoaderContainer assemblyLoaderContainer;
-    private IAssemblyLoadContextAccessor assemblyLoadContextAccessor;
-    private ILibraryManager libraryManager;
 
-    public Startup(IHostingEnvironment hostingEnvironment, IApplicationEnvironment applicationEnvironment, IAssemblyLoaderContainer assemblyLoaderContainer, IAssemblyLoadContextAccessor assemblyLoadContextAccessor, ILibraryManager libraryManager)
+    public Startup(IHostingEnvironment hostingEnvironment)
     {
       this.hostingEnvironment = hostingEnvironment;
-      this.applicationBasePath = applicationEnvironment.ApplicationBasePath;
-      this.assemblyLoaderContainer = assemblyLoaderContainer;
-      this.assemblyLoadContextAccessor = assemblyLoadContextAccessor;
-      this.libraryManager = libraryManager;
     }
 
     public virtual void ConfigureServices(IServiceCollection services)
     {
-      string extensionsPath = this.configurationRoot["Extensions:Path"];            
-      IEnumerable<Assembly> assemblies = AssemblyManager.GetAssemblies(
-        Path.Combine(this.applicationBasePath.Substring(0, this.applicationBasePath.LastIndexOf("src")) + extensionsPath),
-        this.assemblyLoaderContainer,
-        this.assemblyLoadContextAccessor,
-        this.libraryManager
-      );
-
-      ExtensionManager.SetAssemblies(assemblies);
-
-      IFileProvider fileProvider = this.GetFileProvider();
-
-      this.hostingEnvironment.WebRootFileProvider = fileProvider;
-      services.AddCaching();
-      services.AddSession();
-      services.AddMvc().AddPrecompiledRazorViews(ExtensionManager.Assemblies.ToArray());
-      services.Configure<RazorViewEngineOptions>(options =>
-        {
-          options.FileProvider = fileProvider;
-        }
-      );
-
+      this.DiscoverAssemblies();
+      this.hostingEnvironment.WebRootFileProvider = this.CreateCompositeFileProvider();
+      this.AddMvcServices(services);
+      
       foreach (IExtension extension in ExtensionManager.Extensions)
       {
         extension.SetConfigurationRoot(this.configurationRoot);
         extension.ConfigureServices(services);
       }
-
-      services.AddTransient<DefaultAssemblyProvider>();
-      services.AddTransient<IAssemblyProvider, ExtensionAssemblyProvider>();
     }
 
     public virtual void Configure(IApplicationBuilder applicationBuilder, IHostingEnvironment hostingEnvironment)
     {
-      applicationBuilder.UseSession();
       applicationBuilder.UseStaticFiles();
 
       foreach (IExtension extension in ExtensionManager.Extensions)
@@ -87,12 +55,50 @@ namespace ExtCore.WebApplication
       );
     }
 
-    public IFileProvider GetFileProvider()
+    private void DiscoverAssemblies()
+    {
+      string extensionsPath = this.hostingEnvironment.ContentRootPath + this.configurationRoot["Extensions:Path"];
+      IEnumerable<Assembly> assemblies = AssemblyManager.GetAssemblies(extensionsPath);
+
+      ExtensionManager.SetAssemblies(assemblies);
+    }
+
+    private void AddMvcServices(IServiceCollection services)
+    {
+      IMvcBuilder mvcBuilder = services.AddMvc();
+      List<MetadataReference> metadataReferences = new List<MetadataReference>();
+
+      foreach (Assembly assembly in ExtensionManager.Assemblies)
+      {
+        mvcBuilder.AddApplicationPart(assembly);
+        metadataReferences.Add(MetadataReference.CreateFromFile(assembly.Location));
+      }
+
+      mvcBuilder.AddRazorOptions(
+        o =>
+        {
+          foreach (Assembly assembly in ExtensionManager.Assemblies)
+            o.FileProviders.Add(new EmbeddedFileProvider(assembly, assembly.GetName().Name));
+
+          Action<RoslynCompilationContext> previous = o.CompilationCallback;
+
+          o.CompilationCallback = c =>
+          {
+            if (previous != null)
+            {
+              previous(c);
+            }
+
+            c.Compilation = c.Compilation.AddReferences(metadataReferences);
+          };
+        }
+      );
+    }
+
+    private IFileProvider CreateCompositeFileProvider()
     {
       IEnumerable<IFileProvider> fileProviders = new IFileProvider[] {
-        this.hostingEnvironment.WebRootFileProvider,
-        // Seems to be wrong (extra file provider), but views (file system only) can't be resolved without this line
-        new PhysicalFileProvider(this.applicationBasePath)
+        this.hostingEnvironment.WebRootFileProvider
       };
 
       return new CompositeFileProvider(

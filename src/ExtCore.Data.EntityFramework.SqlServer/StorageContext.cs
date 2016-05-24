@@ -3,7 +3,7 @@
 
 using ExtCore.Data.Abstractions;
 using ExtCore.Infrastructure;
-using Microsoft.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace ExtCore.Data.EntityFramework.SqlServer
 {

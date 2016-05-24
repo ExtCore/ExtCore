@@ -5,44 +5,52 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Microsoft.Extensions.PlatformAbstractions;
+using System.Runtime.Loader;
+using Microsoft.Extensions.DependencyModel;
 
 namespace ExtCore.WebApplication
 {
   public static class AssemblyManager
   {
-    public static IEnumerable<Assembly> GetAssemblies(string path, IAssemblyLoaderContainer assemblyLoaderContainer, IAssemblyLoadContextAccessor assemblyLoadContextAccessor, ILibraryManager libraryManager)
+    public static IEnumerable<Assembly> GetAssemblies(string path)
     {
       List<Assembly> assemblies = new List<Assembly>();
-      IAssemblyLoadContext assemblyLoadContext = assemblyLoadContextAccessor.Default;
 
       if (Directory.Exists(path))
       {
-        using (assemblyLoaderContainer.AddLoader(new DirectoryAssemblyLoader(path, assemblyLoadContext)))
+        foreach (string extensionPath in Directory.EnumerateFiles(path, "*.dll"))
         {
-          foreach (string extensionPath in Directory.EnumerateFiles(path, "*.dll"))
-          {
-            string extensionFilename = Path.GetFileNameWithoutExtension(extensionPath);
+          Assembly assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(extensionPath);
 
-            assemblies.Add(assemblyLoadContext.Load(extensionFilename));
-          }
+          if (AssemblyManager.IsCandidateAssembly(assembly))
+            assemblies.Add(assembly);
         }
       }
 
-      // We must not load all of the assemblies
-      foreach (Library library in libraryManager.GetLibraries())
-        if (AssemblyManager.IsCandidateLibrary(libraryManager, library))
-          assemblies.AddRange(library.Assemblies.Select(an => assemblyLoadContext.Load(an)));
+      foreach (CompilationLibrary compilationLibrary in DependencyContext.Default.CompileLibraries)
+        if (AssemblyManager.IsCandidateCompilationLibrary(compilationLibrary))
+          assemblies.Add(Assembly.Load(new AssemblyName(compilationLibrary.Name)));
 
       return assemblies;
     }
 
-    private static bool IsCandidateLibrary(ILibraryManager libraryManager, Library library)
+    private static bool IsCandidateAssembly(Assembly assembly)
     {
-      if (library.Dependencies.Any(d => d.ToLower().Contains("extcore.infrastructure")))
-        return true;
+      if (assembly.FullName.ToLower().Contains("extcore.infrastructure"))
+        return false;
 
-      return false;
+      return true;
+    }
+
+    private static bool IsCandidateCompilationLibrary(CompilationLibrary compilationLibrary)
+    {
+      if (compilationLibrary.Name.ToLower().StartsWith("extcore.") && !compilationLibrary.Name.ToLower().Contains("extcore.data"))
+        return false;
+
+      if (!compilationLibrary.Dependencies.Any(d => d.Name.ToLower().Contains("extcore.infrastructure")))
+        return false;
+
+      return true;
     }
   }
 }

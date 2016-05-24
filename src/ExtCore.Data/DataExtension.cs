@@ -5,8 +5,8 @@ using System;
 using System.Reflection;
 using ExtCore.Data.Abstractions;
 using ExtCore.Infrastructure;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Routing;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 

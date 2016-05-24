@@ -66,7 +66,7 @@ namespace ExtCore.Infrastructure
 
       foreach (Assembly assembly in ExtensionManager.GetAssemblies(predicate))
         foreach (Type type in assembly.GetTypes())
-          if (typeof(T).IsAssignableFrom(type) && type.GetTypeInfo().IsClass)
+          if (typeof(T).GetTypeInfo().IsAssignableFrom(type) && type.GetTypeInfo().IsClass)
             implementations.Add(type);
 
       return implementations;

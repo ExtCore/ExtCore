@@ -2,14 +2,25 @@
   "authors": [ "Dmitry Sikorsky" ],
   "copyright": "Copyright © 2015 Dmitry Sikorsky",
   "dependencies": {
-    "Microsoft.AspNet.Mvc": "6.0.0-rc1-final"
+    "Microsoft.AspNetCore.Http.Abstractions": "1.0.0-rc2-final",
+    "Microsoft.AspNetCore.Routing": "1.0.0-rc2-final",
+    "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc2-final",
+    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc2-final",
+    "NETStandard.Library": "1.5.0-rc2-24027"
   },
   "description": "Free, open source and cross-platform framework for creating modular and extendable web applications based on ASP.NET Core 1.0.",
   "frameworks": {
-    "dnx451": { },
-    "dnxcore50": { }
+    "netstandard1.5": {
+      "imports": [
+        "dotnet5.6",
+        "dnxcore50",
+        "portable-net45+win8"
+      ]
+    }
   },
-  "iconUrl": "http://extcore.net/extcore_nuget_icon.png",
-  "projectUrl": "http://extcore.net/",
-  "version": "1.0.0-alpha7"
+  "packOptions": {
+    "iconUrl": "http://extcore.net/extcore_nuget_icon.png",
+    "projectUrl": "http://extcore.net/"
+  },
+  "version": "1.0.0-alpha8"
 }
