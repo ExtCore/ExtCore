@@ -21,7 +21,7 @@ namespace ExtCore.WebApplication
   {
     protected IConfigurationRoot configurationRoot;
 
-    public Startup(IHostingEnvironment hostingEnvironment)
+    public Startup(IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory)
     {
       DiscoverAssemblies();
       hostingEnvironment.AddCompositeFileProvider();
@@ -38,7 +38,7 @@ namespace ExtCore.WebApplication
       }
     }
 
-    public virtual void Configure(IApplicationBuilder applicationBuilder, IHostingEnvironment hostingEnvironment)
+    public virtual void Configure(IApplicationBuilder applicationBuilder, IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory)
     {
       applicationBuilder.UseStaticFiles();
 
