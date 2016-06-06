@@ -13,6 +13,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Logging;
 
 namespace ExtCore.WebApplication
 {
@@ -20,19 +21,16 @@ namespace ExtCore.WebApplication
   {
     protected IConfigurationRoot configurationRoot;
 
-    private IHostingEnvironment hostingEnvironment;
-
-    public Startup(IHostingEnvironment hostingEnvironment)
+    public Startup(IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory)
     {
-      this.hostingEnvironment = hostingEnvironment;
+      DiscoverAssemblies();
+      hostingEnvironment.AddCompositeFileProvider();
     }
 
     public virtual void ConfigureServices(IServiceCollection services)
     {
-      this.DiscoverAssemblies();
-      this.hostingEnvironment.WebRootFileProvider = this.CreateCompositeFileProvider();
-      this.AddMvcServices(services);
-      
+      AddMvcServices(services);
+
       foreach (IExtension extension in ExtensionManager.Extensions)
       {
         extension.SetConfigurationRoot(this.configurationRoot);
@@ -40,7 +38,7 @@ namespace ExtCore.WebApplication
       }
     }
 
-    public virtual void Configure(IApplicationBuilder applicationBuilder, IHostingEnvironment hostingEnvironment)
+    public virtual void Configure(IApplicationBuilder applicationBuilder, IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory)
     {
       applicationBuilder.UseStaticFiles();
 
@@ -84,27 +82,14 @@ namespace ExtCore.WebApplication
 
           o.CompilationCallback = c =>
           {
-            if (previous != null)
-            {
-              previous(c);
-            }
-
-            c.Compilation = c.Compilation.AddReferences(metadataReferences);
-          };
+        if (previous != null)
+        {
+          previous(c);
         }
-      );
-    }
 
-    private IFileProvider CreateCompositeFileProvider()
-    {
-      IEnumerable<IFileProvider> fileProviders = new IFileProvider[] {
-        this.hostingEnvironment.WebRootFileProvider
+        c.Compilation = c.Compilation.AddReferences(metadataReferences);
       };
-
-      return new CompositeFileProvider(
-        fileProviders.Concat(
-          ExtensionManager.Assemblies.Select(a => new EmbeddedFileProvider(a, a.GetName().Name))
-        )
+        }
       );
     }
   }
