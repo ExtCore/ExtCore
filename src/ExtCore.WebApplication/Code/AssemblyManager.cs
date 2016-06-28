@@ -16,7 +16,7 @@ namespace ExtCore.WebApplication
     {
       List<Assembly> assemblies = new List<Assembly>();
 
-      if (Directory.Exists(path))
+      if (!string.IsNullOrEmpty(path) && Directory.Exists(path))
       {
         foreach (string extensionPath in Directory.EnumerateFiles(path, "*.dll"))
         {
@@ -44,7 +44,7 @@ namespace ExtCore.WebApplication
 
     private static bool IsCandidateCompilationLibrary(CompilationLibrary compilationLibrary)
     {
-      if (compilationLibrary.Name.ToLower().StartsWith("extcore.") && !compilationLibrary.Name.ToLower().Contains("extcore.data"))
+      if (compilationLibrary.Name.ToLower().StartsWith("extcore") && !compilationLibrary.Name.ToLower().Contains("extcore.data"))
         return false;
 
       if (!compilationLibrary.Dependencies.Any(d => d.Name.ToLower().Contains("extcore.infrastructure")))

@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using ExtCore.Data.Abstractions;
 using ExtCore.Infrastructure;
@@ -24,6 +25,14 @@ namespace ExtCore.Data
       }
     }
 
+    public IDictionary<int, Action<IRouteBuilder>> RouteRegistrarsByPriorities
+    {
+      get
+      {
+        return null;
+      }
+    }
+
     public void SetConfigurationRoot(IConfigurationRoot configurationRoot)
     {
       this.configurationRoot = configurationRoot;
@@ -31,7 +40,7 @@ namespace ExtCore.Data
 
     public void ConfigureServices(IServiceCollection services)
     {
-      Type type = ExtensionManager.GetImplementation<IStorage>(a => a.FullName.Contains("Data"));
+      Type type = ExtensionManager.GetImplementation<IStorage>(a => a.FullName.ToLower().Contains("data"));
 
       if (type != null)
       {
@@ -45,10 +54,6 @@ namespace ExtCore.Data
     }
 
     public void Configure(IApplicationBuilder applicationBuilder)
-    {
-    }
-
-    public void RegisterRoutes(IRouteBuilder routeBuilder)
     {
     }
   }

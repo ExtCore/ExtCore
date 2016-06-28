@@ -8,8 +8,7 @@ using System.Reflection;
 using ExtCore.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Razor.Compilation;
-using Microsoft.CodeAnalysis;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
@@ -31,8 +30,20 @@ namespace ExtCore.WebApplication
     {
       this.DiscoverAssemblies();
       this.hostingEnvironment.WebRootFileProvider = this.CreateCompositeFileProvider();
-      this.AddMvcServices(services);
-      
+
+      IMvcBuilder mvcBuilder = services.AddMvc();
+
+      foreach (Assembly assembly in ExtensionManager.Assemblies)
+        mvcBuilder.AddApplicationPart(assembly);
+
+      mvcBuilder.AddRazorOptions(
+        o =>
+        {
+          foreach (Assembly assembly in ExtensionManager.Assemblies)
+            o.FileProviders.Add(new EmbeddedFileProvider(assembly, assembly.GetName().Name));
+        }
+      );
+
       foreach (IExtension extension in ExtensionManager.Extensions)
       {
         extension.SetConfigurationRoot(this.configurationRoot);
@@ -49,55 +60,27 @@ namespace ExtCore.WebApplication
 
       applicationBuilder.UseMvc(routeBuilder =>
         {
-          foreach (IExtension extension in ExtensionManager.Extensions)
-            extension.RegisterRoutes(routeBuilder);
+          foreach (KeyValuePair<int, List<Action<IRouteBuilder>>> routeRegistrarSetByPriority in this.GetRouteRegistrarSetsByPriorities().OrderBy(routeRegistrarSetByPriority => routeRegistrarSetByPriority.Key))
+            foreach (Action<IRouteBuilder> routeRegistrar in routeRegistrarSetByPriority.Value)
+              routeRegistrar(routeBuilder);
         }
       );
     }
 
     private void DiscoverAssemblies()
     {
-      string extensionsPath = this.hostingEnvironment.ContentRootPath + this.configurationRoot["Extensions:Path"];
-      IEnumerable<Assembly> assemblies = AssemblyManager.GetAssemblies(extensionsPath);
+      string extensionsPath = this.configurationRoot["Extensions:Path"];
+
+      IEnumerable<Assembly> assemblies = AssemblyManager.GetAssemblies(
+        string.IsNullOrEmpty(extensionsPath) ? null : this.hostingEnvironment.ContentRootPath + extensionsPath
+      );
 
       ExtensionManager.SetAssemblies(assemblies);
     }
 
-    private void AddMvcServices(IServiceCollection services)
-    {
-      IMvcBuilder mvcBuilder = services.AddMvc();
-      List<MetadataReference> metadataReferences = new List<MetadataReference>();
-
-      foreach (Assembly assembly in ExtensionManager.Assemblies)
-      {
-        mvcBuilder.AddApplicationPart(assembly);
-        metadataReferences.Add(MetadataReference.CreateFromFile(assembly.Location));
-      }
-
-      mvcBuilder.AddRazorOptions(
-        o =>
-        {
-          foreach (Assembly assembly in ExtensionManager.Assemblies)
-            o.FileProviders.Add(new EmbeddedFileProvider(assembly, assembly.GetName().Name));
-
-          Action<RoslynCompilationContext> previous = o.CompilationCallback;
-
-          o.CompilationCallback = c =>
-          {
-            if (previous != null)
-            {
-              previous(c);
-            }
-
-            c.Compilation = c.Compilation.AddReferences(metadataReferences);
-          };
-        }
-      );
-    }
-
     private IFileProvider CreateCompositeFileProvider()
     {
-      IEnumerable<IFileProvider> fileProviders = new IFileProvider[] {
+      IFileProvider[] fileProviders = new IFileProvider[] {
         this.hostingEnvironment.WebRootFileProvider
       };
 
@@ -106,6 +89,27 @@ namespace ExtCore.WebApplication
           ExtensionManager.Assemblies.Select(a => new EmbeddedFileProvider(a, a.GetName().Name))
         )
       );
+    }
+
+    private Dictionary<int, List<Action<IRouteBuilder>>> GetRouteRegistrarSetsByPriorities()
+    {
+      Dictionary<int, List<Action<IRouteBuilder>>> routeRegistrarSetsByPriorities = new Dictionary<int, List<Action<IRouteBuilder>>>();
+
+      foreach (IExtension extension in ExtensionManager.Extensions)
+      {
+        if (extension.RouteRegistrarsByPriorities != null)
+        {
+          foreach (KeyValuePair<int, Action<IRouteBuilder>> routeRegistrarByPriority in extension.RouteRegistrarsByPriorities)
+          {
+            if (!routeRegistrarSetsByPriorities.ContainsKey(routeRegistrarByPriority.Key))
+              routeRegistrarSetsByPriorities.Add(routeRegistrarByPriority.Key, new List<Action<IRouteBuilder>>());
+
+            routeRegistrarSetsByPriorities[routeRegistrarByPriority.Key].Add(routeRegistrarByPriority.Value);
+          }
+        }
+      }
+
+      return routeRegistrarSetsByPriorities;
     }
   }
 }
