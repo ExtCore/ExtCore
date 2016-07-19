@@ -13,10 +13,11 @@ namespace ExtCore.Infrastructure
   public interface IExtension
   {
     string Name { get; }
-    IDictionary<int, Action<IRouteBuilder>> RouteRegistrarsByPriorities { get; }
+    IEnumerable<KeyValuePair<int, Action<IServiceCollection>>> ConfigureServicesActionsByPriorities { get; }
+    IEnumerable<KeyValuePair<int, Action<IMvcBuilder>>> AddMvcActionsByPriorities { get; }
+    IEnumerable<KeyValuePair<int, Action<IApplicationBuilder>>> ConfigureActionsByPriorities { get; }
+    IEnumerable<KeyValuePair<int, Action<IRouteBuilder>>> UseMvcActionsByPriorities { get; }
 
     void SetConfigurationRoot(IConfigurationRoot configurationRoot);
-    void ConfigureServices(IServiceCollection services);
-    void Configure(IApplicationBuilder applicationBuilder);
   }
 }

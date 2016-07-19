@@ -3,6 +3,7 @@
   "copyright": "Copyright © 2015 Dmitry Sikorsky",
   "dependencies": {
     "Microsoft.AspNetCore.Http.Abstractions": "1.0.0",
+    "Microsoft.AspNetCore.Mvc": "1.0.0",
     "Microsoft.AspNetCore.Routing": "1.0.0",
     "Microsoft.Extensions.Configuration.Abstractions": "1.0.0",
     "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
@@ -22,5 +23,5 @@
     "iconUrl": "http://extcore.net/extcore_nuget_icon.png",
     "projectUrl": "http://extcore.net/"
   },
-  "version": "1.0.0-alpha9"
+  "version": "1.0.0-alpha10"
 }

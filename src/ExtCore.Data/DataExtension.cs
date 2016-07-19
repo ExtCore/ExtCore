@@ -6,55 +6,34 @@ using System.Collections.Generic;
 using System.Reflection;
 using ExtCore.Data.Abstractions;
 using ExtCore.Infrastructure;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ExtCore.Data
 {
-  public class DataExtension : IExtension
+  public class DataExtension : ExtensionBase
   {
-    private IConfigurationRoot configurationRoot;
-
-    public string Name
+    public override IEnumerable<KeyValuePair<int, Action<IServiceCollection>>> ConfigureServicesActionsByPriorities
     {
       get
       {
-        return "Data Extension";
+        return new Dictionary<int, Action<IServiceCollection>>()
+        {
+          [1000] = services =>
+          {
+            Type type = ExtensionManager.GetImplementation<IStorage>(a => a.FullName.ToLower().Contains("data"));
+
+            if (type != null)
+            {
+              PropertyInfo connectionStringPropertyInfo = type.GetProperty("ConnectionString");
+
+              if (connectionStringPropertyInfo != null)
+                connectionStringPropertyInfo.SetValue(null, this.configurationRoot["Data:DefaultConnection:ConnectionString"]);
+
+              services.AddScoped(typeof(IStorage), type);
+            }
+          }
+        };
       }
-    }
-
-    public IDictionary<int, Action<IRouteBuilder>> RouteRegistrarsByPriorities
-    {
-      get
-      {
-        return null;
-      }
-    }
-
-    public void SetConfigurationRoot(IConfigurationRoot configurationRoot)
-    {
-      this.configurationRoot = configurationRoot;
-    }
-
-    public void ConfigureServices(IServiceCollection services)
-    {
-      Type type = ExtensionManager.GetImplementation<IStorage>(a => a.FullName.ToLower().Contains("data"));
-
-      if (type != null)
-      {
-        PropertyInfo connectionStringPropertyInfo = type.GetProperty("ConnectionString");
-
-        if (connectionStringPropertyInfo != null)
-          connectionStringPropertyInfo.SetValue(null, this.configurationRoot["Data:DefaultConnection:ConnectionString"]);
-
-        services.AddScoped(typeof(IStorage), type);
-      }
-    }
-
-    public void Configure(IApplicationBuilder applicationBuilder)
-    {
     }
   }
 }
