@@ -2,8 +2,8 @@
   "authors": [ "Dmitry Sikorsky" ],
   "copyright": "Copyright © 2015 Dmitry Sikorsky",
   "dependencies": {
-    "ExtCore.Data.Abstractions": "1.0.0-alpha11",
-    "ExtCore.Infrastructure": "1.0.0-alpha11",
+    "ExtCore.Data.Abstractions": "1.0.0-alpha12",
+    "ExtCore.Infrastructure": "1.0.0-alpha12",
     "Microsoft.AspNetCore.Http.Abstractions": "1.0.0",
     "Microsoft.AspNetCore.Routing": "1.0.0",
     "NETStandard.Library": "1.6.0"
@@ -22,5 +22,5 @@
     "iconUrl": "http://extcore.net/extcore_nuget_icon.png",
     "projectUrl": "http://extcore.net/"
   },
-  "version": "1.0.0-alpha11"
+  "version": "1.0.0-alpha12"
 }

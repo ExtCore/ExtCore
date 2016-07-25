@@ -84,7 +84,7 @@ namespace ExtCore.WebApplication
       List<KeyValuePair<int, Action<IServiceCollection>>> configureServicesActionsByPriorities = new Dictionary<int, Action<IServiceCollection>>()
       {
         [0] = this.AddStaticFiles,
-        [100] = this.AddMvc
+        [10000] = this.AddMvc
       }.ToList();
 
       foreach (IExtension extension in ExtensionManager.Extensions)
@@ -137,7 +137,7 @@ namespace ExtCore.WebApplication
       List<KeyValuePair<int, Action<IApplicationBuilder>>> configureActionsByPriorities = new Dictionary<int, Action<IApplicationBuilder>>()
       {
         [0] = this.UseStaticFiles,
-        [100] = this.UseMvc
+        [10000] = this.UseMvc
       }.ToList();
 
       foreach (IExtension extension in ExtensionManager.Extensions)
