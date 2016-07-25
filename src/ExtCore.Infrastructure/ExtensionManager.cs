@@ -98,9 +98,12 @@ namespace ExtCore.Infrastructure
 
       foreach (Type implementation in ExtensionManager.GetImplementations<T>())
       {
-        T instance = (T)Activator.CreateInstance(implementation);
+        if (!implementation.GetTypeInfo().IsAbstract)
+        {
+          T instance = (T)Activator.CreateInstance(implementation);
 
-        instances.Add(instance);
+          instances.Add(instance);
+        }
       }
 
       return instances;
