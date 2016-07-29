@@ -2,8 +2,7 @@
   "authors": [ "Dmitry Sikorsky" ],
   "copyright": "Copyright © 2015 Dmitry Sikorsky",
   "dependencies": {
-    "ExtCore.Infrastructure": "1.0.0-alpha12",
-    "NETStandard.Library": "1.6.0"
+    "ExtCore.Infrastructure": "1.0.0-alpha12"
   },
   "description": "Part of the ExtCore.Data ExtCore framework extension.",
   "frameworks": {

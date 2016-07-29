@@ -5,8 +5,7 @@
     "ExtCore.Data.Abstractions": "1.0.0-alpha12",
     "ExtCore.Data.Models.Abstractions": "1.0.0-alpha12",
     "ExtCore.Infrastructure": "1.0.0-alpha12",
-    "NETStandard.Library": "1.6.0",
-    "Npgsql.EntityFrameworkCore.PostgreSQL": "1.0.0"
+    "Npgsql.EntityFrameworkCore.PostgreSQL": "1.0.1"
   },
   "description": "Part of the ExtCore.Data ExtCore framework extension.",
   "frameworks": {
