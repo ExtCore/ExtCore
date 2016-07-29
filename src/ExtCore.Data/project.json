@@ -3,10 +3,7 @@
   "copyright": "Copyright © 2015 Dmitry Sikorsky",
   "dependencies": {
     "ExtCore.Data.Abstractions": "1.0.0-alpha12",
-    "ExtCore.Infrastructure": "1.0.0-alpha12",
-    "Microsoft.AspNetCore.Http.Abstractions": "1.0.0",
-    "Microsoft.AspNetCore.Routing": "1.0.0",
-    "NETStandard.Library": "1.6.0"
+    "ExtCore.Infrastructure": "1.0.0-alpha12"
   },
   "description": "Part of the ExtCore.Data ExtCore framework extension.",
   "frameworks": {

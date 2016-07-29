@@ -3,12 +3,9 @@
   "copyright": "Copyright © 2015 Dmitry Sikorsky",
   "dependencies": {
     "ExtCore.Infrastructure": "1.0.0-alpha12",
-    "Microsoft.AspNetCore.Mvc": "1.0.0",
     "Microsoft.AspNetCore.StaticFiles": "1.0.0",
     "Microsoft.Extensions.DependencyModel": "1.0.0",
-    "Microsoft.Extensions.FileProviders.Embedded": "1.0.0",
-    "NETStandard.Library": "1.6.0",
-    "System.Runtime.Loader": "4.0.0"
+    "Microsoft.Extensions.FileProviders.Embedded": "1.0.0"
   },
   "description": "Free, open source and cross-platform framework for creating modular and extendable web applications based on ASP.NET Core 1.0.",
   "frameworks": {

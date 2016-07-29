@@ -5,8 +5,6 @@
     "Microsoft.AspNetCore.Http.Abstractions": "1.0.0",
     "Microsoft.AspNetCore.Mvc": "1.0.0",
     "Microsoft.AspNetCore.Routing": "1.0.0",
-    "Microsoft.Extensions.Configuration.Abstractions": "1.0.0",
-    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
     "NETStandard.Library": "1.6.0"
   },
   "description": "Free, open source and cross-platform framework for creating modular and extendable web applications based on ASP.NET Core 1.0.",
