@@ -1,4 +1,4 @@
-﻿# ExtCore 1.0.0-alpha14
+﻿# ExtCore 1.0.0-alpha16
 
 [![Join the chat at https://gitter.im/ExtCore/ExtCore](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ExtCore/ExtCore?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -15,6 +15,8 @@ resources and/or precompiled), static content (added as resources) will be resol
 (extension pieces) may be added to the application directly as dependencies in project.json of your main
 application project (as source code or NuGet packages), or by copying compiled DLL-files to the Extensions
 folder. ExtCore supports both of these approaches out of the box and at the same time.
+
+MVC support is provided by ExtCore.Mvc extension.
 
 By default, ExtCore doesn’t know anything about data and storage, but you can use ExtCore.Data extension to have
 unified approach to working with data and single storage context. It supports Microsoft SQL Server, PostgreSql
@@ -52,7 +54,6 @@ All you need to do to have modular and extendable web application is:
 
 * add ExtCore.WebApplication as dependency to your main application project;
 * inherit your main application’s Startup class from ExtCore.WebApplication.Startup;
-* add ExtCore.Infrastructure as dependency to each of your extension projects;
 * implement ExtCore.Infrastructure.IExtension interface for each of your extensions (optional);
 * tell main application about the extension.
 
@@ -60,7 +61,7 @@ All you need to do to have modular and extendable web application is:
 
 Please take a look at our [sample](https://github.com/ExtCore/ExtCore-Sample) on GitHub.
 
-You can also download our [ready to use sample](http://extcore.net/files/ExtCore-Sample-1.0.0-alpha14.zip).
+You can also download our [ready to use sample](http://extcore.net/files/ExtCore-Sample-1.0.0-alpha16.zip).
 It contains everything you need to run ExtCore-based web application from Visual Studio 2015, including SQLite
 database with the test data.
 

@@ -17,8 +17,10 @@ namespace ExtCore.WebApplication
 
     public AssemblyProvider()
     {
-      this.IsCandidateAssembly = assembly => !assembly.FullName.StartsWith("Microsoft.") && !assembly.FullName.StartsWith("System.");
-      this.IsCandidateCompilationLibrary = library => library.Type == "project" && !library.Name.StartsWith("Microsoft.") && !library.Name.StartsWith("System.");
+      this.IsCandidateAssembly = assembly =>
+        !assembly.FullName.StartsWith("Microsoft.") && !assembly.FullName.StartsWith("System.");
+      this.IsCandidateCompilationLibrary = library =>
+        library.Name != "NETStandard.Library" && !library.Name.StartsWith("Microsoft.") && !library.Name.StartsWith("System.");
     }
 
     public IEnumerable<Assembly> GetAssemblies(string path)
@@ -29,16 +31,41 @@ namespace ExtCore.WebApplication
       {
         foreach (string extensionPath in Directory.EnumerateFiles(path, "*.dll"))
         {
-          Assembly assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(extensionPath);
+          Assembly assembly = null;
 
-          if (this.IsCandidateAssembly(assembly))
-            assemblies.Add(assembly);
+          try
+          {
+            assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(extensionPath);
+
+            if (this.IsCandidateAssembly(assembly))
+              assemblies.Add(assembly);
+          }
+
+          catch
+          {
+            // TODO: Add errors logging
+          }
         }
       }
 
       foreach (CompilationLibrary compilationLibrary in DependencyContext.Default.CompileLibraries)
+      {
         if (this.IsCandidateCompilationLibrary(compilationLibrary))
-          assemblies.Add(Assembly.Load(new AssemblyName(compilationLibrary.Name)));
+        {
+          Assembly assembly = null;
+
+          try
+          {
+            assembly = Assembly.Load(new AssemblyName(compilationLibrary.Name));
+            assemblies.Add(assembly);
+          }
+
+          catch
+          {
+            // TODO: Add errors logging
+          }
+        }
+      }
 
       return assemblies;
     }
