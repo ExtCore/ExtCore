@@ -9,7 +9,7 @@ using System.Linq;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Primitives;
 
-namespace ExtCore.WebApplication
+namespace ExtCore.Mvc
 {
   public class CompositeFileProvider : IFileProvider
   {

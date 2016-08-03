@@ -4,15 +4,17 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace ExtCore.Infrastructure
 {
   public abstract class ExtensionBase : IExtension
   {
+    protected IServiceProvider serviceProvider;
     protected IConfigurationRoot configurationRoot;
+    protected ILogger<ExtensionBase> logger;
 
     public virtual string Name
     {
@@ -30,14 +32,6 @@ namespace ExtCore.Infrastructure
       }
     }
 
-    public virtual IEnumerable<KeyValuePair<int, Action<IMvcBuilder>>> AddMvcActionsByPriorities
-    {
-      get
-      {
-        return null;
-      }
-    }
-
     public virtual IEnumerable<KeyValuePair<int, Action<IApplicationBuilder>>> ConfigureActionsByPriorities
     {
       get
@@ -46,12 +40,10 @@ namespace ExtCore.Infrastructure
       }
     }
 
-    public virtual IEnumerable<KeyValuePair<int, Action<IRouteBuilder>>> UseMvcActionsByPriorities
+    public virtual void SetServiceProvider(IServiceProvider serviceProvider)
     {
-      get
-      {
-        return null;
-      }
+      this.serviceProvider = serviceProvider;
+      this.logger = this.serviceProvider.GetService<ILoggerFactory>().CreateLogger<ExtensionBase>();
     }
 
     public virtual void SetConfigurationRoot(IConfigurationRoot configurationRoot)

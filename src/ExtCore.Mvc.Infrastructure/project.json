@@ -2,12 +2,10 @@
   "authors": [ "Dmitry Sikorsky" ],
   "copyright": "Copyright © 2015 Dmitry Sikorsky",
   "dependencies": {
-    "ExtCore.Data.Abstractions": "1.0.0-alpha15",
-    "ExtCore.Data.Models.Abstractions": "1.0.0-alpha15",
     "ExtCore.Infrastructure": "1.0.0-alpha15",
-    "Microsoft.EntityFrameworkCore.SqlServer": "1.0.0"
+    "Microsoft.AspNetCore.Mvc.Core": "1.0.0"
   },
-  "description": "Part of the ExtCore.Data ExtCore framework extension.",
+  "description": "Part of the ExtCore.Mvc ExtCore framework extension.",
   "frameworks": {
     "netstandard1.6": {
       "imports": [
