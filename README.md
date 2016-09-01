@@ -45,6 +45,7 @@ For example, we can take a look at ExtCore.Data extension structure:
 * ExtCore.Data;
 * ExtCore.Data.Models.Abstractions;
 * ExtCore.Data.Abstractions;
+* ExtCore.Data.EntityFramework.PostgreSql;
 * ExtCore.Data.EntityFramework.Sqlite;
 * ExtCore.Data.EntityFramework.SqlServer.
 

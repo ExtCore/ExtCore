@@ -4,6 +4,7 @@
   "dependencies": {
     "ExtCore.Infrastructure": "1.0.0-alpha16",
     "Microsoft.AspNetCore.Hosting.Abstractions": "1.0.0",
+    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
     "Microsoft.Extensions.DependencyModel": "1.0.0",
     "System.Runtime.Loader": "4.0.0"
   },

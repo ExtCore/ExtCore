@@ -62,15 +62,15 @@ namespace ExtCore.WebApplication
     private void DiscoverAssemblies()
     {
       string extensionsPath = this.configurationRoot["Extensions:Path"];
+
+      this.assemblyProvider.SetServiceProvider(this.serviceProvider);
+
       IEnumerable<Assembly> assemblies = this.assemblyProvider.GetAssemblies(
         string.IsNullOrEmpty(extensionsPath) ?
           null : this.serviceProvider.GetService<IHostingEnvironment>().ContentRootPath + extensionsPath
       );
 
       ExtensionManager.SetAssemblies(assemblies);
-
-      foreach (Assembly assembly in ExtensionManager.Assemblies)
-        this.logger.LogInformation("Assembly '{0}' is discovered, loaded and added to ExtensionManager", assembly.FullName);
     }
 
     private Action<IServiceCollection>[] GetPrioritizedConfigureServicesActions()
