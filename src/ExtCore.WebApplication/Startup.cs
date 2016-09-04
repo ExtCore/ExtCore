@@ -22,7 +22,7 @@ namespace ExtCore.WebApplication
     protected ILogger<Startup> logger;
 
     public Startup(IServiceProvider serviceProvider)
-      : this(serviceProvider, new AssemblyProvider())
+      : this(serviceProvider, new AssemblyProvider(serviceProvider))
     {
     }
 
@@ -62,9 +62,6 @@ namespace ExtCore.WebApplication
     private void DiscoverAssemblies()
     {
       string extensionsPath = this.configurationRoot["Extensions:Path"];
-
-      this.assemblyProvider.SetServiceProvider(this.serviceProvider);
-
       IEnumerable<Assembly> assemblies = this.assemblyProvider.GetAssemblies(
         string.IsNullOrEmpty(extensionsPath) ?
           null : this.serviceProvider.GetService<IHostingEnvironment>().ContentRootPath + extensionsPath

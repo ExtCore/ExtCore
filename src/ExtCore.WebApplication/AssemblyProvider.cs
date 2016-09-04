@@ -14,27 +14,30 @@ namespace ExtCore.WebApplication
 {
   public class AssemblyProvider : IAssemblyProvider
   {
-    protected IServiceProvider serviceProvider;
     protected ILogger<AssemblyProvider> logger;
 
     public Func<Assembly, bool> IsCandidateAssembly { get; set; }
     public Func<Library, bool> IsCandidateCompilationLibrary { get; set; }
 
-    public AssemblyProvider()
+    public AssemblyProvider(IServiceProvider serviceProvider)
     {
+      this.logger = serviceProvider.GetService<ILoggerFactory>().CreateLogger<AssemblyProvider>();
       this.IsCandidateAssembly = assembly =>
         !assembly.FullName.StartsWith("Microsoft.") && !assembly.FullName.StartsWith("System.");
       this.IsCandidateCompilationLibrary = library =>
         library.Name != "NETStandard.Library" && !library.Name.StartsWith("Microsoft.") && !library.Name.StartsWith("System.");
     }
 
-    public virtual void SetServiceProvider(IServiceProvider serviceProvider)
+    public IEnumerable<Assembly> GetAssemblies(string path)
     {
-      this.serviceProvider = serviceProvider;
-      this.logger = this.serviceProvider.GetService<ILoggerFactory>().CreateLogger<AssemblyProvider>();
+      List<Assembly> assemblies = new List<Assembly>();
+
+      assemblies.AddRange(this.GetAssembliesFromPath(path));
+      assemblies.AddRange(this.GetAssembliesFromDependencyContext());
+      return assemblies;
     }
 
-    public IEnumerable<Assembly> GetAssemblies(string path)
+    private IEnumerable<Assembly> GetAssembliesFromPath(string path)
     {
       List<Assembly> assemblies = new List<Assembly>();
 
@@ -70,8 +73,15 @@ namespace ExtCore.WebApplication
         if (string.IsNullOrEmpty(path))
           this.logger.LogWarning("Discovering and loading assemblies from path skipped: path not provided", path);
 
-        else this.logger.LogWarning("Discovering and loading assemblies from path '{0}' skipped: path not found", path);  
+        else this.logger.LogWarning("Discovering and loading assemblies from path '{0}' skipped: path not found", path);
       }
+
+      return assemblies;
+    }
+
+    private IEnumerable<Assembly> GetAssembliesFromDependencyContext()
+    {
+      List<Assembly> assemblies = new List<Assembly>();
 
       this.logger.LogInformation("Discovering and loading assemblies from DependencyContext");
 
