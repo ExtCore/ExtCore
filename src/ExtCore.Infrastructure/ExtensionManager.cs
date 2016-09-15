@@ -47,12 +47,7 @@ namespace ExtCore.Infrastructure
 
     public static Type GetImplementation<T>(Func<Assembly, bool> predicate)
     {
-      IEnumerable<Type> implementations = ExtensionManager.GetImplementations<T>(predicate);
-
-      if (implementations.Count() == 0)
-        throw new ArgumentException("Implementation of " + typeof(T) + " not found");
-
-      return implementations.FirstOrDefault();
+      return ExtensionManager.GetImplementations<T>(predicate).FirstOrDefault();
     }
 
     public static IEnumerable<Type> GetImplementations<T>()
@@ -79,12 +74,7 @@ namespace ExtCore.Infrastructure
 
     public static T GetInstance<T>(Func<Assembly, bool> predicate)
     {
-      IEnumerable<T> instances = ExtensionManager.GetInstances<T>(predicate);
-
-      if (instances.Count() == 0)
-        throw new ArgumentException("Instance of " + typeof(T) + " can't be created");
-
-      return instances.FirstOrDefault();
+      return ExtensionManager.GetInstances<T>(predicate).FirstOrDefault();
     }
 
     public static IEnumerable<T> GetInstances<T>()

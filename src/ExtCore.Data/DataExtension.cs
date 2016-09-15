@@ -7,6 +7,7 @@ using System.Reflection;
 using ExtCore.Data.Abstractions;
 using ExtCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace ExtCore.Data
 {
@@ -22,15 +23,22 @@ namespace ExtCore.Data
           {
             Type type = ExtensionManager.GetImplementation<IStorage>(a => a.FullName.ToLower().Contains("data"));
 
-            if (type != null)
+            if (type == null)
             {
-              PropertyInfo connectionStringPropertyInfo = type.GetProperty("ConnectionString");
-
-              if (connectionStringPropertyInfo != null)
-                connectionStringPropertyInfo.SetValue(null, this.configurationRoot["Data:DefaultConnection:ConnectionString"]);
-
-              services.AddScoped(typeof(IStorage), type);
+              this.logger.LogError("Implementation of ExtCore.Data.Abstractions.IStorage not found");
+              return;
             }
+
+            string connectionString = this.configurationRoot?["Data:DefaultConnection:ConnectionString"];
+
+            if (string.IsNullOrEmpty(connectionString))
+            {
+              this.logger.LogError("Connection string is not provided");
+              return;
+            }
+
+            type.GetProperty("ConnectionString").SetValue(null, connectionString);
+            services.AddScoped(typeof(IStorage), type);
           }
         };
       }

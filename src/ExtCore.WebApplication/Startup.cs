@@ -61,7 +61,7 @@ namespace ExtCore.WebApplication
 
     private void DiscoverAssemblies()
     {
-      string extensionsPath = this.configurationRoot["Extensions:Path"];
+      string extensionsPath = this.configurationRoot?["Extensions:Path"];
       IEnumerable<Assembly> assemblies = this.assemblyProvider.GetAssemblies(
         string.IsNullOrEmpty(extensionsPath) ?
           null : this.serviceProvider.GetService<IHostingEnvironment>().ContentRootPath + extensionsPath
