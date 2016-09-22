@@ -47,6 +47,7 @@ namespace ExtCore.WebApplication
       {
         this.logger.LogInformation("Executing prioritized ConfigureServices action '{0}' of {1}", this.GetActionMethodInfo(prioritizedConfigureServicesAction));
         prioritizedConfigureServicesAction(services);
+        this.RebuildServiceProvider(services);
       }
     }
 
@@ -79,6 +80,14 @@ namespace ExtCore.WebApplication
           configureServicesActionsByPriorities.AddRange(extension.ConfigureServicesActionsByPriorities);
 
       return this.GetPrioritizedActions(configureServicesActionsByPriorities);
+    }
+
+    private void RebuildServiceProvider(IServiceCollection services)
+    {
+      this.serviceProvider = services.BuildServiceProvider();
+
+      foreach (IExtension extension in ExtensionManager.Extensions)
+        extension.SetServiceProvider(this.serviceProvider);
     }
 
     private Action<IApplicationBuilder>[] GetPrioritizedConfigureActions()
