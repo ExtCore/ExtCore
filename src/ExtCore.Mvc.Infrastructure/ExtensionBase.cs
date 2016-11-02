@@ -8,6 +8,10 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace ExtCore.Mvc.Infrastructure
 {
+  /// <summary>
+  /// Implements the <see cref="IExtension">IExtension</see> interface and represents default MVC extension behavior
+  /// that might be overridden by the derived classes.
+  /// </summary>
   public abstract class ExtensionBase : ExtCore.Infrastructure.ExtensionBase, IExtension
   {
     public virtual IEnumerable<KeyValuePair<int, Action<IMvcBuilder>>> AddMvcActionsByPriorities

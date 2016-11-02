@@ -10,6 +10,10 @@ using Microsoft.Extensions.Logging;
 
 namespace ExtCore.Infrastructure
 {
+  /// <summary>
+  /// Implements the <see cref="IExtension">IExtension</see> interface and represents default extension behavior
+  /// that might be overridden by the derived classes.
+  /// </summary>
   public abstract class ExtensionBase : IExtension
   {
     protected IServiceProvider serviceProvider;

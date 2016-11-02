@@ -14,6 +14,10 @@ using Microsoft.Extensions.Logging;
 
 namespace ExtCore.WebApplication
 {
+  /// <summary>
+  /// Represents default web application <c>Startup</c> class and must be inherited in the derived web applications
+  /// in order ExtCore basic functionality to work.
+  /// </summary>
   public abstract class Startup
   {
     protected IServiceProvider serviceProvider;

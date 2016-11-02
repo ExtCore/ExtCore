@@ -3,6 +3,9 @@
 
 namespace ExtCore.Data.Abstractions
 {
+  /// <summary>
+  /// Describes a repository for working with the underlying storage context.
+  /// </summary>
   public interface IRepository
   {
     void SetStorageContext(IStorageContext storageContext);

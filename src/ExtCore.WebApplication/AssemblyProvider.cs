@@ -12,6 +12,12 @@ using Microsoft.Extensions.Logging;
 
 namespace ExtCore.WebApplication
 {
+  /// <summary>
+  /// Implements the <see cref="IAssemblyProvider">IAssemblyProvider</see> interface and represents
+  /// default assembly provider that gets assemblies from a specific folder and web application dependencies
+  /// with the ability to filter the discovered assemblies with the <c>IsCandidateAssembly</c> and
+  /// <c>IsCandidateCompilationLibrary</c> predicates.
+  /// </summary>
   public class AssemblyProvider : IAssemblyProvider
   {
     protected ILogger<AssemblyProvider> logger;

@@ -6,6 +6,10 @@ using System.Reflection;
 
 namespace ExtCore.WebApplication
 {
+  /// <summary>
+  /// Describes an assembly provider with the mechanism of getting assemblies that should be involved
+  /// in the ExtCore types discovery process.
+  /// </summary>
   public interface IAssemblyProvider
   {
     IEnumerable<Assembly> GetAssemblies(string path);

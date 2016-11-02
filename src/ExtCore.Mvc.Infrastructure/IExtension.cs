@@ -8,6 +8,10 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace ExtCore.Mvc.Infrastructure
 {
+  /// <summary>
+  /// Describes an MVC extension with the mechanism of executing prioritized (defined in a specific order)
+  /// actions (code fragments) inside the <c>AddMvc</c> and <c>UseMvc</c> extension methods.
+  /// </summary>
   public interface IExtension : ExtCore.Infrastructure.IExtension
   {
     IEnumerable<KeyValuePair<int, Action<IMvcBuilder>>> AddMvcActionsByPriorities { get; }

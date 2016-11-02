@@ -3,6 +3,9 @@
 
 namespace ExtCore.Data.Abstractions
 {
+  /// <summary>
+  /// Describes a storage context that must be shared among all the repositories.
+  /// </summary>
   public interface IStorageContext
   {
   }

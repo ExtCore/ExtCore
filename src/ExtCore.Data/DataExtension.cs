@@ -11,6 +11,11 @@ using Microsoft.Extensions.Logging;
 
 namespace ExtCore.Data
 {
+  /// <summary>
+  /// Overrides the <see cref="ExtensionBase">ExtensionBase</see> class and defines the ConfigureServices method
+  /// prioritized action for registering existing implementation of the <see cref="IStorage">IStorage</see> interface
+  /// inside the DI
+  /// </summary>
   public class DataExtension : ExtensionBase
   {
     public override IEnumerable<KeyValuePair<int, Action<IServiceCollection>>> ConfigureServicesActionsByPriorities
