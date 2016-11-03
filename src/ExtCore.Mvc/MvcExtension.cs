@@ -57,7 +57,7 @@ namespace ExtCore.Mvc
         o =>
         {
           foreach (Assembly assembly in ExtensionManager.Assemblies)
-            o.FileProviders.Add(new EmbeddedFileProvider(assembly, assembly.GetName().Name));
+            o.FileProviders.Add(new EmbeddedEndsWithFileProvider(assembly));
         }
       );
 
