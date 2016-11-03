@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ExtCore.Data.EntityFramework.Sqlite
 {
+  /// <summary>
+  /// Describes a mechanism of registering entities inside the SQLite storage context.
+  /// </summary>
   public interface IModelRegistrar
   {
     void RegisterModels(ModelBuilder modelbuilder);

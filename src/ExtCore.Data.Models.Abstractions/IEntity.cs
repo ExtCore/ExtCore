@@ -3,6 +3,9 @@
 
 namespace ExtCore.Data.Models.Abstractions
 {
+  /// <summary>
+  /// Describes an entity.
+  /// </summary>
   public interface IEntity
   {
   }

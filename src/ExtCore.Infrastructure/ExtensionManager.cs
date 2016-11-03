@@ -44,7 +44,8 @@ namespace ExtCore.Infrastructure
     }
 
     /// <summary>
-    /// Sets the assemblies and invalidates the <see cref="IExtension">IExtension</see> interface instances cache.
+    /// Sets the discovered assemblies and invalidates the <see cref="IExtension">IExtension</see> interface
+    /// instances cache.
     /// </summary>
     /// <param name="assemblies">The assemblies to set.</param>
     public static void SetAssemblies(IEnumerable<Assembly> assemblies)

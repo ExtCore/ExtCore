@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ExtCore.Data.EntityFramework.PostgreSql
 {
+  /// <summary>
+  /// Describes a mechanism of registering entities inside the PostgreSQL storage context.
+  /// </summary>
   public interface IModelRegistrar
   {
     void RegisterModels(ModelBuilder modelbuilder);

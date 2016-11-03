@@ -6,6 +6,11 @@ using ExtCore.Infrastructure;
 
 namespace ExtCore.Data.EntityFramework.SqlServer
 {
+  /// <summary>
+  /// Implements the <see cref="IStorage">IStorage</see> interface and represents implementation of the
+  /// Unit of Work design pattern with the mechanism of getting the repositories to work with the underlying
+  /// SQL Server database storage context and committing the changes made by all the repositories.
+  /// </summary>
   public class Storage : IStorage
   {
     public static string ConnectionString { get; set; }

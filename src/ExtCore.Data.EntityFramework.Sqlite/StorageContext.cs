@@ -7,6 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ExtCore.Data.EntityFramework.Sqlite
 {
+  /// <summary>
+  /// Implements the <see cref="IStorageContext">IStorageContext</see> interface and represents SQLite database.
+  /// </summary>
   public class StorageContext : DbContext, IStorageContext
   {
     private string connectionString { get; set; }

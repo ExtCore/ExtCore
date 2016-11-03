@@ -22,7 +22,14 @@ namespace ExtCore.WebApplication
   {
     protected ILogger<AssemblyProvider> logger;
 
+    /// <summary>
+    /// Gets or sets the predicate that is used to filter discovered assemblies from a specific folder.
+    /// </summary>
     public Func<Assembly, bool> IsCandidateAssembly { get; set; }
+
+    /// <summary>
+    /// Gets or sets the predicate that is used to filter discovered libraries from a web application dependencies.
+    /// </summary>
     public Func<Library, bool> IsCandidateCompilationLibrary { get; set; }
 
     public AssemblyProvider(IServiceProvider serviceProvider)
@@ -34,6 +41,11 @@ namespace ExtCore.WebApplication
         library.Name != "NETStandard.Library" && !library.Name.StartsWith("Microsoft.") && !library.Name.StartsWith("System.");
     }
 
+    /// <summary>
+    /// Discovers and then gets the discovered assemblies from a specific folder and web application dependencies.
+    /// </summary>
+    /// <param name="path">The extensions path of a web application.</param>
+    /// <returns></returns>
     public IEnumerable<Assembly> GetAssemblies(string path)
     {
       List<Assembly> assemblies = new List<Assembly>();

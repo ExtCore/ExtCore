@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 namespace ExtCore.Data
 {
   /// <summary>
-  /// Overrides the <see cref="ExtensionBase">ExtensionBase</see> class and defines the ConfigureServices method
+  /// Overrides the <see cref="ExtensionBase">ExtensionBase</see> class and defines the <c>ConfigureServices</c> method
   /// prioritized action for registering existing implementation of the <see cref="IStorage">IStorage</see> interface
   /// inside the DI
   /// </summary>

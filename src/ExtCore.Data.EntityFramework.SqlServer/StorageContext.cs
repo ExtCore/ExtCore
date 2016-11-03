@@ -7,6 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ExtCore.Data.EntityFramework.SqlServer
 {
+  /// <summary>
+  /// Implements the <see cref="IStorageContext">IStorageContext</see> interface and represents SQL Server database.
+  /// </summary>
   public class StorageContext : DbContext, IStorageContext
   {
     private string connectionString { get; set; }

@@ -7,6 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ExtCore.Data.EntityFramework.SqlServer
 {
+  /// <summary>
+  /// Implements the <see cref="IRepository">IRepository</see> interface and represents default repository behavior.
+  /// </summary>
   public abstract class RepositoryBase<TEntity> : IRepository where TEntity : class, IEntity
   {
     protected StorageContext dbContext;

@@ -12,6 +12,12 @@ namespace ExtCore.WebApplication
   /// </summary>
   public interface IAssemblyProvider
   {
+    /// <summary>
+    /// Discovers and then gets the discovered assemblies.
+    /// </summary>
+    /// <param name="path">The extensions path of a web application. Might be used or ignored
+    /// by an implementation of the <see cref="IAssemblyProvider">IAssemblyProvider</see> interface.</param>
+    /// <returns></returns>
     IEnumerable<Assembly> GetAssemblies(string path);
   }
 }
