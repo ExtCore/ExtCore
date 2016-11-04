@@ -8,12 +8,17 @@ using Microsoft.EntityFrameworkCore;
 namespace ExtCore.Data.EntityFramework.Sqlite
 {
   /// <summary>
-  /// Implements the <see cref="IStorageContext">IStorageContext</see> interface and represents SQLite database.
+  /// Implements the <see cref="IStorageContext">IStorageContext</see> interface and represents SQLite database
+  /// with the Entity Framework Core as the ORM.
   /// </summary>
   public class StorageContext : DbContext, IStorageContext
   {
     private string connectionString { get; set; }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="StorageContext">StorageContext</see> class.
+    /// </summary>
+    /// <param name="connectionString">The connection string that is used to connect to the SQLite database.</param>
     public StorageContext(string connectionString)
     {
       this.connectionString = connectionString;

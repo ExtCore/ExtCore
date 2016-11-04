@@ -10,14 +10,14 @@ namespace ExtCore.Mvc.Infrastructure
 {
   /// <summary>
   /// Describes an MVC extension with the mechanism of executing prioritized (defined in a specific order)
-  /// actions (code fragments) inside the <c>AddMvc</c> and <c>UseMvc</c> extension methods that are executed
+  /// actions (code fragments) within the <c>AddMvc</c> and <c>UseMvc</c> extension methods while they are executed
   /// by the ExtCore.Mvc extension to configure the MVC.
   /// </summary>
   public interface IExtension : ExtCore.Infrastructure.IExtension
   {
     /// <summary>
     /// Gets the prioritized (defined in a specific order) actions (code fragments) that must be executed
-    /// inside the <c>AddMvc</c> extension method that is executed by the ExtCore.Mvc extension to configure the MVC.
+    /// within the <c>AddMvc</c> extension method while it is executed by the ExtCore.Mvc extension to configure the MVC.
     /// Priority is set by the key, while the action is set by the value of the KeyValuePair. Before these actions are
     /// executed they will be merged with the actions of all other extensions according to the priorities.
     /// </summary>
@@ -25,7 +25,7 @@ namespace ExtCore.Mvc.Infrastructure
 
     /// <summary>
     /// Gets the prioritized (defined in a specific order) actions (code fragments) that must be executed
-    /// inside the <c>UseMvc</c> extension method that is executed by the ExtCore.Mvc extension to configure the MVC.
+    /// within the <c>UseMvc</c> extension method while it is executed by the ExtCore.Mvc extension to configure the MVC.
     /// Priority is set by the key, while the action is set by the value of the KeyValuePair. Before these actions are
     /// executed they will be merged with the actions of all other extensions according to the priorities.
     /// </summary>

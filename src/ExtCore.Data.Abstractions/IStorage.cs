@@ -10,7 +10,16 @@ namespace ExtCore.Data.Abstractions
   /// </summary>
   public interface IStorage
   {
+    /// <summary>
+    /// Gets a repository of the given type.
+    /// </summary>
+    /// <typeparam name="T">The type parameter to find implementation of.</typeparam>
+    /// <returns></returns>
     T GetRepository<T>() where T: IRepository;
+
+    /// <summary>
+    /// Commits the changes made by all the repositories.
+    /// </summary>
     void Save();
   }
 }

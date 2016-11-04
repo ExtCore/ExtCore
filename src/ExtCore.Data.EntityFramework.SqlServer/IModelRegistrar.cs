@@ -10,6 +10,10 @@ namespace ExtCore.Data.EntityFramework.SqlServer
   /// </summary>
   public interface IModelRegistrar
   {
+    /// <summary>
+    /// Registers entities inside the SQL Server storage context.
+    /// </summary>
+    /// <param name="modelbuilder">The Entity Framework model builder.</param>
     void RegisterModels(ModelBuilder modelbuilder);
   }
 }

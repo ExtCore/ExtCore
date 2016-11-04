@@ -11,10 +11,20 @@ using Microsoft.Extensions.Primitives;
 
 namespace ExtCore.Mvc
 {
+  /// <summary>
+  /// Implements the <see cref="IFileProvider">IFileProvider</see> interface and represents composite file provider
+  /// that is built from the set of other file providers like <see cref="PhysicalFileProvider">PhysicalFileProvider</see>,
+  /// <see cref="EmbeddedFileProvider">EmbeddedFileProvider</see> etc. It is used to make it possible to resolve
+  /// files that are located in a file system, assemblies etc.
+  /// </summary>
   public class CompositeFileProvider : IFileProvider
   {
     private readonly IEnumerable<IFileProvider> fileProviders;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CompositeFileProvider">CompositeFileProvider</see> class.
+    /// </summary>
+    /// <param name="fileProviders">The set of the file providers to look for the files in.</param>
     public CompositeFileProvider(IEnumerable<IFileProvider> fileProviders)
     {
       this.fileProviders = fileProviders;

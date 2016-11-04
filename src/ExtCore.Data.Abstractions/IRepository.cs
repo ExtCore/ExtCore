@@ -8,6 +8,10 @@ namespace ExtCore.Data.Abstractions
   /// </summary>
   public interface IRepository
   {
+    /// <summary>
+    /// Sets the storage context to work with.
+    /// </summary>
+    /// <param name="storageContext">The storage context to set.</param>
     void SetStorageContext(IStorageContext storageContext);
   }
 }

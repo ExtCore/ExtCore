@@ -11,7 +11,7 @@ namespace ExtCore.Infrastructure
 {
   /// <summary>
   /// Describes an extension with the mechanism of executing prioritized (defined in a specific order)
-  /// actions (code fragments) inside the <c>ConfigureServices</c> and <c>Configure</c> methods of a web application
+  /// actions (code fragments) within the <c>ConfigureServices</c> and <c>Configure</c> methods of a web application
   /// <c>Startup</c> class.
   /// </summary>
   public interface IExtension
@@ -23,7 +23,7 @@ namespace ExtCore.Infrastructure
 
     /// <summary>
     /// Gets the prioritized (defined in a specific order) actions (code fragments) that must be executed
-    /// inside the <c>ConfigureServices</c> method of a web application <c>Startup</c> class.
+    /// within the <c>ConfigureServices</c> method of a web application <c>Startup</c> class.
     /// Priority is set by the key, while the action is set by the value of the KeyValuePair. Before these actions are
     /// executed they will be merged with the actions of all other extensions according to the priorities.
     /// </summary>
@@ -31,7 +31,7 @@ namespace ExtCore.Infrastructure
 
     /// <summary>
     /// Gets the prioritized (defined in a specific order) actions (code fragments) that must be executed
-    /// inside the <c>Configure</c> method of a web application <c>Startup</c> class.
+    /// within the <c>Configure</c> method of a web application <c>Startup</c> class.
     /// Priority is set by the key, while the action is set by the value of the KeyValuePair. Before these actions are
     /// executed they will be merged with the actions of all other extensions according to the priorities.
     /// </summary>

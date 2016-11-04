@@ -23,15 +23,21 @@ namespace ExtCore.WebApplication
     protected ILogger<AssemblyProvider> logger;
 
     /// <summary>
-    /// Gets or sets the predicate that is used to filter discovered assemblies from a specific folder.
+    /// Gets or sets the predicate that is used to filter discovered assemblies from a specific folder
+    /// before thay have been added to the resulting assemblies set.
     /// </summary>
     public Func<Assembly, bool> IsCandidateAssembly { get; set; }
 
     /// <summary>
-    /// Gets or sets the predicate that is used to filter discovered libraries from a web application dependencies.
+    /// Gets or sets the predicate that is used to filter discovered libraries from a web application dependencies
+    /// before thay have been added to the resulting assemblies set.
     /// </summary>
     public Func<Library, bool> IsCandidateCompilationLibrary { get; set; }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="AssemblyProvider">AssemblyProvider</see> class.
+    /// </summary>
+    /// <param name="serviceProvider">The service provider that is used to create a logger.</param>
     public AssemblyProvider(IServiceProvider serviceProvider)
     {
       this.logger = serviceProvider.GetService<ILoggerFactory>().CreateLogger<AssemblyProvider>();

@@ -10,6 +10,10 @@ namespace ExtCore.Data.EntityFramework.PostgreSql
   /// </summary>
   public interface IModelRegistrar
   {
+    /// <summary>
+    /// Registers entities inside the PostgreSQL storage context.
+    /// </summary>
+    /// <param name="modelbuilder">The Entity Framework model builder.</param>
     void RegisterModels(ModelBuilder modelbuilder);
   }
 }

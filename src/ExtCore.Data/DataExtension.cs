@@ -14,10 +14,14 @@ namespace ExtCore.Data
   /// <summary>
   /// Overrides the <see cref="ExtensionBase">ExtensionBase</see> class and defines the <c>ConfigureServices</c> method
   /// prioritized action for registering existing implementation of the <see cref="IStorage">IStorage</see> interface
-  /// inside the DI
+  /// inside the DI.
   /// </summary>
   public class DataExtension : ExtensionBase
   {
+    /// <summary>
+    /// Defines one prioritized action with priority = 1000 that looks for the implementation of the
+    /// <see cref="IStorage">IStorage</see> interface and registers it inside the DI if found.
+    /// </summary>
     public override IEnumerable<KeyValuePair<int, Action<IServiceCollection>>> ConfigureServicesActionsByPriorities
     {
       get

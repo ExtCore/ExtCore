@@ -15,6 +15,10 @@ namespace ExtCore.Data.EntityFramework.PostgreSql
     protected StorageContext dbContext;
     protected DbSet<TEntity> dbSet;
 
+    /// <summary>
+    /// Sets the storage context that represents the PostgreSQL database to work with.
+    /// </summary>
+    /// <param name="dbContext">The storage context to set.</param>
     public void SetStorageContext(IStorageContext dbContext)
     {
       this.dbContext = dbContext as StorageContext;

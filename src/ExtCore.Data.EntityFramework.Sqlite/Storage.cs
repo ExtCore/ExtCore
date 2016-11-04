@@ -13,15 +13,29 @@ namespace ExtCore.Data.EntityFramework.Sqlite
   /// </summary>
   public class Storage : IStorage
   {
+    /// <summary>
+    /// Gets or sets the connection string that is used to connect to the SQLite database.
+    /// </summary>
     public static string ConnectionString { get; set; }
 
+    /// <summary>
+    /// Gets or sets the storage context that represents the SQLite database.
+    /// </summary>
     public StorageContext StorageContext { get; private set; }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Storage">Storage</see> class.
+    /// </summary>
     public Storage()
     {
       this.StorageContext = new StorageContext(Storage.ConnectionString);
     }
 
+    /// <summary>
+    /// Gets a repository of the given type.
+    /// </summary>
+    /// <typeparam name="T">The type parameter to find implementation of.</typeparam>
+    /// <returns></returns>
     public TRepository GetRepository<TRepository>() where TRepository : IRepository
     {
       TRepository repository = ExtensionManager.GetInstance<TRepository>(a => a.FullName.ToLower().Contains("entityframework.sqlite"));
@@ -30,6 +44,9 @@ namespace ExtCore.Data.EntityFramework.Sqlite
       return repository;
     }
 
+    /// <summary>
+    /// Commits the changes made by all the repositories.
+    /// </summary>
     public void Save()
     {
       this.StorageContext.SaveChanges();

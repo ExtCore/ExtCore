@@ -15,7 +15,7 @@ using Microsoft.Extensions.Logging;
 namespace ExtCore.WebApplication
 {
   /// <summary>
-  /// Represents default web application <c>Startup</c> class and must be inherited in the derived web applications
+  /// Represents default web application <c>Startup</c> class. Must be inherited in the derived web applications
   /// in order ExtCore basic functionality to work.
   /// </summary>
   public abstract class Startup
@@ -25,11 +25,20 @@ namespace ExtCore.WebApplication
     protected IConfigurationRoot configurationRoot;
     protected ILogger<Startup> logger;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Startup">Startup</see> class.
+    /// </summary>
+    /// <param name="serviceProvider">The service provider that is used to get different services from the DI.</param>
     public Startup(IServiceProvider serviceProvider)
       : this(serviceProvider, new AssemblyProvider(serviceProvider))
     {
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Startup">Startup</see> class.
+    /// </summary>
+    /// <param name="serviceProvider">The service provider that is used to get different services from the DI.</param>
+    /// <param name="assemblyProvider">The assembly provider that is used to get the assemblies that should be involved in the ExtCore types discovery process.</param>
     public Startup(IServiceProvider serviceProvider, IAssemblyProvider assemblyProvider)
     {
       this.serviceProvider = serviceProvider;
@@ -37,6 +46,13 @@ namespace ExtCore.WebApplication
       this.logger = serviceProvider.GetService<ILoggerFactory>().CreateLogger<Startup>();
     }
 
+    /// <summary>
+    /// Discovers the assemblies, initializes extensions and services that are used by a web application.
+    /// Also this method executes prioritized (defined in a specific order) actions (code fragments)
+    /// from all the extensions, so each extension may execute some code within this method using the
+    /// <c>ConfigureServicesActionsByPriorities</c> property of the <see cref="IExtension">IExtension</see> interface.
+    /// </summary>
+    /// <param name="services">The current set of the services configured in the DI.</param>
     public virtual void ConfigureServices(IServiceCollection services)
     {
       this.DiscoverAssemblies();
@@ -55,6 +71,12 @@ namespace ExtCore.WebApplication
       }
     }
 
+    /// <summary>
+    /// Executes prioritized (defined in a specific order) actions (code fragments)
+    /// from all the extensions, so each extension may execute some code within this method using the
+    /// <c>ConfigureActionsByPriorities</c> property of the <see cref="IExtension">IExtension</see> interface.
+    /// </summary>
+    /// <param name="applicationBuilder"></param>
     public virtual void Configure(IApplicationBuilder applicationBuilder)
     {
       foreach (Action<IApplicationBuilder> prioritizedConfigureAction in this.GetPrioritizedConfigureActions())

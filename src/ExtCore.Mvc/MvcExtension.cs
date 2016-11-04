@@ -15,8 +15,17 @@ using Microsoft.Extensions.Logging;
 
 namespace ExtCore.Mvc
 {
+  /// <summary>
+  /// Overrides the <see cref="ExtensionBase">ExtensionBase</see> class and defines the <c>ConfigureServices</c> and
+  /// <c>Configure</c> methods prioritized actions for configuring MVC.
+  /// </summary>
   public class MvcExtension : ExtCore.Mvc.Infrastructure.ExtensionBase
   {
+    /// <summary>
+    /// Defines prioritized action with priority = 0 that creates composite file provider (to support static fieles
+    /// located inside the extension assemblies) and another one prioritized action with priority = 10000 that registers
+    /// MVC services inside the DI.
+    /// </summary>
     public override IEnumerable<KeyValuePair<int, Action<IServiceCollection>>> ConfigureServicesActionsByPriorities
     {
       get
@@ -29,6 +38,10 @@ namespace ExtCore.Mvc
       }
     }
 
+    /// <summary>
+    /// Defines prioritized action with priority = 0 that adds static files support middleware and another one
+    /// prioritized action with priority = 10000 that adds MVC support middleware.
+    /// </summary>
     public override IEnumerable<KeyValuePair<int, Action<IApplicationBuilder>>> ConfigureActionsByPriorities
     {
       get
