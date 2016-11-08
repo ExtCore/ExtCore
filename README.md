@@ -1,4 +1,4 @@
-﻿# ExtCore 1.0.0-rc2
+﻿# ExtCore 1.0.0
 
 [![Join the chat at https://gitter.im/ExtCore/ExtCore](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ExtCore/ExtCore?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -78,7 +78,7 @@ All you need to do to have modular and extendable web application is:
 
 Please take a look at our [sample](https://github.com/ExtCore/ExtCore-Sample) on GitHub.
 
-You can also download our [ready to use sample](http://extcore.net/files/ExtCore-Sample-1.0.0-rc2.zip).
+You can also download our [ready to use sample](http://extcore.net/files/ExtCore-Sample-1.0.0.zip).
 It contains everything you need to run ExtCore-based web application from Visual Studio 2015, including SQLite
 database with the test data.
 
