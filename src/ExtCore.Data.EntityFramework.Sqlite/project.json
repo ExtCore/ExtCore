@@ -1,18 +1,17 @@
-﻿{
+{
   "authors": [ "Dmitry Sikorsky" ],
   "copyright": "Copyright © 2015 Dmitry Sikorsky",
   "dependencies": {
     "ExtCore.Data.Abstractions": "1.0.0",
     "ExtCore.Data.Models.Abstractions": "1.0.0",
     "ExtCore.Infrastructure": "1.0.0",
-    "Microsoft.EntityFrameworkCore.Sqlite": "1.0.1"
+    "Microsoft.EntityFrameworkCore.Sqlite": "1.1.0"
   },
   "description": "Part of the ExtCore.Data ExtCore framework extension.",
   "frameworks": {
     "netstandard1.6": {
       "imports": [
         "dotnet5.6",
-        "dnxcore50",
         "portable-net45+win8"
       ]
     }

@@ -2,18 +2,17 @@
   "authors": [ "Dmitry Sikorsky" ],
   "copyright": "Copyright © 2015 Dmitry Sikorsky",
   "dependencies": {
-    "Microsoft.AspNetCore.Http.Abstractions": "1.0.0",
-    "Microsoft.Extensions.Configuration.Abstractions": "1.0.0",
-    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
-    "Microsoft.Extensions.Logging.Abstractions": "1.0.0",
-    "NETStandard.Library": "1.6.0"
+    "Microsoft.AspNetCore.Http.Abstractions": "1.1.0",
+    "Microsoft.Extensions.Configuration.Abstractions": "1.1.0",
+    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0",
+    "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
+    "NETStandard.Library": "1.6.1"
   },
   "description": "Free, open source and cross-platform framework for creating modular and extendable web applications based on ASP.NET Core 1.0.",
   "frameworks": {
     "netstandard1.6": {
       "imports": [
         "dotnet5.6",
-        "dnxcore50",
         "portable-net45+win8"
       ]
     }
