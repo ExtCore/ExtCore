@@ -8,14 +8,9 @@
     "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
     "NETStandard.Library": "1.6.1"
   },
-  "description": "Free, open source and cross-platform framework for creating modular and extendable web applications based on ASP.NET Core 1.0.",
+  "description": "Free, open source and cross-platform framework for creating modular and extendable web applications based on ASP.NET Core 1.1.0.",
   "frameworks": {
-    "netstandard1.6": {
-      "imports": [
-        "dotnet5.6",
-        "portable-net45+win8"
-      ]
-    }
+    "netstandard1.6": {}
   },
   "packOptions": {
     "iconUrl": "http://extcore.net/extcore_nuget_icon.png",
