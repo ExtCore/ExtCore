@@ -1,15 +1,14 @@
-﻿{
+{
   "authors": [ "Dmitry Sikorsky" ],
   "copyright": "Copyright © 2015 Dmitry Sikorsky",
   "dependencies": {
-    "NETStandard.Library": "1.6.0"
+    "NETStandard.Library": "1.6.1"
   },
   "description": "Part of the ExtCore.Data ExtCore framework extension.",
   "frameworks": {
     "netstandard1.6": {
       "imports": [
         "dotnet5.6",
-        "dnxcore50",
         "portable-net45+win8"
       ]
     }
