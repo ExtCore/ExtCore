@@ -12,17 +12,17 @@ namespace ExtCore.Data.EntityFramework.PostgreSql
   /// </summary>
   public abstract class RepositoryBase<TEntity> : IRepository where TEntity : class, IEntity
   {
-    protected StorageContext dbContext;
+    protected StorageContext storageContext;
     protected DbSet<TEntity> dbSet;
 
     /// <summary>
     /// Sets the storage context that represents the PostgreSQL database to work with.
     /// </summary>
-    /// <param name="dbContext">The storage context to set.</param>
-    public void SetStorageContext(IStorageContext dbContext)
+    /// <param name="storageContext">The storage context to set.</param>
+    public void SetStorageContext(IStorageContext storageContext)
     {
-      this.dbContext = dbContext as StorageContext;
-      this.dbSet = this.dbContext.Set<TEntity>();
+      this.storageContext = storageContext as StorageContext;
+      this.dbSet = this.storageContext.Set<TEntity>();
     }
   }
 }

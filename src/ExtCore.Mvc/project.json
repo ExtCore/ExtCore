@@ -2,7 +2,7 @@
   "authors": [ "Dmitry Sikorsky" ],
   "copyright": "Copyright © 2015 Dmitry Sikorsky",
   "dependencies": {
-    "ExtCore.Mvc.Infrastructure": "1.0.0",
+    "ExtCore.Mvc.Infrastructure": "1.1.0-beta1",
     "Microsoft.AspNetCore.Mvc": "1.1.0",
     "Microsoft.AspNetCore.Mvc.Razor": "1.1.0",
     "Microsoft.AspNetCore.StaticFiles": "1.1.0",
@@ -16,5 +16,5 @@
     "iconUrl": "http://extcore.net/extcore_nuget_icon.png",
     "projectUrl": "http://extcore.net/"
   },
-  "version": "1.0.0"
+  "version": "1.1.0-beta1"
 }
