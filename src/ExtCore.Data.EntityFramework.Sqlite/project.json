@@ -2,9 +2,9 @@
   "authors": [ "Dmitry Sikorsky" ],
   "copyright": "Copyright © 2015 Dmitry Sikorsky",
   "dependencies": {
-    "ExtCore.Data.Abstractions": "1.1.0-beta1",
-    "ExtCore.Data.Models.Abstractions": "1.1.0-beta1",
-    "ExtCore.Infrastructure": "1.1.0-beta1",
+    "ExtCore.Data.Abstractions": "1.1.0",
+    "ExtCore.Data.Models.Abstractions": "1.1.0",
+    "ExtCore.Infrastructure": "1.1.0",
     "Microsoft.EntityFrameworkCore.Sqlite": "1.1.0"
   },
   "description": "Part of the ExtCore.Data ExtCore framework extension.",
@@ -15,5 +15,5 @@
     "iconUrl": "http://extcore.net/extcore_nuget_icon.png",
     "projectUrl": "http://extcore.net/"
   },
-  "version": "1.1.0-beta1"
+  "version": "1.1.0"
 }
