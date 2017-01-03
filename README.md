@@ -92,6 +92,12 @@ to help you start developing your ExtCore-based web applications.
 Please take a look at [Platformus](https://github.com/Platformus/Platformus) on GitHub. It is CMS
 built on ExtCore framework with 8 extensions and 58 projects.
 
+## Development and Debug
+
+You have to have direct references to your extension projects in the host application project.json file
+in order to be able to debug that projects. After the extension is finished, you can use it as DLL files
+without need to have explicit references to its projects.
+
 ## Links
 
 Website: http://extcore.net/ (under construction)
