@@ -38,7 +38,7 @@ namespace ExtCore.Data.EntityFramework.Sqlite
     /// <returns></returns>
     public TRepository GetRepository<TRepository>() where TRepository : IRepository
     {
-      TRepository repository = ExtensionManager.GetInstance<TRepository>(a => a.FullName.ToLower().Contains("entityframework.sqlite"));
+      TRepository repository = ExtensionManager.GetInstance<TRepository>(a => a.FullName.ToLower().Contains("entityframework.sqlite"), this.StorageContext);
 
       repository.SetStorageContext(this.StorageContext);
       return repository;
