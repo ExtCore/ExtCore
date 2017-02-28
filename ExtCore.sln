@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ExtCore.WebApplication", "src\ExtCore.WebApplication\ExtCore.WebApplication.xproj", "{DA53EB89-DAF4-4DD6-9560-20FA0155F02D}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ExtCore.Data.Models.Abstractions", "src\ExtCore.Data.Models.Abstractions\ExtCore.Data.Models.Abstractions.xproj", "{1D0ADBE3-E5A7-4606-8BA3-60B09EF2971D}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ExtCore.Data.Entities.Abstractions", "src\ExtCore.Data.Models.Abstractions\ExtCore.Data.Entities.Abstractions.xproj", "{1D0ADBE3-E5A7-4606-8BA3-60B09EF2971D}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ExtCore.Data.Abstractions", "src\ExtCore.Data.Abstractions\ExtCore.Data.Abstractions.xproj", "{48174F66-A54E-447F-A69C-426EEC0CEF80}"
 EndProject

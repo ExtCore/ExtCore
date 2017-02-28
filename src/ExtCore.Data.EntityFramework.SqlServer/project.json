@@ -3,7 +3,7 @@
   "copyright": "Copyright © 2015 Dmitry Sikorsky",
   "dependencies": {
     "ExtCore.Data.Abstractions": "1.1.0",
-    "ExtCore.Data.Models.Abstractions": "1.1.0",
+    "ExtCore.Data.Entities.Abstractions": "1.1.0",
     "ExtCore.Infrastructure": "1.1.0",
     "Microsoft.EntityFrameworkCore.SqlServer": "1.1.0"
   },
