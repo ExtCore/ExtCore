@@ -38,7 +38,7 @@ namespace ExtCore.Data.EntityFramework.SqlServer
     /// <returns></returns>
     public TRepository GetRepository<TRepository>() where TRepository : IRepository
     {
-      TRepository repository = ExtensionManager.GetInstance<TRepository>(a => a.FullName.ToLower().Contains("entityframework.sqlserver"));
+      TRepository repository = ExtensionManager.GetInstance<TRepository>(a => a.FullName.ToLower().Contains("entityframework.sqlserver"), this.StorageContext);
 
       repository.SetStorageContext(this.StorageContext);
       return repository;

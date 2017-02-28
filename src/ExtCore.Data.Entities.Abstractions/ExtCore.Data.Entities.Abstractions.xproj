@@ -6,7 +6,7 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>1d0adbe3-e5a7-4606-8ba3-60b09ef2971d</ProjectGuid>
+    <ProjectGuid>90efd1cf-0b6f-4a72-a326-7d7ddac141e2</ProjectGuid>
     <RootNamespace>ExtCore.Data.Entities.Abstractions</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
