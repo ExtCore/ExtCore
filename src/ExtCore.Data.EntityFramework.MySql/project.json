@@ -1,0 +1,21 @@
+﻿{
+  "authors": [ "Chris Jones" ],
+
+  "dependencies": {
+    "ExtCore.Data.Abstractions": "1.1.0", 
+    "ExtCore.Data.Models.Abstractions": "1.1.0",
+    "ExtCore.Infrastructure": "1.1.0",
+    "Microsoft.EntityFrameworkCore": "1.1.0", 
+    "Pomelo.EntityFrameworkCore.MySql": "1.1.0"
+  },
+  "description": "MySQL Data provider using Pomelo for ExtCore Framework",
+  "frameworks": {
+    "netstandard1.6": {}
+  },
+  "packOptions": {
+    "iconUrl": "http://extcore.net/extcore_nuget_icon.png",
+    "projectUrl": "http://extcore.net"
+  },
+  "version": "1.0.0" 
+}
+
