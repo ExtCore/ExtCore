@@ -39,7 +39,7 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ExtCore.Mvc.Infrastructure"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mvc", "Mvc", "{0DF5A02D-1188-4F0D-8B8B-6666784BF2D0}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ExtCore.Data.EntityFramework.MySql", "src\ExtCore.Data.EntityFramework.MySql\ExtCore.Data.EntityFramework.MySql.xproj", "{3A518187-18A9-45F4-B926-79A24ACD9764}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ExtCore.Data.EntityFramework.Pomelo.MySql", "src\ExtCore.Data.EntityFramework.MySql\ExtCore.Data.EntityFramework.Pomelo.MySql.xproj", "{3A518187-18A9-45F4-B926-79A24ACD9764}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
