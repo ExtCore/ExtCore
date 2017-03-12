@@ -38,7 +38,7 @@ namespace ExtCore.Data.EntityFramework.PostgreSql
     /// <returns></returns>
     public TRepository GetRepository<TRepository>() where TRepository : IRepository
     {
-      TRepository repository = ExtensionManager.GetInstance<TRepository>(a => a.FullName.ToLower().Contains("entityframework.postgresql"));
+      TRepository repository = ExtensionManager.GetInstance<TRepository>(a => a.FullName.ToLower().Contains("entityframework.postgresql"), this.StorageContext);
 
       repository.SetStorageContext(this.StorageContext);
       return repository;
