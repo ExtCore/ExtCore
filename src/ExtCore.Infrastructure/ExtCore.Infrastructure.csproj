@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Description>Free, open source and cross-platform framework for creating modular and extendable web applications based on ASP.NET Core 1.1.0.</Description>
     <Copyright>Copyright © 2015 Dmitry Sikorsky</Copyright>
-    <VersionPrefix>1.1.0</VersionPrefix>
+    <VersionPrefix>1.1.1</VersionPrefix>
     <Authors>Dmitry Sikorsky</Authors>
     <TargetFramework>netstandard1.6</TargetFramework>
     <AssemblyName>ExtCore.Infrastructure</AssemblyName>
@@ -11,8 +11,6 @@
     <PackageIconUrl>http://extcore.net/extcore_nuget_icon.png</PackageIconUrl>
     <PackageProjectUrl>http://extcore.net/</PackageProjectUrl>
     <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
-    <Version>1.1.1</Version>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

@@ -3,15 +3,13 @@
   <PropertyGroup>
     <Description>Part of the ExtCore.Data ExtCore framework extension.</Description>
     <Copyright>Copyright © 2015 Dmitry Sikorsky</Copyright>
-    <VersionPrefix>1.1.0</VersionPrefix>
+    <VersionPrefix>1.1.1</VersionPrefix>
     <Authors>Dmitry Sikorsky</Authors>
     <TargetFramework>netstandard1.6</TargetFramework>
     <AssemblyName>ExtCore.Data.EntityFramework.Sqlite</AssemblyName>
     <PackageId>ExtCore.Data.EntityFramework.Sqlite</PackageId>
     <PackageIconUrl>http://extcore.net/extcore_nuget_icon.png</PackageIconUrl>
     <PackageProjectUrl>http://extcore.net/</PackageProjectUrl>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.1.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
