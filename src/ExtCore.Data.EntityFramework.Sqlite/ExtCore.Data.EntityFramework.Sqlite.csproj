@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Description>Part of the ExtCore.Data ExtCore framework extension.</Description>
     <Copyright>Copyright © 2015 Dmitry Sikorsky</Copyright>
-    <VersionPrefix>1.1.2</VersionPrefix>
+    <VersionPrefix>1.1.3</VersionPrefix>
     <Authors>Dmitry Sikorsky</Authors>
     <TargetFramework>netstandard1.6</TargetFramework>
     <AssemblyName>ExtCore.Data.EntityFramework.Sqlite</AssemblyName>
