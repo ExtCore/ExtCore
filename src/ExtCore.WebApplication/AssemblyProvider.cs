@@ -42,9 +42,13 @@ namespace ExtCore.WebApplication
     {
       this.logger = serviceProvider.GetService<ILoggerFactory>().CreateLogger<AssemblyProvider>();
       this.IsCandidateAssembly = assembly =>
-        !assembly.FullName.StartsWith("Microsoft.") && !assembly.FullName.StartsWith("System.");
+        !assembly.FullName.StartsWith("Microsoft.", StringComparison.OrdinalIgnoreCase) &&
+        !assembly.FullName.StartsWith("System.", StringComparison.OrdinalIgnoreCase);
+
       this.IsCandidateCompilationLibrary = library =>
-        library.Name != "NETStandard.Library" && !library.Name.StartsWith("Microsoft.") && !library.Name.StartsWith("System.");
+        !string.Equals(library.Name, "NETStandard.Library", StringComparison.OrdinalIgnoreCase) &&
+        !library.Name.StartsWith("Microsoft.", StringComparison.OrdinalIgnoreCase) &&
+        !library.Name.StartsWith("System.", StringComparison.OrdinalIgnoreCase);
     }
 
     /// <summary>
