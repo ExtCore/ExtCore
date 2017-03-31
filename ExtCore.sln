@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+VisualStudioVersion = 15.0.26228.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0D7AEFA3-ABB0-4AF1-A4C1-F8E05C241753}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ABB81F71-8F88-41F7-A235-9458DB99BB7D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtCore.Infrastructure", "src\ExtCore.Infrastructure\ExtCore.Infrastructure.csproj", "{1A7B4E8E-9D6D-4DD2-862D-92A6BDDBC2C8}"
 EndProject
@@ -30,6 +28,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mvc", "Mvc", "{7EB40884-B578-412E-951F-356BC69088C2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{DD95EC14-4783-4E08-A5EC-6C110DC7FB01}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Events", "Events", "{B0915CA5-EB7A-428E-8A6E-344CB8CE5368}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtCore.Events", "src\ExtCore.Events\ExtCore.Events.csproj", "{3E5C83A3-2C66-4503-A3F8-542854D3D2EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +79,10 @@ Global
 		{4B05A3AC-DCDF-454F-A105-C8DFDBFA5EE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B05A3AC-DCDF-454F-A105-C8DFDBFA5EE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B05A3AC-DCDF-454F-A105-C8DFDBFA5EE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E5C83A3-2C66-4503-A3F8-542854D3D2EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E5C83A3-2C66-4503-A3F8-542854D3D2EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E5C83A3-2C66-4503-A3F8-542854D3D2EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E5C83A3-2C66-4503-A3F8-542854D3D2EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -94,5 +100,7 @@ Global
 		{4B05A3AC-DCDF-454F-A105-C8DFDBFA5EE1} = {DD95EC14-4783-4E08-A5EC-6C110DC7FB01}
 		{7EB40884-B578-412E-951F-356BC69088C2} = {0D7AEFA3-ABB0-4AF1-A4C1-F8E05C241753}
 		{DD95EC14-4783-4E08-A5EC-6C110DC7FB01} = {0D7AEFA3-ABB0-4AF1-A4C1-F8E05C241753}
+		{B0915CA5-EB7A-428E-8A6E-344CB8CE5368} = {0D7AEFA3-ABB0-4AF1-A4C1-F8E05C241753}
+		{3E5C83A3-2C66-4503-A3F8-542854D3D2EF} = {B0915CA5-EB7A-428E-8A6E-344CB8CE5368}
 	EndGlobalSection
 EndGlobal
