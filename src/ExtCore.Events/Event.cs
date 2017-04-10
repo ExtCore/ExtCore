@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Linq;
 using ExtCore.Infrastructure;
 
 namespace ExtCore.Events
@@ -20,7 +21,7 @@ namespace ExtCore.Events
     /// <returns>Resolved event handlers that have handled the event.</returns>
     public static IEnumerable<TEventHandler> Broadcast()
     {
-      IEnumerable<TEventHandler> eventHandlers = ExtensionManager.GetInstances<TEventHandler>();
+      IEnumerable<TEventHandler> eventHandlers = ExtensionManager.GetInstances<TEventHandler>().OrderBy(eh => eh.Priority);
 
       foreach (TEventHandler eventHandler in eventHandlers)
         eventHandler.HandleEvent();
@@ -45,7 +46,7 @@ namespace ExtCore.Events
     /// <returns>Resolved event handlers that have handled the event.</returns>
     public static IEnumerable<TEventHandler> Broadcast(TEventArgument argument)
     {
-      IEnumerable<TEventHandler> eventHandlers = ExtensionManager.GetInstances<TEventHandler>();
+      IEnumerable<TEventHandler> eventHandlers = ExtensionManager.GetInstances<TEventHandler>().OrderBy(eh => eh.Priority);
 
       foreach (TEventHandler eventHandler in eventHandlers)
         eventHandler.HandleEvent(argument);
@@ -73,7 +74,7 @@ namespace ExtCore.Events
     /// <returns>Resolved event handlers that have handled the event.</returns>
     public static IEnumerable<TEventHandler> Broadcast(TEventArgument1 argument1, TEventArgument2 argument2)
     {
-      IEnumerable<TEventHandler> eventHandlers = ExtensionManager.GetInstances<TEventHandler>();
+      IEnumerable<TEventHandler> eventHandlers = ExtensionManager.GetInstances<TEventHandler>().OrderBy(eh => eh.Priority);
 
       foreach (TEventHandler eventHandler in eventHandlers)
         eventHandler.HandleEvent(argument1, argument2);
@@ -102,7 +103,7 @@ namespace ExtCore.Events
     /// <returns>Resolved event handlers that have handled the event.</returns>
     public static IEnumerable<TEventHandler> Broadcast(TEventArgument1 argument1, TEventArgument2 argument2, TEventArgument3 argument3)
     {
-      IEnumerable<TEventHandler> eventHandlers = ExtensionManager.GetInstances<TEventHandler>();
+      IEnumerable<TEventHandler> eventHandlers = ExtensionManager.GetInstances<TEventHandler>().OrderBy(eh => eh.Priority);
 
       foreach (TEventHandler eventHandler in eventHandlers)
         eventHandler.HandleEvent(argument1, argument2, argument3);

@@ -10,6 +10,12 @@ namespace ExtCore.Events
   public interface IEventHandler
   {
     /// <summary>
+    /// Priority of the event handler. The event handlers of the same event will be executed in the order
+    /// specified by the priority.
+    /// </summary>
+    int Priority { get; }
+
+    /// <summary>
     /// Handles the event.
     /// </summary>
     void HandleEvent();
@@ -22,6 +28,12 @@ namespace ExtCore.Events
   /// <typeparam name="TEventArgument">Defines the type of the argument that will be passed to the event handler.</typeparam>
   public interface IEventHandler<TEventArgument>
   {
+    /// <summary>
+    /// Priority of the event handler. The event handlers of the same event will be executed in the order
+    /// specified by the priority.
+    /// </summary>
+    int Priority { get; }
+
     /// <summary>
     /// Handles the event.
     /// </summary>
@@ -37,6 +49,12 @@ namespace ExtCore.Events
   /// <typeparam name="TEventArgument2">Defines the type of the second argument that will be passed to the event handler.</typeparam>
   public interface IEventHandler<TEventArgument1, TEventArgument2>
   {
+    /// <summary>
+    /// Priority of the event handler. The event handlers of the same event will be executed in the order
+    /// specified by the priority.
+    /// </summary>
+    int Priority { get; }
+
     /// <summary>
     /// Handles the event.
     /// </summary>
@@ -54,6 +72,12 @@ namespace ExtCore.Events
   /// <typeparam name="TEventArgument3">Defines the type of the first argument that will be passed to the event handler.</typeparam>
   public interface IEventHandler<TEventArgument1, TEventArgument2, TEventArgument3>
   {
+    /// <summary>
+    /// Priority of the event handler. The event handlers of the same event will be executed in the order
+    /// specified by the priority.
+    /// </summary>
+    int Priority { get; }
+
     /// <summary>
     /// Handles the event.
     /// </summary>
