@@ -1,4 +1,4 @@
-# ExtCore 1.2.0-beta2
+# ExtCore 1.2.0
 
 [![Join the chat at https://gitter.im/ExtCore/ExtCore](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ExtCore/ExtCore?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -89,16 +89,17 @@ All you need to do to have modular and extendable web application is:
 
 Please take a look at our samples on GitHub:
 
-* [Full-featured ExtCore 1.1.3 framework sample web application](https://github.com/ExtCore/ExtCore-Sample);
-* [ExtCore framework 1.1.3 sample simplest web application](https://github.com/ExtCore/ExtCore-Sample-Simplest);
-* [ExtCore framework 1.1.3 sample MVC web application](https://github.com/ExtCore/ExtCore-Sample-Mvc);
-* [ExtCore framework 1.1.3 sample web application that uses a database](https://github.com/ExtCore/ExtCore-Sample-Data);
-* [ExtCore framework 1.1.3 sample web application with modular UI](https://github.com/ExtCore/ExtCore-Sample-Modular-Ui);
-* [ExtCore framework 1.1.3 sample web application that registers a service inside the extension](https://github.com/ExtCore/ExtCore-Sample-Service);
+* [Full-featured ExtCore 1.2.0 framework sample web application](https://github.com/ExtCore/ExtCore-Sample);
+* [ExtCore framework 1.2.0 sample simplest web application](https://github.com/ExtCore/ExtCore-Sample-Simplest);
+* [ExtCore framework 1.2.0 sample MVC web application](https://github.com/ExtCore/ExtCore-Sample-Mvc);
+* [ExtCore framework 1.2.0 sample web application that uses a database](https://github.com/ExtCore/ExtCore-Sample-Data);
+* [ExtCore framework 1.2.0 sample web application with modular UI](https://github.com/ExtCore/ExtCore-Sample-Modular-Ui);
+* [ExtCore framework 1.2.0 advanced sample web application with modular UI](https://github.com/ExtCore/ExtCore-Sample-Modular-Ui-Adv);
+* [ExtCore framework 1.2.0 sample web application that registers a service inside the extension](https://github.com/ExtCore/ExtCore-Sample-Service);
 * [ExtCore framework 1.2.0 sample web application that uses the events](https://github.com/ExtCore/ExtCore-Sample-Events);
-* [ExtCore framework 1.1.3 sample API web application](https://github.com/ExtCore/ExtCore-Sample-Api).
+* [ExtCore framework 1.2.0 sample API web application](https://github.com/ExtCore/ExtCore-Sample-Api).
 
-You can also download our [ready to use full-featured sample](http://extcore.net/files/ExtCore-Sample-1.1.3.zip).
+You can also download our [ready to use full-featured sample](http://extcore.net/files/ExtCore-Sample-1.2.0.zip).
 It contains everything you need to run ExtCore-based web application from Visual Studio 2017, including SQLite
 database with the test data.
 

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Description>Free, open source and cross-platform framework for creating modular and extendable web applications based on ASP.NET Core 1.1.0.</Description>
     <Copyright>Copyright © 2015 Dmitry Sikorsky</Copyright>
-    <VersionPrefix>1.2.0-beta2</VersionPrefix>
+    <VersionPrefix>1.2.0</VersionPrefix>
     <Authors>Dmitry Sikorsky</Authors>
     <TargetFramework>netstandard1.6</TargetFramework>
     <AssemblyName>ExtCore.WebApplication</AssemblyName>
