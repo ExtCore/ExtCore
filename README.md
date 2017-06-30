@@ -101,7 +101,7 @@ Please take a look at our samples on GitHub:
 * [ExtCore framework 1.2.0 sample web application that uses a database](https://github.com/ExtCore/ExtCore-Sample-Data);
 * [ExtCore framework 1.2.0 sample web application with modular UI](https://github.com/ExtCore/ExtCore-Sample-Modular-Ui);
 * [ExtCore framework 1.2.0 advanced sample web application with modular UI](https://github.com/ExtCore/ExtCore-Sample-Modular-Ui-Adv);
-* [ExtCore framework 1.2.0 advanced sample accounting web application](https://github.com/ExtCore/ExtCore-Sample-Accounting);
+* [ExtCore framework 2.0.0-alpha1 advanced sample accounting web application](https://github.com/ExtCore/ExtCore-Sample-Accounting);
 * [ExtCore framework 1.2.0 sample web application that registers a service inside the extension](https://github.com/ExtCore/ExtCore-Sample-Service);
 * [ExtCore framework 1.2.0 sample web application that uses the events](https://github.com/ExtCore/ExtCore-Sample-Events);
 * [ExtCore framework 1.2.0 sample API web application](https://github.com/ExtCore/ExtCore-Sample-Api).
