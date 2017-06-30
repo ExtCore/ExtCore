@@ -1,4 +1,4 @@
-# ExtCore 1.2.0
+# ExtCore 2.0.0-alpha1
 
 [![Join the chat at https://gitter.im/ExtCore/ExtCore](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ExtCore/ExtCore?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -27,7 +27,7 @@ Any module or extension can execute its own code during the web application init
 use priorities to specify the correct order of the calls. This feature might be used for configuration,
 to register services etc.
 
-ExtCore consists of two general packages and two optional basic extensions.
+ExtCore consists of two general packages and three optional basic extensions.
 
 ### General Packages
 
@@ -55,14 +55,19 @@ AssemblyProvider class which is used to discover assemblies and might be replace
 ExtCore basic extensions are:
 
 * ExtCore.Data;
+* ExtCore.Data.EntityFramework;
 * ExtCore.Mvc;
 * ExtCore.Events.
 
 #### ExtCore.Data
 
 By default, ExtCore doesn’t know anything about data and storage, but you can use ExtCore.Data extension to have
-unified approach to working with data and single storage context among all the extensions. Currently it supports
-Microsoft SQL Server, PostgreSql and SQLite, but it is very easy to add another storage support.
+unified approach to working with data and single storage context among all the extensions. Storage might be represented
+by a database, a web API, a file structure or anything else.
+
+#### ExtCore.Data.EntityFramework
+
+Currently it supports Microsoft SQL Server, PostgreSql, and SQLite, but it is very easy to add another storage support.
 
 #### ExtCore.Mvc
 
@@ -81,9 +86,10 @@ You can find more information using the links at the bottom of this page.
 All you need to do to have modular and extendable web application is:
 
 * add ExtCore.WebApplication as dependency to your main web application project;
-* inherit your main application’s Startup class from ExtCore.WebApplication.Startup;
-* implement ExtCore.Infrastructure.IExtension interface in each of your extensions (optional);
-* tell main web application about the extensions.
+* call AddExtCore and UseExtCore inside your web application's Startup class;
+* implement the ExtCore.Infrastructure.IConfigureServicesAction and IConfigureAction interfaces in your extensions
+in order to execute some code inside the ConfigureServices and Configure methods of the web application's Startup class (optional);
+* tell main web application about the extensions (with implicit dependencies or by copying them into the extensions folder).
 
 ### Samples
 
@@ -112,7 +118,7 @@ to help you start developing your ExtCore-based web applications.
 ### Real Projects
 
 Please take a look at [Platformus](https://github.com/Platformus/Platformus) on GitHub. It is CMS
-built on ExtCore framework with 10 extensions and 70 projects.
+built on ExtCore framework with more than 10 extensions and 70 projects.
 
 ## Development and Debug
 

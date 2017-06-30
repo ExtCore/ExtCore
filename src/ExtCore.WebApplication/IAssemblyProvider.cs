@@ -8,7 +8,7 @@ namespace ExtCore.WebApplication
 {
   /// <summary>
   /// Describes an assembly provider with the mechanism of getting assemblies that should be involved
-  /// in the ExtCore types discovery process.
+  /// in the ExtCore types discovering process.
   /// </summary>
   public interface IAssemblyProvider
   {

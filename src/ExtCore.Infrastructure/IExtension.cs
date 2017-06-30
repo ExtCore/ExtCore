@@ -1,18 +1,10 @@
-﻿// Copyright © 2015 Dmitry Sikorsky. All rights reserved.
+﻿// Copyright © 2017 Dmitry Sikorsky. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
-
-using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace ExtCore.Infrastructure
 {
   /// <summary>
-  /// Describes an extension with the mechanism of executing prioritized (defined in a specific order)
-  /// actions (code fragments) within the <c>ConfigureServices</c> and <c>Configure</c> methods of a web application
-  /// <c>Startup</c> class.
+  /// Describes an extension.
   /// </summary>
   public interface IExtension
   {
@@ -22,34 +14,23 @@ namespace ExtCore.Infrastructure
     string Name { get; }
 
     /// <summary>
-    /// Gets the prioritized (defined in a specific order) actions (code fragments) that must be executed
-    /// within the <c>ConfigureServices</c> method of a web application <c>Startup</c> class.
-    /// Priority is set by the key, while the action is set by the value of the KeyValuePair. Before these actions are
-    /// executed they will be merged with the actions of all other extensions according to the priorities.
+    /// Gets the description of the extension.
     /// </summary>
-    IEnumerable<KeyValuePair<int, Action<IServiceCollection>>> ConfigureServicesActionsByPriorities { get; }
+    string Description { get; }
 
     /// <summary>
-    /// Gets the prioritized (defined in a specific order) actions (code fragments) that must be executed
-    /// within the <c>Configure</c> method of a web application <c>Startup</c> class.
-    /// Priority is set by the key, while the action is set by the value of the KeyValuePair. Before these actions are
-    /// executed they will be merged with the actions of all other extensions according to the priorities.
+    /// Gets the URL of the extension.
     /// </summary>
-    IEnumerable<KeyValuePair<int, Action<IApplicationBuilder>>> ConfigureActionsByPriorities { get; }
+    string Url { get; }
 
     /// <summary>
-    /// Sets the service provider that contains services currently registered inside the DI.
-    /// Only these services will be available for the extension.
+    /// Gets the version of the extension.
     /// </summary>
-    /// <param name="serviceProvider">The service provider to set.</param>
-    void SetServiceProvider(IServiceProvider serviceProvider);
+    string Version { get; }
 
     /// <summary>
-    /// Sets the configuration root that is built in a web application <c>Startup</c> class constructor.
-    /// This configuration root is only used to configure the extensions and will not be used to
-    /// provide configuration properties to the controllers etc.
+    /// Gets the authors of the extension (separated by commas).
     /// </summary>
-    /// <param name="configurationRoot">The configuration root to set.</param>
-    void SetConfigurationRoot(IConfigurationRoot configurationRoot);
+    string Authors { get; }
   }
 }

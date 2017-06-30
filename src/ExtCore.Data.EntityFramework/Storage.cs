@@ -1,34 +1,26 @@
-﻿// Copyright © 2015 Dmitry Sikorsky. All rights reserved.
+﻿// Copyright © 2017 Dmitry Sikorsky. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using ExtCore.Data.Abstractions;
 using ExtCore.Infrastructure;
 
-namespace ExtCore.Data.EntityFramework.SqlServer
+namespace ExtCore.Data.EntityFramework
 {
   /// <summary>
   /// Implements the <see cref="IStorage">IStorage</see> interface and represents implementation of the
   /// Unit of Work design pattern with the mechanism of getting the repositories to work with the underlying
-  /// SQL Server database storage context and committing the changes made by all the repositories.
+  /// Entity Framework storage context and committing the changes made by all the repositories.
   /// </summary>
   public class Storage : IStorage
   {
     /// <summary>
-    /// Gets or sets the connection string that is used to connect to the SQL Server database.
+    /// Gets the Entity Framework storage context.
     /// </summary>
-    public static string ConnectionString { get; set; }
+    public IStorageContext StorageContext { get; private set; }
 
-    /// <summary>
-    /// Gets or sets the storage context that represents the SQL Server database.
-    /// </summary>
-    public StorageContext StorageContext { get; private set; }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Storage">Storage</see> class.
-    /// </summary>
-    public Storage()
+    public Storage(IStorageContext storageContext)
     {
-      this.StorageContext = new StorageContext(Storage.ConnectionString);
+      this.StorageContext = storageContext;
     }
 
     /// <summary>
@@ -38,7 +30,7 @@ namespace ExtCore.Data.EntityFramework.SqlServer
     /// <returns></returns>
     public TRepository GetRepository<TRepository>() where TRepository : IRepository
     {
-      TRepository repository = ExtensionManager.GetInstance<TRepository>(a => a.FullName.ToLower().Contains("entityframework.sqlserver"));
+      TRepository repository = ExtensionManager.GetInstance<TRepository>();
 
       repository.SetStorageContext(this.StorageContext);
       return repository;
@@ -49,7 +41,7 @@ namespace ExtCore.Data.EntityFramework.SqlServer
     /// </summary>
     public void Save()
     {
-      this.StorageContext.SaveChanges();
+      (this.StorageContext as StorageContextBase).SaveChanges();
     }
   }
 }

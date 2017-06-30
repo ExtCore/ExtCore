@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Description>Part of the ExtCore.Data ExtCore framework extension.</Description>
     <Copyright>Copyright © 2015 Dmitry Sikorsky</Copyright>
-    <VersionPrefix>1.2.0</VersionPrefix>
+    <VersionPrefix>2.0.0-alpha1</VersionPrefix>
     <Authors>Dmitry Sikorsky</Authors>
     <TargetFramework>netstandard1.6</TargetFramework>
     <AssemblyName>ExtCore.Data.EntityFramework.PostgreSql</AssemblyName>
@@ -13,9 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ExtCore.Data.Abstractions\ExtCore.Data.Abstractions.csproj" />
-    <ProjectReference Include="..\ExtCore.Data.Models.Abstractions\ExtCore.Data.Models.Abstractions.csproj" />
-    <ProjectReference Include="..\ExtCore.Infrastructure\ExtCore.Infrastructure.csproj" />
+    <ProjectReference Include="..\ExtCore.Data.EntityFramework\ExtCore.Data.EntityFramework.csproj" />
   </ItemGroup>
 
   <ItemGroup>

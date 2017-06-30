@@ -10,36 +10,20 @@ namespace ExtCore.Infrastructure
 {
   /// <summary>
   /// Represents assembly cache with the mechanism of getting implementations or instances of a given type.
-  /// Also it allows to get all the instances of the <see cref="IExtension">IExtension</see> interface
-  /// with the additional cache. This is the global access point to the types discovered by the ExtCore.
+  /// This is the global access point to the types discovered by the ExtCore.
   /// </summary>
   public static class ExtensionManager
   {
     private static IEnumerable<Assembly> assemblies;
-    private static IEnumerable<IExtension> extensions;
 
     /// <summary>
-    /// Gets the cached assemblies that has been set by the <c>SetAssemblies</c> method.
+    /// Gets the cached assemblies that has been set by the SetAssemblies method.
     /// </summary>
     public static IEnumerable<Assembly> Assemblies
     {
       get
       {
         return ExtensionManager.assemblies;
-      }
-    }
-
-    /// <summary>
-    /// Gets the cached instances of the <see cref="IExtension">IExtension</see> interface.
-    /// </summary>
-    public static IEnumerable<IExtension> Extensions
-    {
-      get
-      {
-        if (ExtensionManager.extensions == null)
-          ExtensionManager.extensions = ExtensionManager.GetInstances<IExtension>();
-
-        return ExtensionManager.extensions;
       }
     }
 
@@ -51,7 +35,6 @@ namespace ExtCore.Infrastructure
     public static void SetAssemblies(IEnumerable<Assembly> assemblies)
     {
       ExtensionManager.assemblies = assemblies;
-      ExtensionManager.extensions = null;
     }
 
     /// <summary>

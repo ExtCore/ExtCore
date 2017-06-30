@@ -1,36 +1,34 @@
 ﻿// Copyright © 2017 Dmitry Sikorsky. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-namespace ExtCore.Infrastructure
+using ExtCore.Infrastructure;
+
+namespace ExtCore.Data.EntityFramework
 {
   /// <summary>
-  /// Implements the <see cref="IExtension">IExtension</see> interface and represents default extension behavior.
+  /// Overrides the <see cref="ExtensionBase">ExtensionBase</see> class and provides the
+  /// ExtCore.Data.EntityFramework extension information.
   /// </summary>
-  public abstract class ExtensionBase : IExtension
+  public class Extension : ExtensionBase
   {
     /// <summary>
     /// Gets the name of the extension.
     /// </summary>
-    public virtual string Name => this.GetType().FullName;
-
-    /// <summary>
-    /// Gets the description of the extension.
-    /// </summary>
-    public virtual string Description => null;
+    public override string Name => "ExtCore.Data.EntityFramework";
 
     /// <summary>
     /// Gets the URL of the extension.
     /// </summary>
-    public virtual string Url => null;
+    public override string Url => "http://extcore.net/";
 
     /// <summary>
     /// Gets the version of the extension.
     /// </summary>
-    public virtual string Version => null;
+    public override string Version => "2.0.0-alpha1";
 
     /// <summary>
     /// Gets the authors of the extension (separated by commas).
     /// </summary>
-    public virtual string Authors => null;
+    public override string Authors => "Dmitry Sikorsky";
   }
 }

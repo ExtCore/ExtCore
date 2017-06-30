@@ -1,4 +1,4 @@
-﻿// Copyright © 2015 Dmitry Sikorsky. All rights reserved.
+﻿// Copyright © 2017 Dmitry Sikorsky. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
@@ -14,13 +14,13 @@ namespace ExtCore.WebApplication
 {
   /// <summary>
   /// Implements the <see cref="IAssemblyProvider">IAssemblyProvider</see> interface and represents
-  /// default assembly provider that gets assemblies from a specific folder and web application dependencies
-  /// with the ability to filter the discovered assemblies with the <c>IsCandidateAssembly</c> and
-  /// <c>IsCandidateCompilationLibrary</c> predicates.
+  /// default assembly provider that gets assemblies from a specific path and web application dependencies
+  /// with the ability to filter the discovered assemblies with the IsCandidateAssembly and
+  /// IsCandidateCompilationLibrary predicates.
   /// </summary>
-  public class AssemblyProvider : IAssemblyProvider
+  public class DefaultAssemblyProvider : IAssemblyProvider
   {
-    protected ILogger<AssemblyProvider> logger;
+    protected ILogger logger;
 
     /// <summary>
     /// Gets or sets the predicate that is used to filter discovered assemblies from a specific folder
@@ -35,12 +35,12 @@ namespace ExtCore.WebApplication
     public Func<Library, bool> IsCandidateCompilationLibrary { get; set; }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="AssemblyProvider">AssemblyProvider</see> class.
+    /// Initializes a new instance of the <see cref="DefaultAssemblyProvider">AssemblyProvider</see> class.
     /// </summary>
     /// <param name="serviceProvider">The service provider that is used to create a logger.</param>
-    public AssemblyProvider(IServiceProvider serviceProvider)
+    public DefaultAssemblyProvider(IServiceProvider serviceProvider)
     {
-      this.logger = serviceProvider.GetService<ILoggerFactory>().CreateLogger<AssemblyProvider>();
+      this.logger = serviceProvider.GetService<ILoggerFactory>().CreateLogger("ExtCore.WebApplication");
       this.IsCandidateAssembly = assembly =>
         !assembly.FullName.StartsWith("Microsoft.", StringComparison.OrdinalIgnoreCase) &&
         !assembly.FullName.StartsWith("System.", StringComparison.OrdinalIgnoreCase);

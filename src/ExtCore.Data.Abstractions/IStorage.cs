@@ -11,6 +11,11 @@ namespace ExtCore.Data.Abstractions
   public interface IStorage
   {
     /// <summary>
+    /// Gets the underlying storage context used by this storage.
+    /// </summary>
+    IStorageContext StorageContext { get; }
+
+    /// <summary>
     /// Gets a repository of the given type.
     /// </summary>
     /// <typeparam name="T">The type parameter to find implementation of.</typeparam>
