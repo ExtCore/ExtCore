@@ -95,7 +95,7 @@ in order to execute some code inside the ConfigureServices and Configure methods
 
 Please take a look at our samples on GitHub:
 
-* [Full-featured ExtCore 1.2.0 framework sample web application](https://github.com/ExtCore/ExtCore-Sample);
+* [Full-featured ExtCore 2.0.0-alpha1 framework sample web application](https://github.com/ExtCore/ExtCore-Sample);
 * [ExtCore framework 1.2.0 sample simplest web application](https://github.com/ExtCore/ExtCore-Sample-Simplest);
 * [ExtCore framework 1.2.0 sample MVC web application](https://github.com/ExtCore/ExtCore-Sample-Mvc);
 * [ExtCore framework 1.2.0 sample web application that uses a database](https://github.com/ExtCore/ExtCore-Sample-Data);
@@ -106,7 +106,7 @@ Please take a look at our samples on GitHub:
 * [ExtCore framework 1.2.0 sample web application that uses the events](https://github.com/ExtCore/ExtCore-Sample-Events);
 * [ExtCore framework 1.2.0 sample API web application](https://github.com/ExtCore/ExtCore-Sample-Api).
 
-You can also download our [ready to use full-featured sample](http://extcore.net/files/ExtCore-Sample-1.2.0.zip).
+You can also download our [ready to use full-featured sample](http://extcore.net/files/ExtCore-Sample-2.0.0-alpha1.zip).
 It contains everything you need to run ExtCore-based web application from Visual Studio 2017, including SQLite
 database with the test data.
 
