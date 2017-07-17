@@ -27,7 +27,7 @@ Any module or extension can execute its own code during the web application init
 use priorities to specify the correct order of the calls. This feature might be used for configuration,
 to register services etc.
 
-ExtCore consists of two general packages and three optional basic extensions.
+ExtCore consists of two general packages and four optional basic extensions.
 
 ### General Packages
 
