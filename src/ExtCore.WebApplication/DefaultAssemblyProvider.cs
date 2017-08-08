@@ -55,17 +55,31 @@ namespace ExtCore.WebApplication
     /// Discovers and then gets the discovered assemblies from a specific folder and web application dependencies.
     /// </summary>
     /// <param name="path">The extensions path of a web application.</param>
-    /// <returns></returns>
+    /// <returns>The discovered and loaded assemblies.</returns>
     public IEnumerable<Assembly> GetAssemblies(string path)
+    {
+      return this.GetAssemblies(path, false);
+    }
+
+    /// <summary>
+    /// Discovers and then gets the discovered assemblies from a specific folder and web application dependencies.
+    /// </summary>
+    /// <param name="path">The extensions path of a web application.</param>
+    /// <param name="includingSubpaths">
+    /// Determines whether a web application will discover and then get the discovered assemblies from the subfolders
+    /// of a specific folder recursively.
+    /// </param>
+    /// <returns>The discovered and loaded assemblies.</returns>
+    public IEnumerable<Assembly> GetAssemblies(string path, bool includingSubpaths)
     {
       List<Assembly> assemblies = new List<Assembly>();
 
-      assemblies.AddRange(this.GetAssembliesFromPath(path));
+      assemblies.AddRange(this.GetAssembliesFromPath(path, true));
       assemblies.AddRange(this.GetAssembliesFromDependencyContext());
       return assemblies;
     }
 
-    private IEnumerable<Assembly> GetAssembliesFromPath(string path)
+    private IEnumerable<Assembly> GetAssembliesFromPath(string path, bool includingSubpaths)
     {
       List<Assembly> assemblies = new List<Assembly>();
 
@@ -103,6 +117,10 @@ namespace ExtCore.WebApplication
 
         else this.logger.LogWarning("Discovering and loading assemblies from path '{0}' skipped: path not found", path);
       }
+
+      if (includingSubpaths)
+        foreach (string subpath in Directory.GetDirectories(path))
+          assemblies.AddRange(this.GetAssembliesFromPath(subpath, includingSubpaths));
 
       return assemblies;
     }
