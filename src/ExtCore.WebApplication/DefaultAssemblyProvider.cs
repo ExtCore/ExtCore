@@ -74,7 +74,7 @@ namespace ExtCore.WebApplication
     {
       List<Assembly> assemblies = new List<Assembly>();
 
-      assemblies.AddRange(this.GetAssembliesFromPath(path, true));
+      assemblies.AddRange(this.GetAssembliesFromPath(path, includingSubpaths));
       assemblies.AddRange(this.GetAssembliesFromDependencyContext());
       return assemblies;
     }
