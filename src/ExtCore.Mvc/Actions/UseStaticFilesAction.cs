@@ -4,6 +4,8 @@
 using System;
 using ExtCore.Infrastructure.Actions;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace ExtCore.Mvc.Actions
 {
@@ -30,7 +32,9 @@ namespace ExtCore.Mvc.Actions
     /// </param>
     public void Execute(IApplicationBuilder applicationBuilder, IServiceProvider serviceProvider)
     {
-      applicationBuilder.UseStaticFiles();
+      IOptions<StaticFileOptions> options = serviceProvider.GetService<IOptions<StaticFileOptions>>();
+
+      applicationBuilder.UseStaticFiles(options?.Value);
     }
   }
 }
