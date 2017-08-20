@@ -86,6 +86,7 @@ namespace ExtCore.WebApplication.Extensions
     public static void AddExtCore(this IServiceCollection services, string extensionsPath, bool includingSubpaths, IAssemblyProvider assemblyProvider)
     {
       ServiceCollectionExtensions.DiscoverAssemblies(assemblyProvider, extensionsPath, includingSubpaths);
+
       IServiceProvider serviceProvider = services.BuildServiceProvider();
       ILogger logger = serviceProvider.GetService<ILoggerFactory>().CreateLogger("ExtCore.WebApplication");
 
@@ -99,12 +100,7 @@ namespace ExtCore.WebApplication.Extensions
 
     private static void DiscoverAssemblies(IAssemblyProvider assemblyProvider, string extensionsPath, bool includingSubpaths)
     {
-      // TODO: remove this workaround in the next major release
-      // (it is done this way now only to avoid changing the IAssemblyProvider public interface in the minor release).
-      if (assemblyProvider is DefaultAssemblyProvider)
-        ExtensionManager.SetAssemblies((assemblyProvider as DefaultAssemblyProvider).GetAssemblies(extensionsPath, includingSubpaths));
-
-      else ExtensionManager.SetAssemblies(assemblyProvider.GetAssemblies(extensionsPath));
+      ExtensionManager.SetAssemblies(assemblyProvider.GetAssemblies(extensionsPath, includingSubpaths));
     }
   }
 }

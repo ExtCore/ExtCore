@@ -1,26 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>Free, open source and cross-platform framework for creating modular and extendable web applications based on ASP.NET Core 1.1.0.</Description>
-    <Copyright>Copyright © 2015 Dmitry Sikorsky</Copyright>
-    <VersionPrefix>2.1.0</VersionPrefix>
     <Authors>Dmitry Sikorsky</Authors>
-    <TargetFramework>netstandard1.6</TargetFramework>
+    <Copyright>Copyright © 2015 Dmitry Sikorsky</Copyright>
+    <Description>Free, open source and cross-platform framework for creating modular and extendable web applications based on ASP.NET Core.</Description>
+    <VersionPrefix>3.0.0-alpha1</VersionPrefix>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
     <AssemblyName>ExtCore.WebApplication</AssemblyName>
     <PackageId>ExtCore.WebApplication</PackageId>
     <PackageIconUrl>http://extcore.net/extcore_nuget_icon.png</PackageIconUrl>
     <PackageProjectUrl>http://extcore.net/</PackageProjectUrl>
   </PropertyGroup>
-  
-  <ItemGroup>
-    <ProjectReference Include="..\ExtCore.Infrastructure\ExtCore.Infrastructure.csproj" />
-  </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="1.1.2" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="1.1.1" />
-    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="1.1.2" />
-    <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
+    <ProjectReference Include="..\ExtCore.Infrastructure\ExtCore.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>Part of the ExtCore.Mvc ExtCore framework extension.</Description>
-    <Copyright>Copyright © 2015 Dmitry Sikorsky</Copyright>
-    <VersionPrefix>2.1.0</VersionPrefix>
     <Authors>Dmitry Sikorsky</Authors>
-    <TargetFramework>netstandard1.6</TargetFramework>
+    <Copyright>Copyright © 2015 Dmitry Sikorsky</Copyright>
+    <Description>The ExtCore.Mvc extension component. Based on the ExtCore framework.</Description>
+    <VersionPrefix>3.0.0-alpha1</VersionPrefix>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
     <AssemblyName>ExtCore.Mvc</AssemblyName>
     <PackageId>ExtCore.Mvc</PackageId>
     <PackageIconUrl>http://extcore.net/extcore_nuget_icon.png</PackageIconUrl>
@@ -14,13 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ExtCore.Mvc.Infrastructure\ExtCore.Mvc.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="1.1.3" />
-    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.2" />
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="1.1.1" />
   </ItemGroup>
 
 </Project>

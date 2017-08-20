@@ -17,7 +17,12 @@ namespace ExtCore.WebApplication
     /// </summary>
     /// <param name="path">The extensions path of a web application. Might be used or ignored
     /// by an implementation of the <see cref="IAssemblyProvider">IAssemblyProvider</see> interface.</param>
-    /// <returns></returns>
-    IEnumerable<Assembly> GetAssemblies(string path);
+    /// <param name="includingSubpaths">
+    /// Determines whether a web application will discover and then get the discovered assemblies from the subfolders
+    /// of a specific folder recursively. Might be used or ignored by an implementation of the
+    /// <see cref="IAssemblyProvider">IAssemblyProvider</see> interface.</param>
+    /// </param>
+    /// <returns>The discovered and loaded assemblies.</returns>
+    IEnumerable<Assembly> GetAssemblies(string path, bool includingSubpaths);
   }
 }

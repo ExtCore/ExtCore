@@ -16,7 +16,7 @@ namespace ExtCore.Data.EntityFramework.Actions
   /// Implements the <see cref="IConfigureServicesAction">IConfigureServicesAction</see> interface and
   /// registers found implementation of the <see cref="IStorageContext">IStorageContext</see> interface inside the DI.
   /// </summary>
-  public class AddStaticFilesAction : IConfigureServicesAction
+  public class AddStorageContextAction : IConfigureServicesAction
   {
     /// <summary>
     /// Priority of the action. The actions will be executed in the order specified by the priority (from smallest to largest).

@@ -42,23 +42,19 @@ namespace ExtCore.WebApplication
     {
       this.logger = serviceProvider.GetService<ILoggerFactory>().CreateLogger("ExtCore.WebApplication");
       this.IsCandidateAssembly = assembly =>
-        !assembly.FullName.StartsWith("Microsoft.", StringComparison.OrdinalIgnoreCase) &&
-        !assembly.FullName.StartsWith("System.", StringComparison.OrdinalIgnoreCase);
+        !assembly.FullName.StartsWith("System.", StringComparison.OrdinalIgnoreCase) &&
+        !assembly.FullName.StartsWith("Microsoft.", StringComparison.OrdinalIgnoreCase);
 
       this.IsCandidateCompilationLibrary = library =>
-        !string.Equals(library.Name, "NETStandard.Library", StringComparison.OrdinalIgnoreCase) &&
+        !library.Name.StartsWith("System.", StringComparison.OrdinalIgnoreCase) &&
         !library.Name.StartsWith("Microsoft.", StringComparison.OrdinalIgnoreCase) &&
-        !library.Name.StartsWith("System.", StringComparison.OrdinalIgnoreCase);
-    }
-
-    /// <summary>
-    /// Discovers and then gets the discovered assemblies from a specific folder and web application dependencies.
-    /// </summary>
-    /// <param name="path">The extensions path of a web application.</param>
-    /// <returns>The discovered and loaded assemblies.</returns>
-    public IEnumerable<Assembly> GetAssemblies(string path)
-    {
-      return this.GetAssemblies(path, false);
+        !library.Name.StartsWith("Newtonsoft.", StringComparison.OrdinalIgnoreCase) &&
+        !library.Name.StartsWith("runtime.", StringComparison.OrdinalIgnoreCase) &&
+        !library.Name.Equals("NETStandard.Library", StringComparison.OrdinalIgnoreCase) &&
+        !library.Name.Equals("Libuv", StringComparison.OrdinalIgnoreCase) &&
+        !library.Name.Equals("Remotion.Linq", StringComparison.OrdinalIgnoreCase) &&
+        !library.Name.Equals("StackExchange.Redis.StrongName", StringComparison.OrdinalIgnoreCase) &&
+        !library.Name.Equals("WindowsAzure.Storage", StringComparison.OrdinalIgnoreCase);
     }
 
     /// <summary>
@@ -105,7 +101,7 @@ namespace ExtCore.WebApplication
           catch (Exception e)
           {
             this.logger.LogWarning("Error loading assembly '{0}'", extensionPath);
-            this.logger.LogInformation(e.ToString());
+            this.logger.LogWarning(e.ToString());
           }
         }
       }
@@ -147,7 +143,7 @@ namespace ExtCore.WebApplication
           catch (Exception e)
           {
             this.logger.LogWarning("Error loading assembly '{0}'", compilationLibrary.Name);
-            this.logger.LogInformation(e.ToString());
+            this.logger.LogWarning(e.ToString());
           }
         }
       }
