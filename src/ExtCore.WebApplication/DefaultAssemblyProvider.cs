@@ -103,6 +103,10 @@ namespace ExtCore.WebApplication
             this.logger.LogWarning(e.ToString());
           }
         }
+
+        if (includingSubpaths)
+          foreach (string subpath in Directory.GetDirectories(path))
+            this.GetAssembliesFromPath(assemblies, subpath, includingSubpaths);
       }
 
       else
@@ -112,10 +116,6 @@ namespace ExtCore.WebApplication
 
         else this.logger.LogWarning("Discovering and loading assemblies from path '{0}' skipped: path not found", path);
       }
-
-      if (includingSubpaths)
-        foreach (string subpath in Directory.GetDirectories(path))
-          this.GetAssembliesFromPath(assemblies, subpath, includingSubpaths);
     }
 
     private void GetAssembliesFromDependencyContext(List<Assembly> assemblies)
