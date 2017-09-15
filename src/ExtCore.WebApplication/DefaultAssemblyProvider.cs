@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
 using Microsoft.Extensions.DependencyInjection;
@@ -70,15 +71,13 @@ namespace ExtCore.WebApplication
     {
       List<Assembly> assemblies = new List<Assembly>();
 
-      assemblies.AddRange(this.GetAssembliesFromPath(path, includingSubpaths));
-      assemblies.AddRange(this.GetAssembliesFromDependencyContext());
+      this.GetAssembliesFromDependencyContext(assemblies);
+      this.GetAssembliesFromPath(assemblies, path, includingSubpaths);
       return assemblies;
     }
 
-    private IEnumerable<Assembly> GetAssembliesFromPath(string path, bool includingSubpaths)
+    private void GetAssembliesFromPath(List<Assembly> assemblies, string path, bool includingSubpaths)
     {
-      List<Assembly> assemblies = new List<Assembly>();
-
       if (!string.IsNullOrEmpty(path) && Directory.Exists(path))
       {
         this.logger.LogInformation("Discovering and loading assemblies from path '{0}'", path);
@@ -91,7 +90,7 @@ namespace ExtCore.WebApplication
           {
             assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(extensionPath);
 
-            if (this.IsCandidateAssembly(assembly))
+            if (this.IsCandidateAssembly(assembly) && !assemblies.Any(a => string.Equals(a.FullName, assembly.FullName, StringComparison.OrdinalIgnoreCase)))
             {
               assemblies.Add(assembly);
               this.logger.LogInformation("Assembly '{0}' is discovered and loaded", assembly.FullName);
@@ -116,15 +115,11 @@ namespace ExtCore.WebApplication
 
       if (includingSubpaths)
         foreach (string subpath in Directory.GetDirectories(path))
-          assemblies.AddRange(this.GetAssembliesFromPath(subpath, includingSubpaths));
-
-      return assemblies;
+          this.GetAssembliesFromPath(assemblies, subpath, includingSubpaths);
     }
 
-    private IEnumerable<Assembly> GetAssembliesFromDependencyContext()
+    private void GetAssembliesFromDependencyContext(List<Assembly> assemblies)
     {
-      List<Assembly> assemblies = new List<Assembly>();
-
       this.logger.LogInformation("Discovering and loading assemblies from DependencyContext");
 
       foreach (CompilationLibrary compilationLibrary in DependencyContext.Default.CompileLibraries)
@@ -135,9 +130,13 @@ namespace ExtCore.WebApplication
 
           try
           {
-            assembly = Assembly.Load(new AssemblyName(compilationLibrary.Name));
-            assemblies.Add(assembly);
-            this.logger.LogInformation("Assembly '{0}' is discovered and loaded", assembly.FullName);
+            assembly = AssemblyLoadContext.Default.LoadFromAssemblyName(new AssemblyName(compilationLibrary.Name));
+
+            if (!assemblies.Any(a => string.Equals(a.FullName, assembly.FullName, StringComparison.OrdinalIgnoreCase)))
+            {
+              assemblies.Add(assembly);
+              this.logger.LogInformation("Assembly '{0}' is discovered and loaded", assembly.FullName);
+            }
           }
 
           catch (Exception e)
@@ -147,8 +146,6 @@ namespace ExtCore.WebApplication
           }
         }
       }
-
-      return assemblies;
     }
   }
 }
