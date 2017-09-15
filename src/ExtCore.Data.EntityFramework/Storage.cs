@@ -32,7 +32,9 @@ namespace ExtCore.Data.EntityFramework
     {
       TRepository repository = ExtensionManager.GetInstance<TRepository>();
 
-      repository.SetStorageContext(this.StorageContext);
+      if (repository != null)
+        repository.SetStorageContext(this.StorageContext);
+
       return repository;
     }
 
