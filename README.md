@@ -67,7 +67,7 @@ by a database, a web API, a file structure or anything else.
 
 #### ExtCore.Data.EntityFramework
 
-Currently it supports Microsoft SQL Server, PostgreSql, and SQLite, but it is very easy to add another storage support.
+Currently it supports MySQL, PostgreSql, SQLite, and SQL Server, but it is very easy to add another storage support.
 
 #### ExtCore.Mvc
 
