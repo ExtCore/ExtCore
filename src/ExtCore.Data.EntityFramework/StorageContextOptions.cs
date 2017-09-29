@@ -12,5 +12,10 @@ namespace ExtCore.Data.EntityFramework
     /// The connection string that is used to connect to the physical storage.
     /// </summary>
     public string ConnectionString { get; set; }
+
+    /// <summary>
+    /// The assembly name that is used to design entity framework migrations.
+    /// </summary>
+    public string MigrationsAssembly { get; set; }
   }
 }

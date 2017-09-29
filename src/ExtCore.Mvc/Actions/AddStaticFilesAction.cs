@@ -33,7 +33,9 @@ namespace ExtCore.Mvc.Actions
     /// </param>
     public void Execute(IServiceCollection services, IServiceProvider serviceProvider)
     {
-      serviceProvider.GetService<IHostingEnvironment>().WebRootFileProvider = this.CreateCompositeFileProvider(serviceProvider);
+      var env = serviceProvider.GetService<IHostingEnvironment>();
+      if (env != null)
+        env.WebRootFileProvider = this.CreateCompositeFileProvider(serviceProvider);
     }
 
     private IFileProvider CreateCompositeFileProvider(IServiceProvider serviceProvider)
