@@ -22,7 +22,7 @@ namespace ExtCore.Data.EntityFramework.MySql
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
       base.OnConfiguring(optionsBuilder);
-      optionsBuilder.UseMySQL(this.ConnectionString);
+      optionsBuilder.UseMySQL(this.ConnectionString, b => b.MigrationsAssembly(this.MigrationsAssembly));
     }
   }
 }

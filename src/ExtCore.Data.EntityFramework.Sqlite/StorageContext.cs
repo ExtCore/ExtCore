@@ -21,7 +21,7 @@ namespace ExtCore.Data.EntityFramework.Sqlite
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
       base.OnConfiguring(optionsBuilder);
-      optionsBuilder.UseSqlite(this.ConnectionString);
+      optionsBuilder.UseSqlite(this.ConnectionString, b => b.MigrationsAssembly(this.MigrationsAssembly));
     }
   }
 }

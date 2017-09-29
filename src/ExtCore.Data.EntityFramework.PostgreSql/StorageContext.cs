@@ -21,7 +21,7 @@ namespace ExtCore.Data.EntityFramework.PostgreSql
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
       base.OnConfiguring(optionsBuilder);
-      optionsBuilder.UseNpgsql(this.ConnectionString);
+      optionsBuilder.UseNpgsql(this.ConnectionString, b => b.MigrationsAssembly(this.MigrationsAssembly));
     }
   }
 }
