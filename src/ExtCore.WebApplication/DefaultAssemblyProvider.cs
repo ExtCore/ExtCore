@@ -43,18 +43,19 @@ namespace ExtCore.WebApplication
     {
       this.logger = serviceProvider.GetService<ILoggerFactory>().CreateLogger("ExtCore.WebApplication");
       this.IsCandidateAssembly = assembly =>
-        !assembly.FullName.StartsWith("System.", StringComparison.OrdinalIgnoreCase) &&
-        !assembly.FullName.StartsWith("Microsoft.", StringComparison.OrdinalIgnoreCase);
+        !assembly.FullName.StartsWith("Microsoft.", StringComparison.OrdinalIgnoreCase) &&
+        !assembly.FullName.StartsWith("System.", StringComparison.OrdinalIgnoreCase);
 
       this.IsCandidateCompilationLibrary = library =>
-        !library.Name.StartsWith("System.", StringComparison.OrdinalIgnoreCase) &&
-        !library.Name.StartsWith("Microsoft.", StringComparison.OrdinalIgnoreCase) &&
-        !library.Name.StartsWith("Newtonsoft.", StringComparison.OrdinalIgnoreCase) &&
-        !library.Name.StartsWith("runtime.", StringComparison.OrdinalIgnoreCase) &&
-        !library.Name.Equals("NETStandard.Library", StringComparison.OrdinalIgnoreCase) &&
         !library.Name.Equals("Libuv", StringComparison.OrdinalIgnoreCase) &&
+        !library.Name.StartsWith("Microsoft.", StringComparison.OrdinalIgnoreCase) &&
+        !library.Name.Equals("NETStandard.Library", StringComparison.OrdinalIgnoreCase) &&
+        !library.Name.StartsWith("Newtonsoft.", StringComparison.OrdinalIgnoreCase) &&
+        !library.Name.StartsWith("Npgsql", StringComparison.OrdinalIgnoreCase) &&
         !library.Name.Equals("Remotion.Linq", StringComparison.OrdinalIgnoreCase) &&
+        !library.Name.StartsWith("runtime.", StringComparison.OrdinalIgnoreCase) &&
         !library.Name.Equals("StackExchange.Redis.StrongName", StringComparison.OrdinalIgnoreCase) &&
+        !library.Name.StartsWith("System.", StringComparison.OrdinalIgnoreCase) &&
         !library.Name.Equals("WindowsAzure.Storage", StringComparison.OrdinalIgnoreCase);
     }
 
