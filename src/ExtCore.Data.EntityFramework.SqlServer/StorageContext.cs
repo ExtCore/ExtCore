@@ -21,7 +21,17 @@ namespace ExtCore.Data.EntityFramework.SqlServer
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
       base.OnConfiguring(optionsBuilder);
-      optionsBuilder.UseSqlServer(this.ConnectionString);
+
+      if (string.IsNullOrEmpty(this.MigrationsAssembly))
+        optionsBuilder.UseSqlServer(this.ConnectionString);
+
+      else optionsBuilder.UseSqlServer(
+        this.ConnectionString,
+        options =>
+        {
+          options.MigrationsAssembly(this.MigrationsAssembly);
+        }
+      );
     }
   }
 }

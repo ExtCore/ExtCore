@@ -16,12 +16,25 @@ namespace ExtCore.Data.EntityFramework.Sqlite
     /// Initializes a new instance of the <see cref="StorageContext">StorageContext</see> class.
     /// </summary>
     /// <param name="connectionString">The connection string that is used to connect to the SQLite database.</param>
-    public StorageContext(IOptions<StorageContextOptions> options) : base(options) { }
+    public StorageContext(IOptions<StorageContextOptions> options)
+      : base(options)
+    {
+    }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
       base.OnConfiguring(optionsBuilder);
-      optionsBuilder.UseSqlite(this.ConnectionString);
+
+      if (string.IsNullOrEmpty(this.MigrationsAssembly))
+        optionsBuilder.UseSqlite(this.ConnectionString);
+
+      else optionsBuilder.UseSqlite(
+        this.ConnectionString,
+        options =>
+        {
+          options.MigrationsAssembly(this.MigrationsAssembly);
+        }
+      );
     }
   }
 }

@@ -10,6 +10,7 @@ namespace ExtCore.Data.EntityFramework
   /// <summary>
   /// Implements the <see cref="IRepository">IRepository</see> interface and represents default repository behavior.
   /// </summary>
+  /// <typeparam name="TEntity">The entity type this repository operates.</typeparam>
   public abstract class RepositoryBase<TEntity> : IRepository where TEntity : class, IEntity
   {
     protected StorageContextBase storageContext;

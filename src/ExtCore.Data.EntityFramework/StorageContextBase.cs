@@ -19,12 +19,18 @@ namespace ExtCore.Data.EntityFramework
     public string ConnectionString { get; private set; }
 
     /// <summary>
+    /// The assembly name where migrations are maintained for this context.
+    /// </summary>
+    public string MigrationsAssembly { get; private set; }
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="StorageContext">StorageContext</see> class.
     /// </summary>
     /// <param name="connectionStringProvider">The connection string that is used to connect to the physical storage.</param>
     public StorageContextBase(IOptions<StorageContextOptions> options)
     {
       this.ConnectionString = options.Value.ConnectionString;
+      this.MigrationsAssembly = options.Value.MigrationsAssembly;
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
