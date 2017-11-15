@@ -1,8 +1,10 @@
 ﻿// Copyright © 2017 Dmitry Sikorsky. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using System;
 using ExtCore.Data.Abstractions;
 using ExtCore.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 namespace ExtCore.Data.EntityFramework
 {
@@ -20,6 +22,9 @@ namespace ExtCore.Data.EntityFramework
 
     public Storage(IStorageContext storageContext)
     {
+      if (!(storageContext is DbContext))
+        throw new ArgumentException("The storageContext object must be an instance of the Microsoft.EntityFrameworkCore.DbContext class.");
+
       this.StorageContext = storageContext;
     }
 

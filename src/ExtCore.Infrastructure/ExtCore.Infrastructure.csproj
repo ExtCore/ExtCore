@@ -4,7 +4,7 @@
     <Authors>Dmitry Sikorsky</Authors>
     <Copyright>Copyright © 2015 Dmitry Sikorsky</Copyright>
     <Description>Free, open source and cross-platform framework for creating modular and extendable web applications based on ASP.NET Core.</Description>
-    <VersionPrefix>3.1.0-beta2</VersionPrefix>
+    <VersionPrefix>3.1.0-beta3</VersionPrefix>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <AssemblyName>ExtCore.Infrastructure</AssemblyName>
     <PackageId>ExtCore.Infrastructure</PackageId>

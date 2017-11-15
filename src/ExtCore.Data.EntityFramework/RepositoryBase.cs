@@ -13,7 +13,7 @@ namespace ExtCore.Data.EntityFramework
   /// <typeparam name="TEntity">The entity type this repository operates.</typeparam>
   public abstract class RepositoryBase<TEntity> : IRepository where TEntity : class, IEntity
   {
-    protected IStorageContext storageContext;
+    protected DbContext storageContext;
     protected DbSet<TEntity> dbSet;
 
     /// <summary>
@@ -22,8 +22,8 @@ namespace ExtCore.Data.EntityFramework
     /// <param name="storageContext">The Entity Framework storage context to set.</param>
     public void SetStorageContext(IStorageContext storageContext)
     {
-      this.storageContext = storageContext;
-      this.dbSet = (storageContext as DbContext).Set<TEntity>();
+      this.storageContext = storageContext as DbContext;
+      this.dbSet = this.storageContext.Set<TEntity>();
     }
   }
 }
