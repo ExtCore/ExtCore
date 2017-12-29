@@ -3,17 +3,18 @@
 
 using ExtCore.Infrastructure;
 
-namespace ExtCore.Events
+namespace ExtCore.Data.Dapper
 {
   /// <summary>
-  /// Overrides the <see cref="ExtensionBase">ExtensionBase</see> class and provides the ExtCore.Events extension information.
+  /// Overrides the <see cref="ExtensionBase">ExtensionBase</see> class and provides the
+  /// ExtCore.Data.Dapper extension information.
   /// </summary>
   public class Extension : ExtensionBase
   {
     /// <summary>
     /// Gets the name of the extension.
     /// </summary>
-    public override string Name => "ExtCore.Events";
+    public override string Name => "ExtCore.Data.Dapper";
 
     /// <summary>
     /// Gets the URL of the extension.

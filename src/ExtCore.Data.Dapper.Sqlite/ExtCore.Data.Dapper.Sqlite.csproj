@@ -2,18 +2,18 @@
 
   <PropertyGroup>
     <Authors>Dmitry Sikorsky</Authors>
-    <Copyright>Copyright © 2015 Dmitry Sikorsky</Copyright>
-    <Description>The ExtCore.Mvc extension component. Based on the ExtCore framework.</Description>
+    <Copyright>Copyright © 2017 Dmitry Sikorsky</Copyright>
+    <Description>The ExtCore.Data.Dapper extension component. Based on the ExtCore framework.</Description>
     <VersionPrefix>3.2.0-beta1</VersionPrefix>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <AssemblyName>ExtCore.Mvc</AssemblyName>
-    <PackageId>ExtCore.Mvc</PackageId>
+    <AssemblyName>ExtCore.Data.Dapper.Sqlite</AssemblyName>
+    <PackageId>ExtCore.Data.Dapper.Sqlite</PackageId>
     <PackageIconUrl>http://extcore.net/extcore_nuget_icon.png</PackageIconUrl>
     <PackageProjectUrl>http://extcore.net/</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ExtCore.Mvc.Infrastructure\ExtCore.Mvc.Infrastructure.csproj" />
+    <ProjectReference Include="..\ExtCore.Data.Dapper\ExtCore.Data.Dapper.csproj" />
   </ItemGroup>
 
 </Project>
