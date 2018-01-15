@@ -4,7 +4,7 @@
     <Authors>Dmitry Sikorsky</Authors>
     <Copyright>Copyright © 2017 Dmitry Sikorsky</Copyright>
     <Description>The ExtCore.Data.Dapper extension component. Based on the ExtCore framework.</Description>
-    <VersionPrefix>3.2.0-beta2</VersionPrefix>
+    <VersionPrefix>3.2.0-beta3</VersionPrefix>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <AssemblyName>ExtCore.Data.Dapper.PostgreSql</AssemblyName>
     <PackageId>ExtCore.Data.Dapper.PostgreSql</PackageId>

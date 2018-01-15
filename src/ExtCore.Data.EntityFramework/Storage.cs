@@ -48,7 +48,7 @@ namespace ExtCore.Data.EntityFramework
     /// </summary>
     public void Save()
     {
-      (this.StorageContext as StorageContextBase).SaveChanges();
+      (this.StorageContext as DbContext).SaveChanges();
     }
   }
 }
