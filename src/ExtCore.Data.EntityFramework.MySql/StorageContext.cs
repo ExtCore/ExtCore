@@ -3,7 +3,6 @@
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using MySQL.Data.EntityFrameworkCore.Extensions;
 
 namespace ExtCore.Data.EntityFramework.MySql
 {
