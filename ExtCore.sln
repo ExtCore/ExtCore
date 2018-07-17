@@ -51,6 +51,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtCore.Data.Dapper.Sqlite"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data.Dapper", "Data.Dapper", "{8C720480-750C-44C1-945B-961599088853}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtCore.Infrastructure.Core", "src\ExtCore.Infrastructure.Core\ExtCore.Infrastructure.Core.csproj", "{3477CA62-4AA4-4373-A3F5-22DC772C98E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +131,10 @@ Global
 		{693AB050-3305-471C-90C3-816BD694A930}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{693AB050-3305-471C-90C3-816BD694A930}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{693AB050-3305-471C-90C3-816BD694A930}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3477CA62-4AA4-4373-A3F5-22DC772C98E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3477CA62-4AA4-4373-A3F5-22DC772C98E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3477CA62-4AA4-4373-A3F5-22DC772C98E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3477CA62-4AA4-4373-A3F5-22DC772C98E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -157,6 +163,7 @@ Global
 		{E588921B-5E74-45E8-841B-2654D2416D9F} = {8C720480-750C-44C1-945B-961599088853}
 		{693AB050-3305-471C-90C3-816BD694A930} = {8C720480-750C-44C1-945B-961599088853}
 		{8C720480-750C-44C1-945B-961599088853} = {0D7AEFA3-ABB0-4AF1-A4C1-F8E05C241753}
+		{3477CA62-4AA4-4373-A3F5-22DC772C98E5} = {0D7AEFA3-ABB0-4AF1-A4C1-F8E05C241753}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DF807CB9-3F57-4CF4-B501-26F9D4BB417C}
