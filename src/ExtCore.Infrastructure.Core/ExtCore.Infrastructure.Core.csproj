@@ -3,20 +3,16 @@
   <PropertyGroup>
     <Authors>Dmitry Sikorsky</Authors>
     <Copyright>Copyright © 2015 Dmitry Sikorsky</Copyright>
-    <Description>The ExtCore.Data extension component. Based on the ExtCore framework.</Description>
+    <Description>Free, open source and cross-platform framework for creating modular and extendable web applications based on ASP.NET Core.</Description>
     <VersionPrefix>3.3.0-beta3</VersionPrefix>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <AssemblyName>ExtCore.Data</AssemblyName>
-    <PackageId>ExtCore.Data</PackageId>
+    <AssemblyName>ExtCore.Infrastructure.Core</AssemblyName>
+    <PackageId>ExtCore.Infrastructure.Core</PackageId>
     <PackageIconUrl>http://extcore.net/extcore_nuget_icon.png</PackageIconUrl>
     <PackageProjectUrl>http://extcore.net/</PackageProjectUrl>
   </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.1" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ExtCore.Data.Abstractions\ExtCore.Data.Abstractions.csproj" />
-    <ProjectReference Include="..\ExtCore.Infrastructure\ExtCore.Infrastructure.csproj" />
-  </ItemGroup>
-
 </Project>
