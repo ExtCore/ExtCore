@@ -14,7 +14,7 @@ namespace ExtCore.Data.Dapper.Sqlite
     /// <summary>
     /// Initializes a new instance of the <see cref="StorageContext">StorageContext</see> class.
     /// </summary>
-    /// <param name="connectionString">The connection string that is used to connect to the SQLite database.</param>
+    /// <param name="options">The options that are used to connect to the SQLite database.</param>
     public StorageContext(IOptions<StorageContextOptions> options)
       : base(options)
     {

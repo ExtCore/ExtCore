@@ -15,7 +15,7 @@ namespace ExtCore.Data.EntityFramework.PostgreSql
     /// <summary>
     /// Initializes a new instance of the <see cref="StorageContext">StorageContext</see> class.
     /// </summary>
-    /// <param name="connectionString">The connection string that is used to connect to the PostgreSQL database.</param>
+    /// <param name="options">The options that are used to connect to the PostgreSQL database.</param>
     public StorageContext(IOptions<StorageContextOptions> options) : base(options) { }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

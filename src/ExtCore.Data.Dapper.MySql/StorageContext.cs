@@ -14,7 +14,7 @@ namespace ExtCore.Data.Dapper.MySql
     /// <summary>
     /// Initializes a new instance of the <see cref="StorageContext">StorageContext</see> class.
     /// </summary>
-    /// <param name="connectionString">The connection string that is used to connect to the MySQL database.</param>
+    /// <param name="options">The options that are used to connect to the MySQL database.</param>
     public StorageContext(IOptions<StorageContextOptions> options)
       : base(options)
     {

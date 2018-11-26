@@ -14,7 +14,7 @@ namespace ExtCore.Data.Dapper.SqlServer
     /// <summary>
     /// Initializes a new instance of the <see cref="StorageContext">StorageContext</see> class.
     /// </summary>
-    /// <param name="connectionString">The connection string that is used to connect to the SQL Server database.</param>
+    /// <param name="options">The options that are used to connect to the SQL Server database.</param>
     public StorageContext(IOptions<StorageContextOptions> options)
       : base(options)
     {

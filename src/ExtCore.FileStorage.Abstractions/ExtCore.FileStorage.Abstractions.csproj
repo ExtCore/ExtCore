@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Authors>Dmitry Sikorsky</Authors>
+    <Copyright>Copyright © 2018 Dmitry Sikorsky</Copyright>
+    <Description>The ExtCore.FileStorage extension component. Based on the ExtCore framework.</Description>
+    <VersionPrefix>4.0.0-alpha1</VersionPrefix>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>ExtCore.FileStorage.Abstractions</AssemblyName>
+    <PackageId>ExtCore.FileStorage.Abstractions</PackageId>
+    <PackageIconUrl>http://extcore.net/extcore_nuget_icon.png</PackageIconUrl>
+    <PackageProjectUrl>http://extcore.net/</PackageProjectUrl>
+  </PropertyGroup>
+
+</Project>
