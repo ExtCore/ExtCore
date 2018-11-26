@@ -37,23 +37,16 @@ namespace ExtCore.FileStorage.FileSystem
     /// <exception cref="ArgumentNullException"></exception>
     public FileProxy(string rootPath, string relativePath, string filename)
     {
-      if (relativePath == string.Empty)
-        throw new ArgumentException($"Value can't be empty. Parameter name: relativePath.");
-
-      if (relativePath == null)
-        throw new ArgumentNullException($"Value can't be null. Parameter name: relativePath.", default(Exception));
-
       if (filename == string.Empty)
         throw new ArgumentException($"Value can't be empty. Parameter name: filename.");
 
       if (filename == null)
         throw new ArgumentNullException($"Value can't be null. Parameter name: filename.", default(Exception));
 
-
       this.rootPath = rootPath;
       this.RelativePath = relativePath;
       this.Filename = filename;
-      this.filepath = this.rootPath + this.RelativePath + this.Filename;
+      this.filepath = AbsolutePath.Combine(this.rootPath, this.RelativePath, this.Filename);
     }
 
     /// <summary>

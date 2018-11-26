@@ -48,12 +48,6 @@ namespace ExtCore.FileStorage.Dropbox
       if (accessToken == null)
         throw new ArgumentNullException($"Value can't be null. Parameter name: accessToken.", default(Exception));
 
-      if (relativePath == string.Empty)
-        throw new ArgumentException($"Value can't be empty. Parameter name: relativePath.");
-
-      if (relativePath == null)
-        throw new ArgumentNullException($"Value can't be null. Parameter name: relativePath.", default(Exception));
-
       if (filename == string.Empty)
         throw new ArgumentException($"Value can't be empty. Parameter name: filename.");
 

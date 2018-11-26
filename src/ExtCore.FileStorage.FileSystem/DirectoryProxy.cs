@@ -28,19 +28,11 @@ namespace ExtCore.FileStorage.FileSystem
     /// </summary>
     /// <param name="rootPath">The root path of the underlying directory's relative one.</param>
     /// <param name="relativePath">The path of the underlying directory relatively to the root one.</param>
-    /// <exception cref="ArgumentException"></exception>
-    /// <exception cref="ArgumentNullException"></exception>
     public DirectoryProxy(string rootPath, string relativePath)
     {
-      if (relativePath == string.Empty)
-        throw new ArgumentException($"Value can't be empty. Parameter name: relativePath.");
-
-      if (relativePath == null)
-        throw new ArgumentNullException($"Value can't be null. Parameter name: relativePath.", default(Exception));
-
-      this.rootPath = rootPath;
-      this.RelativePath = relativePath;
-      this.path = this.rootPath + this.RelativePath;
+      this.rootPath = AbsolutePath.Combine(rootPath);
+      this.RelativePath = AbsolutePath.Combine(relativePath);
+      this.path = AbsolutePath.Combine(this.rootPath, this.RelativePath);
     }
 
     /// <summary>
@@ -240,8 +232,8 @@ namespace ExtCore.FileStorage.FileSystem
                 string relativePath = f;
 
                 relativePath = relativePath.Substring(this.rootPath.Length);
-                relativePath = relativePath.Remove(relativePath.LastIndexOf(@"\"));
-                return new FileProxy(this.rootPath, relativePath, f.Substring(f.LastIndexOf(@"\") + 1));
+                relativePath = relativePath.Remove(relativePath.LastIndexOf(Path.DirectorySeparatorChar));
+                return new FileProxy(this.rootPath, relativePath, f.Substring(f.LastIndexOf(Path.DirectorySeparatorChar) + 1));
               }
             );
           }

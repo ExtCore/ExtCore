@@ -41,15 +41,9 @@ namespace ExtCore.FileStorage.Dropbox
       if (accessToken == null)
         throw new ArgumentNullException($"Value can't be null. Parameter name: accessToken.", default(Exception));
 
-      if (relativePath == string.Empty)
-        throw new ArgumentException($"Value can't be empty. Parameter name: relativePath.");
-
-      if (relativePath == null)
-        throw new ArgumentNullException($"Value can't be null. Parameter name: relativePath.", default(Exception));
-
       this.accessToken = accessToken;
-      this.rootPath = rootPath;
-      this.RelativePath = relativePath;
+      this.rootPath = RelativeUrl.Combine(rootPath);
+      this.RelativePath = RelativeUrl.Combine(relativePath);
       this.path = RelativeUrl.Combine(this.rootPath, this.RelativePath);
 
       if (string.Equals(this.path, "/"))
@@ -222,7 +216,10 @@ namespace ExtCore.FileStorage.Dropbox
             string relativePath = metadata.PathDisplay;
 
             relativePath = relativePath.Substring(this.rootPath.Length);
-            relativePath = relativePath.Remove(relativePath.LastIndexOf("/"));
+
+            if (relativePath.Contains("/"))
+              relativePath = relativePath.Remove(relativePath.LastIndexOf("/"));
+
             fileProxies.Add(new FileProxy(this.accessToken, this.rootPath, relativePath, metadata.Name));
           }
         }
