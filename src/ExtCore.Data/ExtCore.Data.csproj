@@ -4,7 +4,7 @@
     <Authors>Dmitry Sikorsky</Authors>
     <Copyright>Copyright © 2015 Dmitry Sikorsky</Copyright>
     <Description>The ExtCore.Data extension component. Based on the ExtCore framework.</Description>
-    <VersionPrefix>4.0.0-alpha2</VersionPrefix>
+    <VersionPrefix>4.0.0-alpha3</VersionPrefix>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>ExtCore.Data</AssemblyName>
     <PackageId>ExtCore.Data</PackageId>
