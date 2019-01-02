@@ -4,7 +4,7 @@
     <Authors>Dmitry Sikorsky</Authors>
     <Copyright>Copyright © 2018 Dmitry Sikorsky</Copyright>
     <Description>The ExtCore.FileStorage extension component. Based on the ExtCore framework.</Description>
-    <VersionPrefix>4.0.0-alpha3</VersionPrefix>
+    <VersionPrefix>4.0.0</VersionPrefix>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>ExtCore.FileStorage.FileSystem</AssemblyName>
     <PackageId>ExtCore.FileStorage.FileSystem</PackageId>
