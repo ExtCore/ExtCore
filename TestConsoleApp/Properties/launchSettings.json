@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TestConsoleApp": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\Git\\ExtCore\\ExtCore\\TestConsoleApp"
+    }
+  }
+}

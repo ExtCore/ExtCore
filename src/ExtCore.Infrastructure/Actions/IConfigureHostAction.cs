@@ -3,6 +3,7 @@
 
 using System;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace ExtCore.Infrastructure.Actions
@@ -24,9 +25,9 @@ namespace ExtCore.Infrastructure.Actions
     /// <param name="hostBuilder">
     /// Will be provided by the ExtCore and might be used to configure a web application's request pipeline.
     /// </param>
-    /// <param name="serviceProvider">
+    /// <param name="services">
     /// Will be provided by the ExtCore and might be used to get any service that is registered inside the DI at this moment.
     /// </param>
-    void Execute(IHostBuilder hostBuilder, IServiceProvider serviceProvider);
+    void Execute(IHostBuilder hostBuilder, IServiceCollection services);
   }
 }
