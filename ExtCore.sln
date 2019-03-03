@@ -61,6 +61,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtCore.FileStorage.Dropbox
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtCore.FileStorage.FileSystem", "src\ExtCore.FileStorage.FileSystem\ExtCore.FileStorage.FileSystem.csproj", "{2031A605-DB91-4998-94DB-8012C590152B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtCore.ConsoleApplication", "ExtCore.ConsoleApplication\ExtCore.ConsoleApplication.csproj", "{1C151594-41FD-4C7D-A469-7B3AD54832F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -155,6 +157,10 @@ Global
 		{2031A605-DB91-4998-94DB-8012C590152B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2031A605-DB91-4998-94DB-8012C590152B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2031A605-DB91-4998-94DB-8012C590152B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C151594-41FD-4C7D-A469-7B3AD54832F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C151594-41FD-4C7D-A469-7B3AD54832F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C151594-41FD-4C7D-A469-7B3AD54832F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C151594-41FD-4C7D-A469-7B3AD54832F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -188,6 +194,7 @@ Global
 		{EED241F9-4900-4FB0-91FD-432A5F40983D} = {2093A913-AB5F-4597-839E-A472E25D37D8}
 		{D9FA3F92-D638-434D-9C0C-E74A6BCFDE7A} = {2093A913-AB5F-4597-839E-A472E25D37D8}
 		{2031A605-DB91-4998-94DB-8012C590152B} = {2093A913-AB5F-4597-839E-A472E25D37D8}
+		{1C151594-41FD-4C7D-A469-7B3AD54832F5} = {0D7AEFA3-ABB0-4AF1-A4C1-F8E05C241753}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DF807CB9-3F57-4CF4-B501-26F9D4BB417C}
