@@ -21,17 +21,20 @@ namespace ExtCore.ConsoleApplication.Extensions
 		/// of the web application's Startup class in order ExtCore to work properly.
 		/// </summary>
 		/// <param name="hostBuilder">The host builder passed to the Configure method of the console application's Startup class.</param>
-		/// <param name="services">The services.</param>
-		public static void UseExtCore(this IHostBuilder hostBuilder, IServiceCollection services)
+		public static IHostBuilder UseExtCore(this IHostBuilder hostBuilder)
 		{
-			IServiceProvider serviceProvider = services.BuildServiceProvider();
-			ILogger logger = serviceProvider.GetService<ILoggerFactory>().CreateLogger("ExtCore.ConsoleApplication");
-
-			foreach (IConfigureHostAction action in ExtensionManager.GetInstances<IConfigureHostAction>().OrderBy(a => a.Priority))
+			hostBuilder.ConfigureServices((hostingContext, services) =>
 			{
-				logger.LogInformation("Executing Configure action '{0}'", action.GetType().FullName);
-				action.Execute(hostBuilder, serviceProvider);
-			}
+				IServiceProvider serviceProvider = services.BuildServiceProvider();
+				ILogger logger = serviceProvider.GetService<ILoggerFactory>().CreateLogger("ExtCore.ConsoleApplication");
+
+				foreach (IConfigureHostAction action in ExtensionManager.GetInstances<IConfigureHostAction>().OrderBy(a => a.Priority))
+				{
+					logger.LogInformation("Executing Configure action '{0}'", action.GetType().FullName);
+					action.Execute(hostBuilder, services);
+				}
+			});
+			return hostBuilder;
 		}
 	}
 }

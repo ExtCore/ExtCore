@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\src\ExtCore.Events\ExtCore.Events.csproj" />
     <ProjectReference Include="..\src\ExtCore.Infrastructure\ExtCore.Infrastructure.csproj" />
   </ItemGroup>
 
