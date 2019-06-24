@@ -1,6 +1,8 @@
 ﻿// Copyright © 2015 Dmitry Sikorsky. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using System.Threading.Tasks;
+
 namespace ExtCore.Data.Abstractions
 {
   /// <summary>
@@ -26,5 +28,10 @@ namespace ExtCore.Data.Abstractions
     /// Commits the changes made by all the repositories.
     /// </summary>
     void Save();
+
+    /// <summary>
+    /// Asynchronously commits the changes made by all the repositories.
+    /// </summary>
+    Task SaveAsync();
   }
 }

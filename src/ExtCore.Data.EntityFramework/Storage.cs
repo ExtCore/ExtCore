@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
+using System.Threading.Tasks;
 using ExtCore.Data.Abstractions;
 using ExtCore.Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -49,6 +50,14 @@ namespace ExtCore.Data.EntityFramework
     public void Save()
     {
       (this.StorageContext as DbContext).SaveChanges();
+    }
+
+    /// <summary>
+    /// Asynchronously commits the changes made by all the repositories.
+    /// </summary>
+    public async Task SaveAsync()
+    {
+      await (this.StorageContext as DbContext).SaveChangesAsync();
     }
   }
 }
