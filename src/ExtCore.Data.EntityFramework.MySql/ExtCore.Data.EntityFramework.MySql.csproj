@@ -4,8 +4,8 @@
     <Authors>Dmitry Sikorsky</Authors>
     <Copyright>Copyright © 2017 Dmitry Sikorsky</Copyright>
     <Description>The ExtCore.Data.EntityFramework extension component. Based on the ExtCore framework.</Description>
-    <VersionPrefix>4.1.0</VersionPrefix>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <VersionPrefix>5.0.0-alpha1</VersionPrefix>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <AssemblyName>ExtCore.Data.EntityFramework.MySql</AssemblyName>
     <PackageId>ExtCore.Data.EntityFramework.MySql</PackageId>
     <PackageIconUrl>http://extcore.net/extcore_nuget_icon.png</PackageIconUrl>
@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.16" />
+    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.17" />
   </ItemGroup>
 
   <ItemGroup>

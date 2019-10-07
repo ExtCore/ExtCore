@@ -4,7 +4,7 @@
     <Authors>Dmitry Sikorsky</Authors>
     <Copyright>Copyright © 2018 Dmitry Sikorsky</Copyright>
     <Description>The ExtCore.FileStorage extension component. Based on the ExtCore framework.</Description>
-    <VersionPrefix>4.1.0</VersionPrefix>
+    <VersionPrefix>5.0.0-alpha1</VersionPrefix>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>ExtCore.FileStorage.Dropbox</AssemblyName>
     <PackageId>ExtCore.FileStorage.Dropbox</PackageId>
@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="Dropbox.Api" Version="4.9.4" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup>

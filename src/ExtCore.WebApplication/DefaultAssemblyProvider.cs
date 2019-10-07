@@ -43,19 +43,15 @@ namespace ExtCore.WebApplication
     {
       this.logger = serviceProvider.GetService<ILoggerFactory>().CreateLogger("ExtCore.WebApplication");
       this.IsCandidateAssembly = assembly =>
-        !assembly.FullName.StartsWith("System.", StringComparison.OrdinalIgnoreCase) &&
-        !assembly.FullName.StartsWith("Microsoft.", StringComparison.OrdinalIgnoreCase);
+        !assembly.FullName.StartsWith("System", StringComparison.OrdinalIgnoreCase) &&
+        !assembly.FullName.StartsWith("Microsoft", StringComparison.OrdinalIgnoreCase);
 
       this.IsCandidateCompilationLibrary = library =>
-        !library.Name.StartsWith("System.", StringComparison.OrdinalIgnoreCase) &&
-        !library.Name.StartsWith("Microsoft.", StringComparison.OrdinalIgnoreCase) &&
-        !library.Name.StartsWith("Newtonsoft.", StringComparison.OrdinalIgnoreCase) &&
-        !library.Name.StartsWith("runtime.", StringComparison.OrdinalIgnoreCase) &&
-        !library.Name.Equals("NETStandard.Library", StringComparison.OrdinalIgnoreCase) &&
-        !library.Name.Equals("Libuv", StringComparison.OrdinalIgnoreCase) &&
-        !library.Name.Equals("Remotion.Linq", StringComparison.OrdinalIgnoreCase) &&
-        !library.Name.Equals("StackExchange.Redis.StrongName", StringComparison.OrdinalIgnoreCase) &&
-        !library.Name.Equals("WindowsAzure.Storage", StringComparison.OrdinalIgnoreCase);
+        !library.Name.StartsWith("mscorlib", StringComparison.OrdinalIgnoreCase) &&
+        !library.Name.StartsWith("netstandard", StringComparison.OrdinalIgnoreCase) &&
+        !library.Name.StartsWith("System", StringComparison.OrdinalIgnoreCase) &&
+        !library.Name.StartsWith("Microsoft", StringComparison.OrdinalIgnoreCase) &&
+        !library.Name.StartsWith("WindowsBase", StringComparison.OrdinalIgnoreCase);
     }
 
     /// <summary>
@@ -74,6 +70,36 @@ namespace ExtCore.WebApplication
       this.GetAssembliesFromDependencyContext(assemblies);
       this.GetAssembliesFromPath(assemblies, path, includingSubpaths);
       return assemblies;
+    }
+
+    private void GetAssembliesFromDependencyContext(List<Assembly> assemblies)
+    {
+      this.logger.LogInformation("Discovering and loading assemblies from DependencyContext");
+
+      foreach (CompilationLibrary compilationLibrary in DependencyContext.Default.CompileLibraries)
+      {
+        if (this.IsCandidateCompilationLibrary(compilationLibrary))
+        {
+          Assembly assembly = null;
+
+          try
+          {
+            assembly = AssemblyLoadContext.Default.LoadFromAssemblyName(new AssemblyName(compilationLibrary.Name));
+
+            if (!assemblies.Any(a => string.Equals(a.FullName, assembly.FullName, StringComparison.OrdinalIgnoreCase)))
+            {
+              assemblies.Add(assembly);
+              this.logger.LogInformation("Assembly '{0}' is discovered and loaded", assembly.FullName);
+            }
+          }
+
+          catch (Exception e)
+          {
+            this.logger.LogWarning("Error loading assembly '{0}'", compilationLibrary.Name);
+            this.logger.LogWarning(e.ToString());
+          }
+        }
+      }
     }
 
     private void GetAssembliesFromPath(List<Assembly> assemblies, string path, bool includingSubpaths)
@@ -115,36 +141,6 @@ namespace ExtCore.WebApplication
           this.logger.LogWarning("Discovering and loading assemblies from path skipped: path not provided", path);
 
         else this.logger.LogWarning("Discovering and loading assemblies from path '{0}' skipped: path not found", path);
-      }
-    }
-
-    private void GetAssembliesFromDependencyContext(List<Assembly> assemblies)
-    {
-      this.logger.LogInformation("Discovering and loading assemblies from DependencyContext");
-
-      foreach (CompilationLibrary compilationLibrary in DependencyContext.Default.CompileLibraries)
-      {
-        if (this.IsCandidateCompilationLibrary(compilationLibrary))
-        {
-          Assembly assembly = null;
-
-          try
-          {
-            assembly = AssemblyLoadContext.Default.LoadFromAssemblyName(new AssemblyName(compilationLibrary.Name));
-
-            if (!assemblies.Any(a => string.Equals(a.FullName, assembly.FullName, StringComparison.OrdinalIgnoreCase)))
-            {
-              assemblies.Add(assembly);
-              this.logger.LogInformation("Assembly '{0}' is discovered and loaded", assembly.FullName);
-            }
-          }
-
-          catch (Exception e)
-          {
-            this.logger.LogWarning("Error loading assembly '{0}'", compilationLibrary.Name);
-            this.logger.LogWarning(e.ToString());
-          }
-        }
       }
     }
   }

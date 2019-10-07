@@ -26,7 +26,7 @@ namespace ExtCore.Data.Dapper.Actions
     /// <summary>
     /// Registers found implementation of the <see cref="IStorageContext">IStorageContext</see> interface inside the DI.
     /// </summary>
-    /// <param name="serviceCollection">
+    /// <param name="services">
     /// Will be provided by the ExtCore and might be used to register any service inside the DI.
     /// </param>
     /// <param name="serviceProvider">

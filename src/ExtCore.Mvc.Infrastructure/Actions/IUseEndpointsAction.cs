@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.Routing;
 namespace ExtCore.Mvc.Infrastructure.Actions
 {
   /// <summary>
-  /// Describes an action that must be executed inside the UseMvc method and might be used by the extensions
-  /// to configure the routes.
+  /// Describes an action that must be executed inside the UseEndpoints method and might be used by the extensions
+  /// to configure the endpoints.
   /// </summary>
-  public interface IUseMvcAction
+  public interface IUseEndpointsAction
   {
     /// <summary>
     /// Priority of the action. The actions will be executed in the order specified by the priority (from smallest to largest).
@@ -18,14 +18,14 @@ namespace ExtCore.Mvc.Infrastructure.Actions
     int Priority { get; }
 
     /// <summary>
-    /// Contains any code that must be executed inside the UseMvc method.
+    /// Contains any code that must be executed inside the UseEndpoints method.
     /// </summary>
-    /// <param name="routeBuilder">
-    /// Will be provided by the ExtCore.Mvc and might be used to configure the routes.
+    /// <param name="endpointRouteBuilder">
+    /// Will be provided by the ExtCore.Mvc and might be used to configure the endpoints.
     /// </param>
     /// <param name="serviceProvider">
     /// Will be provided by the ExtCore.Mvc and might be used to get any service that is registered inside the DI at this moment.
     /// </param>
-    void Execute(IRouteBuilder routeBuilder, IServiceProvider serviceProvider);
+    void Execute(IEndpointRouteBuilder endpointRouteBuilder, IServiceProvider serviceProvider);
   }
 }

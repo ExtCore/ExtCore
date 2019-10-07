@@ -25,7 +25,7 @@ namespace ExtCore.Mvc.Actions
     /// <summary>
     /// Creates and registers the composite file provider that contains resources from all the extensions.
     /// </summary>
-    /// <param name="serviceCollection">
+    /// <param name="services">
     /// Will be provided by the ExtCore and might be used to register any service inside the DI.
     /// </param>
     /// <param name="serviceProvider">
@@ -33,13 +33,13 @@ namespace ExtCore.Mvc.Actions
     /// </param>
     public void Execute(IServiceCollection services, IServiceProvider serviceProvider)
     {
-      serviceProvider.GetService<IHostingEnvironment>().WebRootFileProvider = this.CreateCompositeFileProvider(serviceProvider);
+      serviceProvider.GetService<IWebHostEnvironment>().WebRootFileProvider = this.CreateCompositeFileProvider(serviceProvider);
     }
 
     private IFileProvider CreateCompositeFileProvider(IServiceProvider serviceProvider)
     {
       IFileProvider[] fileProviders = new IFileProvider[] {
-        serviceProvider.GetService<IHostingEnvironment>().WebRootFileProvider
+        serviceProvider.GetService<IWebHostEnvironment>().WebRootFileProvider
       };
 
       return new CompositeFileProvider(

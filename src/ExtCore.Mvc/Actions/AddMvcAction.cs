@@ -8,7 +8,6 @@ using ExtCore.Infrastructure;
 using ExtCore.Infrastructure.Actions;
 using ExtCore.Mvc.Infrastructure.Actions;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 
 namespace ExtCore.Mvc.Actions
@@ -27,7 +26,7 @@ namespace ExtCore.Mvc.Actions
     /// <summary>
     /// Registers the MVC services inside the DI.
     /// </summary>
-    /// <param name="serviceCollection">
+    /// <param name="services">
     /// Will be provided by the ExtCore and might be used to register any service inside the DI.
     /// </param>
     /// <param name="serviceProvider">
@@ -39,14 +38,6 @@ namespace ExtCore.Mvc.Actions
 
       foreach (Assembly assembly in ExtensionManager.Assemblies)
         mvcBuilder.AddApplicationPart(assembly);
-
-      mvcBuilder.AddRazorOptions(
-        o =>
-        {
-          foreach (Assembly assembly in ExtensionManager.Assemblies)
-            o.FileProviders.Add(new EmbeddedFileProvider(assembly, assembly.GetName().Name));
-        }
-      );
 
       foreach (IAddMvcAction action in ExtensionManager.GetInstances<IAddMvcAction>().OrderBy(a => a.Priority))
       {

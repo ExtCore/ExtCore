@@ -20,12 +20,12 @@ namespace ExtCore.Infrastructure.Actions
     /// <summary>
     /// Contains any code that must be executed inside the ConfigureServices method of the web application's Startup class.
     /// </summary>
-    /// <param name="serviceCollection">
+    /// <param name="services">
     /// Will be provided by the ExtCore and might be used to register any service inside the DI.
     /// </param>
     /// <param name="serviceProvider">
     /// Will be provided by the ExtCore and might be used to get any service that is registered inside the DI at this moment.
     /// </param>
-    void Execute(IServiceCollection serviceCollection, IServiceProvider serviceProvider);
+    void Execute(IServiceCollection services, IServiceProvider serviceProvider);
   }
 }
