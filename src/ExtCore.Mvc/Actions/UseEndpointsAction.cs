@@ -21,7 +21,7 @@ namespace ExtCore.Mvc.Actions
     /// <summary>
     /// Priority of the action. The actions will be executed in the order specified by the priority (from smallest to largest).
     /// </summary>
-    public int Priority => 10001;
+    public int Priority => 11000;
 
     /// <summary>
     /// Registers the endpoints middleware inside a web application's request pipeline.
