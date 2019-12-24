@@ -4,8 +4,8 @@
     <Authors>Dmitry Sikorsky</Authors>
     <Copyright>Copyright © 2015 Dmitry Sikorsky</Copyright>
     <Description>The ExtCore.Mvc extension component. Based on the ExtCore framework.</Description>
-    <VersionPrefix>5.0.0</VersionPrefix>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <VersionPrefix>5.1.0</VersionPrefix>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>ExtCore.Mvc</AssemblyName>
     <PackageId>ExtCore.Mvc</PackageId>
     <PackageIconUrl>http://extcore.net/extcore_nuget_icon.png</PackageIconUrl>
