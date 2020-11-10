@@ -5,7 +5,7 @@
     <Copyright>Copyright © 2015 Dmitry Sikorsky</Copyright>
     <Description>The ExtCore.Mvc extension component. Based on the ExtCore framework.</Description>
     <VersionPrefix>3.3.0</VersionPrefix>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>ExtCore.Mvc.Infrastructure</AssemblyName>
     <PackageId>ExtCore.Mvc.Infrastructure</PackageId>
     <PackageIconUrl>http://extcore.net/extcore_nuget_icon.png</PackageIconUrl>
@@ -14,6 +14,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ExtCore.Infrastructure\ExtCore.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
 </Project>

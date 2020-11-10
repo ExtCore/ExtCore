@@ -5,7 +5,7 @@
     <Copyright>Copyright © 2015 Dmitry Sikorsky</Copyright>
     <Description>The ExtCore.Data.EntityFramework extension component. Based on the ExtCore framework.</Description>
     <VersionPrefix>3.3.0</VersionPrefix>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>ExtCore.Data.EntityFramework.SqlServer</AssemblyName>
     <PackageId>ExtCore.Data.EntityFramework.SqlServer</PackageId>
     <PackageIconUrl>http://extcore.net/extcore_nuget_icon.png</PackageIconUrl>
@@ -14,6 +14,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ExtCore.Data.EntityFramework\ExtCore.Data.EntityFramework.csproj" />
+  </ItemGroup>
+
+    <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.10" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.10" />
+    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="3.1.6" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.10" />
   </ItemGroup>
 
 </Project>

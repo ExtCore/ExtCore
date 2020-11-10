@@ -35,12 +35,12 @@ namespace ExtCore.Mvc.Actions
     /// </param>
     public void Execute(IServiceCollection services, IServiceProvider serviceProvider)
     {
-      IMvcBuilder mvcBuilder = services.AddMvc();
+      IMvcBuilder mvcBuilder = services.AddMvc().AddRazorRuntimeCompilation();
 
       foreach (Assembly assembly in ExtensionManager.Assemblies)
         mvcBuilder.AddApplicationPart(assembly);
 
-      mvcBuilder.AddRazorOptions(
+      mvcBuilder.AddRazorRuntimeCompilation(
         o =>
         {
           foreach (Assembly assembly in ExtensionManager.Assemblies)

@@ -33,13 +33,13 @@ namespace ExtCore.Mvc.Actions
     /// </param>
     public void Execute(IServiceCollection services, IServiceProvider serviceProvider)
     {
-      serviceProvider.GetService<IHostingEnvironment>().WebRootFileProvider = this.CreateCompositeFileProvider(serviceProvider);
+      serviceProvider.GetService<IWebHostEnvironment>().WebRootFileProvider = this.CreateCompositeFileProvider(serviceProvider);
     }
 
     private IFileProvider CreateCompositeFileProvider(IServiceProvider serviceProvider)
     {
       IFileProvider[] fileProviders = new IFileProvider[] {
-        serviceProvider.GetService<IHostingEnvironment>().WebRootFileProvider
+        serviceProvider.GetService<IWebHostEnvironment>().WebRootFileProvider
       };
 
       return new CompositeFileProvider(

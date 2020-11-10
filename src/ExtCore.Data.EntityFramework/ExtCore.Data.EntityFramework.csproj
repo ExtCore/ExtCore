@@ -5,7 +5,7 @@
     <Copyright>Copyright © 2017 Dmitry Sikorsky</Copyright>
     <Description>The ExtCore.Data.EntityFramework extension component. Based on the ExtCore framework.</Description>
     <VersionPrefix>3.3.0</VersionPrefix>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>ExtCore.Data.EntityFramework</AssemblyName>
     <PackageId>ExtCore.Data.EntityFramework</PackageId>
     <PackageIconUrl>http://extcore.net/extcore_nuget_icon.png</PackageIconUrl>
@@ -16,6 +16,10 @@
     <ProjectReference Include="..\ExtCore.Data.Abstractions\ExtCore.Data.Abstractions.csproj" />
     <ProjectReference Include="..\ExtCore.Data.Entities.Abstractions\ExtCore.Data.Entities.Abstractions.csproj" />
     <ProjectReference Include="..\ExtCore.Infrastructure\ExtCore.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.10" />
   </ItemGroup>
 
 </Project>
