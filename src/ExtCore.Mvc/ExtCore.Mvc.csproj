@@ -11,6 +11,7 @@
     <PackageIconUrl>http://extcore.net/extcore_nuget_icon.png</PackageIconUrl>
     <PackageProjectUrl>http://extcore.net/</PackageProjectUrl>
     <LangVersion>8.0</LangVersion>
+    <OutputType>Library</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
