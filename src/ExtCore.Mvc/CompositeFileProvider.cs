@@ -74,10 +74,7 @@ namespace ExtCore.Mvc
   {
     public bool Exists
     {
-      get
-      {
-        return false;
-      }
+      get => false;
     }
 
     public IEnumerator<IFileInfo> GetEnumerator()
@@ -102,50 +99,32 @@ namespace ExtCore.Mvc
 
     public bool Exists
     {
-      get
-      {
-        return false;
-      }
+      get => false;
     }
 
     public bool IsDirectory
     {
-      get
-      {
-        return false;
-      }
+      get => false;
     }
 
     public DateTimeOffset LastModified
     {
-      get
-      {
-        return DateTimeOffset.MinValue;
-      }
+      get => DateTimeOffset.MinValue;
     }
 
     public long Length
     {
-      get
-      {
-        return -1;
-      }
+      get => -1;
     }
 
     public string Name
     {
-      get
-      {
-        return this.name;
-      }
+      get => this.name;
     }
 
     public string PhysicalPath
     {
-      get
-      {
-        return null;
-      }
+      get => null;
     }
 
     public Stream CreateReadStream()
@@ -160,18 +139,12 @@ namespace ExtCore.Mvc
 
     public bool ActiveChangeCallbacks
     {
-      get
-      {
-        throw new NotImplementedException();
-      }
+      get => throw new NotImplementedException();
     }
 
     public bool HasChanged
     {
-      get
-      {
-        throw new NotImplementedException();
-      }
+      get => throw new NotImplementedException();
     }
 
     public IDisposable RegisterChangeCallback(Action<object> callback, object state)

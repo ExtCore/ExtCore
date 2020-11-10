@@ -31,10 +31,8 @@ namespace ExtCore.Mvc.Actions
     /// <param name="serviceProvider">
     /// Will be provided by the ExtCore and might be used to get any service that is registered inside the DI at this moment.
     /// </param>
-    public void Execute(IServiceCollection services, IServiceProvider serviceProvider)
-    {
-      serviceProvider.GetService<IWebHostEnvironment>().WebRootFileProvider = this.CreateCompositeFileProvider(serviceProvider);
-    }
+    public void Execute(IServiceCollection services, IServiceProvider serviceProvider) =>
+       serviceProvider.GetService<IWebHostEnvironment>().WebRootFileProvider = this.CreateCompositeFileProvider(serviceProvider);
 
     private IFileProvider CreateCompositeFileProvider(IServiceProvider serviceProvider)
     {

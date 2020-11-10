@@ -41,10 +41,10 @@ namespace ExtCore.Mvc.Actions
         mvcBuilder.AddApplicationPart(assembly);
 
       mvcBuilder.AddRazorRuntimeCompilation(
-        o =>
+        option =>
         {
           foreach (Assembly assembly in ExtensionManager.Assemblies)
-            o.FileProviders.Add(new EmbeddedFileProvider(assembly, assembly.GetName().Name));
+            option.FileProviders.Add(new EmbeddedFileProvider(assembly, assembly.GetName().Name));
         }
       );
 

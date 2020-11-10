@@ -18,10 +18,7 @@ namespace ExtCore.Data.Dapper
     /// </summary>
     public IStorageContext StorageContext { get; private set; }
 
-    public Storage(IStorageContext storageContext)
-    {
-      this.StorageContext = storageContext;
-    }
+    public Storage(IStorageContext storageContext) => this.StorageContext = storageContext;
 
     /// <summary>
     /// Gets a repository of the given type.

@@ -23,10 +23,7 @@ namespace ExtCore.WebApplication.Extensions
     /// <param name="services">
     /// The services collection passed to the ConfigureServices method of the web application's Startup class.
     /// </param>
-    public static void AddExtCore(this IServiceCollection services)
-    {
-      services.AddExtCore(null);
-    }
+    public static void AddExtCore(this IServiceCollection services) => services.AddExtCore(null);
 
     /// <summary>
     /// Discovers the assemblies and executes the ConfigureServices actions from all the extensions.
@@ -37,10 +34,8 @@ namespace ExtCore.WebApplication.Extensions
     /// The services collection passed to the ConfigureServices method of the web application's Startup class.
     /// </param>
     /// <param name="extensionsPath">The absolute extensions path.</param>
-    public static void AddExtCore(this IServiceCollection services, string extensionsPath)
-    {
+    public static void AddExtCore(this IServiceCollection services, string extensionsPath) =>
       services.AddExtCore(extensionsPath, false, new DefaultAssemblyProvider(services.BuildServiceProvider()));
-    }
 
     /// <summary>
     /// Discovers the assemblies and executes the ConfigureServices actions from all the extensions.
@@ -52,10 +47,8 @@ namespace ExtCore.WebApplication.Extensions
     /// </param>
     /// <param name="extensionsPath">The absolute extensions path.</param>
     /// <param name="includingSubpaths">Determines whether the assemblies must be loaded from the subfolders recursively.</param>
-    public static void AddExtCore(this IServiceCollection services, string extensionsPath, bool includingSubpaths)
-    {
+    public static void AddExtCore(this IServiceCollection services, string extensionsPath, bool includingSubpaths) =>
       services.AddExtCore(extensionsPath, includingSubpaths, new DefaultAssemblyProvider(services.BuildServiceProvider()));
-    }
 
     /// <summary>
     /// Discovers the assemblies and executes the ConfigureServices actions from all the extensions.
@@ -67,10 +60,8 @@ namespace ExtCore.WebApplication.Extensions
     /// </param>
     /// <param name="extensionsPath">The absolute extensions path.</param>
     /// <param name="assemblyProvider">The assembly provider that is used to discover and load the assemblies.</param>
-    public static void AddExtCore(this IServiceCollection services, string extensionsPath, IAssemblyProvider assemblyProvider)
-    {
+    public static void AddExtCore(this IServiceCollection services, string extensionsPath, IAssemblyProvider assemblyProvider) =>
       services.AddExtCore(extensionsPath, false, assemblyProvider);
-    }
 
     /// <summary>
     /// Discovers the assemblies and executes the ConfigureServices actions from all the extensions.
@@ -98,9 +89,7 @@ namespace ExtCore.WebApplication.Extensions
       }
     }
 
-    private static void DiscoverAssemblies(IAssemblyProvider assemblyProvider, string extensionsPath, bool includingSubpaths)
-    {
+    private static void DiscoverAssemblies(IAssemblyProvider assemblyProvider, string extensionsPath, bool includingSubpaths) =>
       ExtensionManager.SetAssemblies(assemblyProvider.GetAssemblies(extensionsPath, includingSubpaths));
-    }
   }
 }

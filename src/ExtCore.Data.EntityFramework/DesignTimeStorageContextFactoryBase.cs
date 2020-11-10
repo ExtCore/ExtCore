@@ -27,10 +27,7 @@ namespace ExtCore.Data.EntityFramework
     /// </summary>
     /// <param name="args"></param>
     /// <returns>Storage context service set by the Initialize method.</returns>
-    public T CreateDbContext(string[] args)
-    {
-      return DesignTimeStorageContextFactoryBase<T>.StorageContext;
-    }
+    public T CreateDbContext(string[] args) => DesignTimeStorageContextFactoryBase<T>.StorageContext;
 
     /// <summary>
     /// Gets the storage context service from the DI and then sets it to the StorageContext property.
@@ -38,9 +35,7 @@ namespace ExtCore.Data.EntityFramework
     /// is configured.
     /// </summary>
     /// <param name="serviceProvider">The service provider to get the storage context service.</param>
-    public static void Initialize(IServiceProvider serviceProvider)
-    {
+    public static void Initialize(IServiceProvider serviceProvider) =>
       DesignTimeStorageContextFactoryBase<T>.StorageContext = serviceProvider.GetService<IStorageContext>() as T;
-    }
   }
 }
