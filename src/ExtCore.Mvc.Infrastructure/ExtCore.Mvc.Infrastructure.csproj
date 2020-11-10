@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <Authors>Dmitry Sikorsky</Authors>
@@ -14,10 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ExtCore.Infrastructure\ExtCore.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
 </Project>
