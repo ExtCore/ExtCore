@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <Authors>Dmitry Sikorsky</Authors>
@@ -12,9 +12,5 @@
     <PackageProjectUrl>http://extcore.net/</PackageProjectUrl>
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
 
 </Project>
