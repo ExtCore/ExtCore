@@ -4,8 +4,8 @@
     <Authors>Dmitry Sikorsky</Authors>
     <Copyright>Copyright © 2017 Dmitry Sikorsky</Copyright>
     <Description>The ExtCore.Data.Dapper extension component. Based on the ExtCore framework.</Description>
-    <VersionPrefix>5.1.0</VersionPrefix>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <VersionPrefix>6.0.0-beta1</VersionPrefix>
+    <TargetFramework>net5.0</TargetFramework>
     <AssemblyName>ExtCore.Data.Dapper.PostgreSql</AssemblyName>
     <PackageId>ExtCore.Data.Dapper.PostgreSql</PackageId>
     <PackageIconUrl>http://extcore.net/extcore_nuget_icon.png</PackageIconUrl>
@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.0.1" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
