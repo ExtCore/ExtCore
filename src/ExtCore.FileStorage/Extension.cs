@@ -23,7 +23,7 @@ namespace ExtCore.FileStorage
     /// <summary>
     /// Gets the version of the extension.
     /// </summary>
-    public override string Version => "6.0.0-beta1";
+    public override string Version => "6.0.0";
 
     /// <summary>
     /// Gets the authors of the extension (separated by commas).
