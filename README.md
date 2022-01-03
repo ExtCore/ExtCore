@@ -1,4 +1,4 @@
-# ExtCore 6.0.0
+# ExtCore 7.0.0
 
 [![Join the chat at https://gitter.im/ExtCore/ExtCore](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ExtCore/ExtCore?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -7,17 +7,16 @@
 ## Introduction
 
 ExtCore is free, open source and cross-platform framework for creating modular and extendable web applications
-based on ASP.NET Core. It is built using the best and the most modern tools and languages (Visual Studio 2019, C#
+based on ASP.NET Core. It is built using the best and the most modern tools and languages (Visual Studio 2022, C#
 etc). Join our team!
 
 ExtCore allows you to build your web applications from the different independent reusable modules or extensions.
 Each of these modules or extensions may consist of one or more ASP.NET Core projects and each of these projects
 may include everything you want as any other ASP.NET Core project. You don’t need to perform any additional
 actions to make it all work: any ASP.NET Core project can be used as an ExtCore-based web application extension
-by default. Controllers, view components, views (~~added as resources and/or~~ precompiled), static content (added as
-resources) are resolved automatically. These projects may be then added to the web application in two ways: as
-direct dependencies (as source code or NuGet packages) or by copying compiled DLLs to the Extensions folder.
-ExtCore supports both of these options out of the box and at the same time.
+by default. Controllers, view components, precompiled views, static content (added as resources) are resolved automatically.
+These projects may be then added to the web application in two ways: as direct dependencies (as source code or NuGet packages)
+or by copying compiled DLLs to the Extensions folder. ExtCore supports both of these options out of the box and at the same time.
 
 Furthermore, any project of the ExtCore-based web application is able to discover the types that are defined
 inside all the projects (optionally using the predicates for assemblies filtering) and to get the implementations
@@ -72,8 +71,7 @@ Currently it supports MySQL, PostgreSql, SQLite, and SQL Server, but it is very 
 #### ExtCore.Mvc
 
 By default, ExtCore web applications are not MVC ones. MVC support is provided for them by ExtCore.Mvc extension.
-This extension initializes MVC, makes it possible to use controllers, view components, views (~~added as resources
-and/or~~ precompiled), static content (added as resources) from other extensions etc.
+This extension initializes MVC, makes it possible to use controllers, view components, precompiled views, static content (added as resources) from other extensions etc.
 
 #### ExtCore.Events
 
@@ -95,21 +93,21 @@ in order to execute some code inside the ConfigureServices and Configure methods
 
 Please take a look at our samples on GitHub:
 
-* [Full-featured ExtCore 6.0.0 framework sample web application](https://github.com/ExtCore/ExtCore-Sample);
-* [ExtCore framework 6.0.0 sample simplest web application](https://github.com/ExtCore/ExtCore-Sample-Simplest);
-* [ExtCore framework 6.0.0 sample MVC web application](https://github.com/ExtCore/ExtCore-Sample-Mvc);
-* [ExtCore framework 6.0.0 sample web application that uses file storage](https://github.com/ExtCore/ExtCore-Sample-FileStorage);
-* [ExtCore framework 6.0.0 sample web application that uses a database](https://github.com/ExtCore/ExtCore-Sample-Data);
-* [ExtCore framework 6.0.0 sample web application that uses Identity](https://github.com/ExtCore/ExtCore-Sample-Identity);
-* [ExtCore framework 6.0.0 sample web application with modular UI](https://github.com/ExtCore/ExtCore-Sample-Modular-Ui);
-* [ExtCore framework 6.0.0 advanced sample web application with modular UI](https://github.com/ExtCore/ExtCore-Sample-Modular-Ui-Adv);
-* [ExtCore framework 6.0.0 advanced sample accounting web application](https://github.com/ExtCore/ExtCore-Sample-Accounting);
-* [ExtCore framework 6.0.0 sample web application that registers a service inside the extension](https://github.com/ExtCore/ExtCore-Sample-Service);
-* [ExtCore framework 6.0.0 sample web application that uses the events](https://github.com/ExtCore/ExtCore-Sample-Events);
-* [ExtCore framework 6.0.0 sample API web application](https://github.com/ExtCore/ExtCore-Sample-Api).
+* [Full-featured ExtCore 7.0.0 framework sample web application](https://github.com/ExtCore/ExtCore-Sample);
+* [ExtCore framework 7.0.0 sample simplest web application](https://github.com/ExtCore/ExtCore-Sample-Simplest);
+* [ExtCore framework 7.0.0 sample MVC web application](https://github.com/ExtCore/ExtCore-Sample-Mvc);
+* [ExtCore framework 7.0.0 sample web application that uses file storage](https://github.com/ExtCore/ExtCore-Sample-FileStorage);
+* [ExtCore framework 7.0.0 sample web application that uses a database](https://github.com/ExtCore/ExtCore-Sample-Data);
+* [ExtCore framework 7.0.0 sample web application that uses Identity](https://github.com/ExtCore/ExtCore-Sample-Identity);
+* [ExtCore framework 7.0.0 sample web application with modular UI](https://github.com/ExtCore/ExtCore-Sample-Modular-Ui);
+* [ExtCore framework 7.0.0 advanced sample web application with modular UI](https://github.com/ExtCore/ExtCore-Sample-Modular-Ui-Adv);
+* [ExtCore framework 7.0.0 advanced sample accounting web application](https://github.com/ExtCore/ExtCore-Sample-Accounting);
+* [ExtCore framework 7.0.0 sample web application that registers a service inside the extension](https://github.com/ExtCore/ExtCore-Sample-Service);
+* [ExtCore framework 7.0.0 sample web application that uses the events](https://github.com/ExtCore/ExtCore-Sample-Events);
+* [ExtCore framework 7.0.0 sample API web application](https://github.com/ExtCore/ExtCore-Sample-Api).
 
-You can also download our [ready to use full-featured sample](http://extcore.net/files/ExtCore-Sample-6.0.0.zip).
-It contains everything you need to run ExtCore-based web application from Visual Studio 2019, including SQLite
+You can also download our [ready to use full-featured sample](http://extcore.net/files/ExtCore-Sample-7.0.0.zip).
+It contains everything you need to run ExtCore-based web application from Visual Studio 2022, including SQLite
 database with the test data.
 
 ### Tutorials
@@ -135,5 +133,3 @@ Website: http://extcore.net/
 Docs: http://docs.extcore.net/
 
 Author: http://sikorsky.pro/
-
-Patreon: https://www.patreon.com/dmitry_sikorsky (you can support this project)

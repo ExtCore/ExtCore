@@ -18,12 +18,12 @@ namespace ExtCore.Data
     /// <summary>
     /// Gets the URL of the extension.
     /// </summary>
-    public override string Url => "http://extcore.net/";
+    public override string Url => "https://extcore.net/";
 
     /// <summary>
     /// Gets the version of the extension.
     /// </summary>
-    public override string Version => "6.0.0";
+    public override string Version => "7.0.0";
 
     /// <summary>
     /// Gets the authors of the extension (separated by commas).

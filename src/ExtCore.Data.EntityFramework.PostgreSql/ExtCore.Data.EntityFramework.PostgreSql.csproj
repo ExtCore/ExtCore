@@ -4,16 +4,21 @@
     <Authors>Dmitry Sikorsky</Authors>
     <Copyright>Copyright © 2015 Dmitry Sikorsky</Copyright>
     <Description>The ExtCore.Data.EntityFramework extension component. Based on the ExtCore framework.</Description>
-    <VersionPrefix>6.0.0</VersionPrefix>
-    <TargetFramework>net5.0</TargetFramework>
+    <VersionPrefix>7.0.0</VersionPrefix>
+    <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>ExtCore.Data.EntityFramework.PostgreSql</AssemblyName>
     <PackageId>ExtCore.Data.EntityFramework.PostgreSql</PackageId>
-    <PackageIconUrl>http://extcore.net/extcore_nuget_icon.png</PackageIconUrl>
-    <PackageProjectUrl>http://extcore.net/</PackageProjectUrl>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageProjectUrl>https://extcore.net/</PackageProjectUrl>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.1" />
+    <None Include="icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.2" />
   </ItemGroup>
 
   <ItemGroup>
