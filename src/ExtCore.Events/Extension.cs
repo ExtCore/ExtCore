@@ -23,7 +23,7 @@ namespace ExtCore.Events
     /// <summary>
     /// Gets the version of the extension.
     /// </summary>
-    public override string Version => "7.0.0";
+    public override string Version => "7.0.1";
 
     /// <summary>
     /// Gets the authors of the extension (separated by commas).
