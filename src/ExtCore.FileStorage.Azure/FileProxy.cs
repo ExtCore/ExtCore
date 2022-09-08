@@ -1,25 +1,25 @@
-﻿// Copyright © 2018 Dmitry Sikorsky. All rights reserved.
+﻿// Copyright © 2022 Dmitry Sikorsky. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
 using System.IO;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
-using Dropbox.Api;
-using Dropbox.Api.Files;
-using Dropbox.Api.Stone;
+using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 using ExtCore.FileStorage.Abstractions;
 
-namespace ExtCore.FileStorage.Dropbox
+namespace ExtCore.FileStorage.Azure
 {
   /// <summary>
-  /// Implements the <see cref="IDirectoryProxy">IDirectoryProxy</see> interface and represents a file in a Dropbox account.
+  /// Implements the <see cref="IDirectoryProxy">IDirectoryProxy</see> interface and represents a file in a Azure Storage account.
   /// </summary>
   public class FileProxy : IFileProxy
   {
-    private readonly string accessToken;
-    private readonly string rootPath;
+    private readonly string connectionString;
     private readonly string filepath;
+    private readonly string containerName;
+    private readonly string blobName;
 
     /// <summary>
     /// The path of the underlying file relatively to the root one.
@@ -34,19 +34,19 @@ namespace ExtCore.FileStorage.Dropbox
     /// <summary>
     /// Initializes a new instance of the <see cref="FileProxy">FileProxy</see> class.
     /// </summary>
-    /// <param name="accessToken">The Dropbox's account access token.</param>
+    /// <param name="connectionString">The Azure Storage account connection string.</param>
     /// <param name="rootPath">The root path of the underlying file's relative one.</param>
     /// <param name="relativePath">The path of the underlying file relatively to the root one.</param>
     /// <param name="filename">The filename of the underlying file.</param>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public FileProxy(string accessToken, string rootPath, string relativePath, string filename)
+    public FileProxy(string connectionString, string rootPath, string relativePath, string filename)
     {
-      if (accessToken == string.Empty)
-        throw new ArgumentException($"Value can't be empty. Parameter name: accessToken.");
+      if (connectionString == string.Empty)
+        throw new ArgumentException($"Value can't be empty. Parameter name: connectionString.");
 
-      if (accessToken == null)
-        throw new ArgumentNullException($"Value can't be null. Parameter name: accessToken.", default(Exception));
+      if (connectionString == null)
+        throw new ArgumentNullException($"Value can't be null. Parameter name: connectionString.", default(Exception));
 
       if (filename == string.Empty)
         throw new ArgumentException($"Value can't be empty. Parameter name: filename.");
@@ -54,11 +54,15 @@ namespace ExtCore.FileStorage.Dropbox
       if (filename == null)
         throw new ArgumentNullException($"Value can't be null. Parameter name: filename.", default(Exception));
 
-      this.accessToken = accessToken;
-      this.rootPath = RelativeUrl.Combine(rootPath);
+      this.connectionString = connectionString;
       this.RelativePath = RelativeUrl.Combine(relativePath);
       this.Filename = filename;
-      this.filepath = RelativeUrl.Combine(this.rootPath, this.RelativePath, this.Filename);
+      this.filepath = RelativeUrl.Combine(rootPath, this.RelativePath, this.Filename);
+
+      string[] urlSegments = filepath.Split('/');
+
+      this.containerName = urlSegments.First();
+      this.blobName = string.Join("/", urlSegments.Skip(1));
     }
 
     /// <summary>
@@ -69,15 +73,15 @@ namespace ExtCore.FileStorage.Dropbox
     {
       try
       {
-        using (DropboxClient dropboxClient = new DropboxClient(this.accessToken))
-        {
-          Metadata metadata = await dropboxClient.Files.GetMetadataAsync(this.filepath);
+        BlobClient blobClient = await this.GetBlobClient();
 
-          return metadata.IsFile;
-        }
+        return await blobClient.ExistsAsync();
       }
 
-      catch { return false; }
+      catch
+      {
+        return false;
+      }
     }
 
     /// <summary>
@@ -93,17 +97,9 @@ namespace ExtCore.FileStorage.Dropbox
     {
       try
       {
-        using (DropboxClient dropboxClient = new DropboxClient(this.accessToken))
-        using (IDownloadResponse<FileMetadata> response = await dropboxClient.Files.DownloadAsync(this.filepath))
-          return await response.GetContentAsStreamAsync();
-      }
+        BlobClient blobClient = await this.GetBlobClient();
 
-      catch (ApiException<DownloadError> e)
-      {
-        if (e.ErrorResponse.IsPath)
-          throw new DirectoryNotFoundException($"Directory not found: \"{this.filepath}\". See inner exception for details.", e);
-
-        throw new FileStorageException($"Generic file storage exception: \"{this.filepath}\". See inner exception for details.", e);
+        return (await blobClient.DownloadStreamingAsync()).Value.Content;
       }
 
       catch (Exception e)
@@ -125,17 +121,10 @@ namespace ExtCore.FileStorage.Dropbox
     {
       try
       {
-        using (DropboxClient dropboxClient = new DropboxClient(this.accessToken))
-        using (IDownloadResponse<FileMetadata> response = await dropboxClient.Files.DownloadAsync(this.filepath))
-          return await response.GetContentAsByteArrayAsync();
-      }
+        BlobClient blobClient = await this.GetBlobClient();
+        BlobDownloadResult downloadResult = await blobClient.DownloadContentAsync();
 
-      catch (ApiException<DownloadError> e)
-      {
-        if (e.ErrorResponse.IsPath)
-          throw new DirectoryNotFoundException($"Directory not found: \"{this.filepath}\". See inner exception for details.", e);
-
-        throw new FileStorageException($"Generic file storage exception: \"{this.filepath}\". See inner exception for details.", e);
+        return downloadResult.Content.ToArray();
       }
 
       catch (Exception e)
@@ -157,17 +146,10 @@ namespace ExtCore.FileStorage.Dropbox
     {
       try
       {
-        using (DropboxClient dropboxClient = new DropboxClient(this.accessToken))
-        using (IDownloadResponse<FileMetadata> response = await dropboxClient.Files.DownloadAsync(this.filepath))
-          return await response.GetContentAsStringAsync();
-      }
+        BlobClient blobClient = await this.GetBlobClient();
+        BlobDownloadResult downloadResult = await blobClient.DownloadContentAsync();
 
-      catch (ApiException<DownloadError> e)
-      {
-        if (e.ErrorResponse.IsPath)
-          throw new DirectoryNotFoundException($"Directory not found: \"{this.filepath}\". See inner exception for details.", e);
-
-        throw new FileStorageException($"Generic file storage exception: \"{this.filepath}\". See inner exception for details.", e);
+        return downloadResult.Content.ToString();
       }
 
       catch (Exception e)
@@ -189,8 +171,9 @@ namespace ExtCore.FileStorage.Dropbox
     {
       try
       {
-        using (DropboxClient dropboxClient = new DropboxClient(this.accessToken))
-          await dropboxClient.Files.UploadAsync(this.filepath, WriteMode.Overwrite.Instance, body: inputStream);
+        BlobClient blobClient = await this.GetBlobClient();
+
+        await blobClient.UploadAsync(inputStream);
       }
 
       catch (Exception e)
@@ -212,8 +195,9 @@ namespace ExtCore.FileStorage.Dropbox
     {
       try
       {
-        using (MemoryStream inputStream = new MemoryStream(bytes))
-          await this.WriteStreamAsync(inputStream);
+        BlobClient blobClient = await this.GetBlobClient();
+
+        await blobClient.UploadAsync(BinaryData.FromBytes(bytes));
       }
 
       catch (Exception e)
@@ -235,7 +219,9 @@ namespace ExtCore.FileStorage.Dropbox
     {
       try
       {
-        await this.WriteBytesAsync(Encoding.UTF8.GetBytes(text));
+        BlobClient blobClient = await this.GetBlobClient();
+
+        await blobClient.UploadAsync(BinaryData.FromString(text));
       }
 
       catch (Exception e)
@@ -256,22 +242,24 @@ namespace ExtCore.FileStorage.Dropbox
     {
       try
       {
-        using (DropboxClient dropboxClient = new DropboxClient(this.accessToken))
-          await dropboxClient.Files.DeleteV2Async(this.filepath);
-      }
+        BlobClient blobClient = await this.GetBlobClient();
 
-      catch (ApiException<ListFolderError> e)
-      {
-        if (e.ErrorResponse.IsPath)
-          throw new DirectoryNotFoundException($"Directory not found: \"{this.filepath}\". See inner exception for details.", e);
-
-        throw new FileStorageException($"Generic file storage exception: \"{this.filepath}\". See inner exception for details.", e);
+        await blobClient.DeleteAsync();
       }
 
       catch (Exception e)
       {
         throw new FileStorageException($"Generic file storage exception: \"{this.filepath}\". See inner exception for details.", e);
       }
+    }
+
+    private async Task<BlobClient> GetBlobClient()
+    {
+      BlobServiceClient blobServiceClient = new BlobServiceClient(this.connectionString);
+      BlobContainerClient blobContainerClient = blobServiceClient.GetBlobContainerClient(this.containerName);
+
+      await blobContainerClient.CreateIfNotExistsAsync(PublicAccessType.Blob);
+      return blobContainerClient.GetBlobClient(this.blobName);
     }
   }
 }

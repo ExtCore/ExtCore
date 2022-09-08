@@ -4,7 +4,7 @@
     <Authors>Dmitry Sikorsky</Authors>
     <Copyright>Copyright © 2015 Dmitry Sikorsky</Copyright>
     <Description>The ExtCore.Data.EntityFramework extension component. Based on the ExtCore framework.</Description>
-    <VersionPrefix>7.0.1</VersionPrefix>
+    <VersionPrefix>7.1.0</VersionPrefix>
     <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>ExtCore.Data.EntityFramework.SqlServer</AssemblyName>
     <PackageId>ExtCore.Data.EntityFramework.SqlServer</PackageId>
@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.8" />
   </ItemGroup>
 
   <ItemGroup>
