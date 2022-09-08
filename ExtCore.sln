@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30711.63
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtCore.Infrastructure", "src\ExtCore.Infrastructure\ExtCore.Infrastructure.csproj", "{1A7B4E8E-9D6D-4DD2-862D-92A6BDDBC2C8}"
 EndProject
@@ -58,6 +58,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtCore.FileStorage.Dropbox", "src\ExtCore.FileStorage.Dropbox\ExtCore.FileStorage.Dropbox.csproj", "{D9FA3F92-D638-434D-9C0C-E74A6BCFDE7A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtCore.FileStorage.FileSystem", "src\ExtCore.FileStorage.FileSystem\ExtCore.FileStorage.FileSystem.csproj", "{2031A605-DB91-4998-94DB-8012C590152B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtCore.FileStorage.Azure", "src\ExtCore.FileStorage.Azure\ExtCore.FileStorage.Azure.csproj", "{6BDBDD17-3529-4A03-8DF1-25BEF8577E9B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -153,6 +155,10 @@ Global
 		{2031A605-DB91-4998-94DB-8012C590152B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2031A605-DB91-4998-94DB-8012C590152B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2031A605-DB91-4998-94DB-8012C590152B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BDBDD17-3529-4A03-8DF1-25BEF8577E9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BDBDD17-3529-4A03-8DF1-25BEF8577E9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BDBDD17-3529-4A03-8DF1-25BEF8577E9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BDBDD17-3529-4A03-8DF1-25BEF8577E9B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -178,6 +184,7 @@ Global
 		{EED241F9-4900-4FB0-91FD-432A5F40983D} = {2093A913-AB5F-4597-839E-A472E25D37D8}
 		{D9FA3F92-D638-434D-9C0C-E74A6BCFDE7A} = {2093A913-AB5F-4597-839E-A472E25D37D8}
 		{2031A605-DB91-4998-94DB-8012C590152B} = {2093A913-AB5F-4597-839E-A472E25D37D8}
+		{6BDBDD17-3529-4A03-8DF1-25BEF8577E9B} = {2093A913-AB5F-4597-839E-A472E25D37D8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DF807CB9-3F57-4CF4-B501-26F9D4BB417C}
