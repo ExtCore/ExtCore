@@ -116,7 +116,14 @@ namespace ExtCore.FileStorage.Azure
       {
         BlobContainerClient blobContainerClient = this.GetBlobContainerClient();
 
-        IAsyncEnumerable<Page<BlobHierarchyItem>> pages = blobContainerClient.GetBlobsByHierarchyAsync(prefix: this.prefix + "/", delimiter: recursive ? null : "/").AsPages();
+        if (string.IsNullOrEmpty(this.prefix))
+        {
+          await blobContainerClient.DeleteAsync();
+          return;
+        }
+
+        string prefix = this.prefix + "/";
+        IAsyncEnumerable<Page<BlobHierarchyItem>> pages = blobContainerClient.GetBlobsByHierarchyAsync(prefix: prefix, delimiter: recursive ? null : "/").AsPages();
 
         await foreach (Page<BlobHierarchyItem> page in pages)
         {
