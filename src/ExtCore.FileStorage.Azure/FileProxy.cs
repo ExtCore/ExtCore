@@ -98,8 +98,11 @@ namespace ExtCore.FileStorage.Azure
       try
       {
         BlobClient blobClient = await this.GetBlobClient();
+        MemoryStream stream = new MemoryStream();
 
-        return (await blobClient.DownloadStreamingAsync()).Value.Content;
+        await blobClient.DownloadToAsync(stream);
+        stream.Position = 0;
+        return stream;
       }
 
       catch (Exception e)
