@@ -261,7 +261,7 @@ namespace ExtCore.FileStorage.Azure
       BlobServiceClient blobServiceClient = new BlobServiceClient(this.connectionString);
       BlobContainerClient blobContainerClient = blobServiceClient.GetBlobContainerClient(this.containerName);
 
-      await blobContainerClient.CreateIfNotExistsAsync(PublicAccessType.Blob);
+      await blobContainerClient.CreateIfNotExistsAsync();
       return blobContainerClient.GetBlobClient(this.blobName);
     }
   }
