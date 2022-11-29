@@ -4,8 +4,8 @@
     <Authors>Dmitry Sikorsky</Authors>
     <Copyright>Copyright © 2015 Dmitry Sikorsky</Copyright>
     <Description>The ExtCore.Mvc extension component. Based on the ExtCore framework.</Description>
-    <VersionPrefix>7.1.3</VersionPrefix>
-    <TargetFramework>net6.0</TargetFramework>
+    <VersionPrefix>8.0.0</VersionPrefix>
+    <TargetFramework>net7.0</TargetFramework>
     <AssemblyName>ExtCore.Mvc.Infrastructure</AssemblyName>
     <PackageId>ExtCore.Mvc.Infrastructure</PackageId>
     <PackageIcon>icon.png</PackageIcon>

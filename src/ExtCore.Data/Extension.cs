@@ -23,7 +23,7 @@ namespace ExtCore.Data
     /// <summary>
     /// Gets the version of the extension.
     /// </summary>
-    public override string Version => "7.1.3";
+    public override string Version => "8.0.0";
 
     /// <summary>
     /// Gets the authors of the extension (separated by commas).

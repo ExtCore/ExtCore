@@ -4,8 +4,8 @@
     <Authors>Dmitry Sikorsky</Authors>
     <Copyright>Copyright © 2017 Dmitry Sikorsky</Copyright>
     <Description>The ExtCore.Data.Dapper extension component. Based on the ExtCore framework.</Description>
-    <VersionPrefix>7.1.3</VersionPrefix>
-    <TargetFramework>net6.0</TargetFramework>
+    <VersionPrefix>8.0.0</VersionPrefix>
+    <TargetFramework>net7.0</TargetFramework>
     <AssemblyName>ExtCore.Data.Dapper.MySql</AssemblyName>
     <PackageId>ExtCore.Data.Dapper.MySql</PackageId>
     <PackageIcon>icon.png</PackageIcon>
@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-	  <PackageReference Include="MySql.EntityFrameworkCore" Version="6.0.4" />
+	  <PackageReference Include="MySql.EntityFrameworkCore" Version="6.0.7" />
   </ItemGroup>
 
   <ItemGroup>
