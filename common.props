@@ -5,13 +5,9 @@
     <Copyright>Copyright © 2015 Dmitry Sikorsky</Copyright>
     <VersionPrefix>8.1.0</VersionPrefix>
     <LangVersion>8.0</LangVersion>
-    <PackageIcon>icon.png</PackageIcon>
+    <PackageIconUrl>https://extcore.net/images/extcore_framework_logo_s.png</PackageIconUrl>
     <PackageProjectUrl>https://extcore.net/</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Include="icon.png" Pack="true" PackagePath="\" />
-  </ItemGroup>
 
 </Project>
