@@ -47,17 +47,17 @@ namespace ExtCore.Data.EntityFramework
     /// <summary>
     /// Commits the changes made by all the repositories.
     /// </summary>
-    public void Save()
+    public int Save()
     {
-      (this.StorageContext as DbContext).SaveChanges();
+      return (this.StorageContext as DbContext).SaveChanges();
     }
 
     /// <summary>
     /// Asynchronously commits the changes made by all the repositories.
     /// </summary>
-    public async Task SaveAsync()
+    public async Task<int> SaveAsync()
     {
-      await (this.StorageContext as DbContext).SaveChangesAsync();
+      return await (this.StorageContext as DbContext).SaveChangesAsync();
     }
   }
 }

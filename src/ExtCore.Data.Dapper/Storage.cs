@@ -42,15 +42,17 @@ namespace ExtCore.Data.Dapper
     /// <summary>
     /// Commits the changes made by all the repositories.
     /// </summary>
-    public void Save()
+    public int Save()
     {
+      return -1;
     }
 
     /// <summary>
     /// Asynchronously commits the changes made by all the repositories.
     /// </summary>
-    public async Task SaveAsync()
+    public async Task<int> SaveAsync()
     {
+      return -1;
     }
   }
 }

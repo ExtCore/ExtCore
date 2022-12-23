@@ -4,7 +4,7 @@
     <Authors>Dmitry Sikorsky</Authors>
     <Copyright>Copyright © 2015 Dmitry Sikorsky</Copyright>
     <Description>Free, open source and cross-platform framework for creating modular and extendable web applications based on ASP.NET Core.</Description>
-    <VersionPrefix>8.0.0</VersionPrefix>
+    <VersionPrefix>8.1.0</VersionPrefix>
     <TargetFramework>net7.0</TargetFramework>
     <AssemblyName>ExtCore.WebApplication</AssemblyName>
     <PackageId>ExtCore.WebApplication</PackageId>

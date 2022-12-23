@@ -27,11 +27,11 @@ namespace ExtCore.Data.Abstractions
     /// <summary>
     /// Commits the changes made by all the repositories.
     /// </summary>
-    void Save();
+    int Save();
 
     /// <summary>
     /// Asynchronously commits the changes made by all the repositories.
     /// </summary>
-    Task SaveAsync();
+    Task<int> SaveAsync();
   }
 }
