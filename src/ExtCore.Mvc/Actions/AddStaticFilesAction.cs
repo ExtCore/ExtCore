@@ -9,44 +9,43 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 
-namespace ExtCore.Mvc.Actions
+namespace ExtCore.Mvc.Actions;
+
+/// <summary>
+/// Implements the <see cref="IConfigureServicesAction">IConfigureServicesAction</see> interface and
+/// creates and registers the composite file provider that contains resources from all the extensions.
+/// </summary>
+public class AddStaticFilesAction : IConfigureServicesAction
 {
   /// <summary>
-  /// Implements the <see cref="IConfigureServicesAction">IConfigureServicesAction</see> interface and
-  /// creates and registers the composite file provider that contains resources from all the extensions.
+  /// Priority of the action. The actions will be executed in the order specified by the priority (from smallest to largest).
   /// </summary>
-  public class AddStaticFilesAction : IConfigureServicesAction
+  public int Priority => 1000;
+
+  /// <summary>
+  /// Creates and registers the composite file provider that contains resources from all the extensions.
+  /// </summary>
+  /// <param name="services">
+  /// Will be provided by the ExtCore and might be used to register any service inside the DI.
+  /// </param>
+  /// <param name="serviceProvider">
+  /// Will be provided by the ExtCore and might be used to get any service that is registered inside the DI at this moment.
+  /// </param>
+  public void Execute(IServiceCollection services, IServiceProvider serviceProvider)
   {
-    /// <summary>
-    /// Priority of the action. The actions will be executed in the order specified by the priority (from smallest to largest).
-    /// </summary>
-    public int Priority => 1000;
+    serviceProvider.GetService<IWebHostEnvironment>().WebRootFileProvider = this.CreateCompositeFileProvider(serviceProvider);
+  }
 
-    /// <summary>
-    /// Creates and registers the composite file provider that contains resources from all the extensions.
-    /// </summary>
-    /// <param name="services">
-    /// Will be provided by the ExtCore and might be used to register any service inside the DI.
-    /// </param>
-    /// <param name="serviceProvider">
-    /// Will be provided by the ExtCore and might be used to get any service that is registered inside the DI at this moment.
-    /// </param>
-    public void Execute(IServiceCollection services, IServiceProvider serviceProvider)
-    {
-      serviceProvider.GetService<IWebHostEnvironment>().WebRootFileProvider = this.CreateCompositeFileProvider(serviceProvider);
-    }
+  private IFileProvider CreateCompositeFileProvider(IServiceProvider serviceProvider)
+  {
+    IFileProvider[] fileProviders = new IFileProvider[] {
+      serviceProvider.GetService<IWebHostEnvironment>().WebRootFileProvider
+    };
 
-    private IFileProvider CreateCompositeFileProvider(IServiceProvider serviceProvider)
-    {
-      IFileProvider[] fileProviders = new IFileProvider[] {
-        serviceProvider.GetService<IWebHostEnvironment>().WebRootFileProvider
-      };
-
-      return new CompositeFileProvider(
-        fileProviders.Concat(
-          ExtensionManager.Assemblies.Select(a => new EmbeddedFileProvider(a, a.GetName().Name))
-        )
-      );
-    }
+    return new CompositeFileProvider(
+      fileProviders.Concat(
+        ExtensionManager.Assemblies.Select(a => new EmbeddedFileProvider(a, a.GetName().Name))
+      )
+    );
   }
 }

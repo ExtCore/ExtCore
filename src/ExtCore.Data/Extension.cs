@@ -3,31 +3,30 @@
 
 using ExtCore.Infrastructure;
 
-namespace ExtCore.Data
+namespace ExtCore.Data;
+
+/// <summary>
+/// Overrides the <see cref="ExtensionBase">ExtensionBase</see> class and provides the ExtCore.Data extension information.
+/// </summary>
+public class Extension : ExtensionBase
 {
   /// <summary>
-  /// Overrides the <see cref="ExtensionBase">ExtensionBase</see> class and provides the ExtCore.Data extension information.
+  /// Gets the name of the extension.
   /// </summary>
-  public class Extension : ExtensionBase
-  {
-    /// <summary>
-    /// Gets the name of the extension.
-    /// </summary>
-    public override string Name => "ExtCore.Data";
+  public override string Name => "ExtCore.Data";
 
-    /// <summary>
-    /// Gets the URL of the extension.
-    /// </summary>
-    public override string Url => "https://extcore.net/";
+  /// <summary>
+  /// Gets the URL of the extension.
+  /// </summary>
+  public override string Url => "https://extcore.net/";
 
-    /// <summary>
-    /// Gets the version of the extension.
-    /// </summary>
-    public override string Version => "8.1.0";
+  /// <summary>
+  /// Gets the version of the extension.
+  /// </summary>
+  public override string Version => "8.1.0";
 
-    /// <summary>
-    /// Gets the authors of the extension (separated by commas).
-    /// </summary>
-    public override string Authors => "Dmitry Sikorsky";
-  }
+  /// <summary>
+  /// Gets the authors of the extension (separated by commas).
+  /// </summary>
+  public override string Authors => "Dmitry Sikorsky";
 }

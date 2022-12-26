@@ -5,18 +5,17 @@ using System;
 using System.IO;
 using System.Linq;
 
-namespace ExtCore.FileStorage.FileSystem
+namespace ExtCore.FileStorage.FileSystem;
+
+public static class AbsolutePath
 {
-  public static class AbsolutePath
+  public static string Combine(params string[] segments)
   {
-    public static string Combine(params string[] segments)
-    {
-      return string.Join(
-        Path.DirectorySeparatorChar.ToString(),
-        segments.Where(s => !string.IsNullOrEmpty(s)).Select(
-          s => string.Join(Path.DirectorySeparatorChar.ToString(), s.Split(new char[] { '/', '\\' }, StringSplitOptions.RemoveEmptyEntries))
-        ).Where(s => !string.IsNullOrEmpty(s))
-      );
-    }
+    return string.Join(
+      Path.DirectorySeparatorChar.ToString(),
+      segments.Where(s => !string.IsNullOrEmpty(s)).Select(
+        s => string.Join(Path.DirectorySeparatorChar.ToString(), s.Split(new char[] { '/', '\\' }, StringSplitOptions.RemoveEmptyEntries))
+      ).Where(s => !string.IsNullOrEmpty(s))
+    );
   }
 }

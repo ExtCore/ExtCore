@@ -3,15 +3,14 @@
 
 using System;
 
-namespace ExtCore.FileStorage
+namespace ExtCore.FileStorage;
+
+/// <summary>
+/// Represents an access denied file storage exception.
+/// </summary>
+public class AccessDeniedException : FileStorageException
 {
-  /// <summary>
-  /// Represents an access denied file storage exception.
-  /// </summary>
-  public class AccessDeniedException : FileStorageException
-  {
-    public AccessDeniedException() : base() { }
-    public AccessDeniedException(string message) : base(message) { }
-    public AccessDeniedException(string message, Exception innerException) : base(message, innerException) { }
-  }
+  public AccessDeniedException() : base() { }
+  public AccessDeniedException(string message) : base(message) { }
+  public AccessDeniedException(string message, Exception innerException) : base(message, innerException) { }
 }

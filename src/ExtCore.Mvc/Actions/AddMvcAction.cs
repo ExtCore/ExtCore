@@ -10,42 +10,41 @@ using ExtCore.Mvc.Infrastructure.Actions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace ExtCore.Mvc.Actions
+namespace ExtCore.Mvc.Actions;
+
+/// <summary>
+/// Implements the <see cref="IConfigureServicesAction">IConfigureServicesAction</see> interface and
+/// registers the MVC services inside the DI.
+/// </summary>
+public class AddMvcAction : IConfigureServicesAction
 {
   /// <summary>
-  /// Implements the <see cref="IConfigureServicesAction">IConfigureServicesAction</see> interface and
-  /// registers the MVC services inside the DI.
+  /// Priority of the action. The actions will be executed in the order specified by the priority (from smallest to largest).
   /// </summary>
-  public class AddMvcAction : IConfigureServicesAction
+  public int Priority => 10000;
+
+  /// <summary>
+  /// Registers the MVC services inside the DI.
+  /// </summary>
+  /// <param name="services">
+  /// Will be provided by the ExtCore and might be used to register any service inside the DI.
+  /// </param>
+  /// <param name="serviceProvider">
+  /// Will be provided by the ExtCore and might be used to get any service that is registered inside the DI at this moment.
+  /// </param>
+  public void Execute(IServiceCollection services, IServiceProvider serviceProvider)
   {
-    /// <summary>
-    /// Priority of the action. The actions will be executed in the order specified by the priority (from smallest to largest).
-    /// </summary>
-    public int Priority => 10000;
+    IMvcBuilder mvcBuilder = services.AddMvc();
 
-    /// <summary>
-    /// Registers the MVC services inside the DI.
-    /// </summary>
-    /// <param name="services">
-    /// Will be provided by the ExtCore and might be used to register any service inside the DI.
-    /// </param>
-    /// <param name="serviceProvider">
-    /// Will be provided by the ExtCore and might be used to get any service that is registered inside the DI at this moment.
-    /// </param>
-    public void Execute(IServiceCollection services, IServiceProvider serviceProvider)
+    foreach (Assembly assembly in ExtensionManager.Assemblies)
+      mvcBuilder.AddApplicationPart(assembly);
+
+    foreach (IAddMvcAction action in ExtensionManager.GetInstances<IAddMvcAction>().OrderBy(a => a.Priority))
     {
-      IMvcBuilder mvcBuilder = services.AddMvc();
+      ILogger logger = serviceProvider.GetService<ILoggerFactory>().CreateLogger("ExtCore.Mvc");
 
-      foreach (Assembly assembly in ExtensionManager.Assemblies)
-        mvcBuilder.AddApplicationPart(assembly);
-
-      foreach (IAddMvcAction action in ExtensionManager.GetInstances<IAddMvcAction>().OrderBy(a => a.Priority))
-      {
-        ILogger logger = serviceProvider.GetService<ILoggerFactory>().CreateLogger("ExtCore.Mvc");
-
-        logger.LogInformation("Executing AddMvc action '{0}'", action.GetType().FullName);
-        action.Execute(mvcBuilder, serviceProvider);
-      }
+      logger.LogInformation("Executing AddMvc action '{0}'", action.GetType().FullName);
+      action.Execute(mvcBuilder, serviceProvider);
     }
   }
 }

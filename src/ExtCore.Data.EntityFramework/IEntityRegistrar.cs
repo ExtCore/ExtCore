@@ -3,17 +3,16 @@
 
 using Microsoft.EntityFrameworkCore;
 
-namespace ExtCore.Data.EntityFramework
+namespace ExtCore.Data.EntityFramework;
+
+/// <summary>
+/// Describes a mechanism of registering entities inside the Entity Framework storage context.
+/// </summary>
+public interface IEntityRegistrar
 {
   /// <summary>
-  /// Describes a mechanism of registering entities inside the Entity Framework storage context.
+  /// Registers entities inside the Entity Framework storage context.
   /// </summary>
-  public interface IEntityRegistrar
-  {
-    /// <summary>
-    /// Registers entities inside the Entity Framework storage context.
-    /// </summary>
-    /// <param name="modelbuilder">The Entity Framework model builder.</param>
-    void RegisterEntities(ModelBuilder modelbuilder);
-  }
+  /// <param name="modelbuilder">The Entity Framework model builder.</param>
+  void RegisterEntities(ModelBuilder modelbuilder);
 }

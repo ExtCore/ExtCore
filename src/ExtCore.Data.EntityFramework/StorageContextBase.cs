@@ -5,38 +5,37 @@ using ExtCore.Data.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
-namespace ExtCore.Data.EntityFramework
+namespace ExtCore.Data.EntityFramework;
+
+/// <summary>
+/// Implements the <see cref="IStorageContext">IStorageContext</see> interface and represents the physical storage
+/// with the Entity Framework Core as the ORM.
+/// </summary>
+public abstract class StorageContextBase : DbContext, IStorageContext
 {
   /// <summary>
-  /// Implements the <see cref="IStorageContext">IStorageContext</see> interface and represents the physical storage
-  /// with the Entity Framework Core as the ORM.
+  /// The connection string that is used to connect to the physical storage.
   /// </summary>
-  public abstract class StorageContextBase : DbContext, IStorageContext
+  public string ConnectionString { get; private set; }
+
+  /// <summary>
+  /// The assembly name where migrations are maintained for this context.
+  /// </summary>
+  public string MigrationsAssembly { get; private set; }
+
+  /// <summary>
+  /// Initializes a new instance of the <see cref="StorageContext">StorageContext</see> class.
+  /// </summary>
+  /// <param name="connectionStringProvider">The connection string that is used to connect to the physical storage.</param>
+  public StorageContextBase(IOptions<StorageContextOptions> options)
   {
-    /// <summary>
-    /// The connection string that is used to connect to the physical storage.
-    /// </summary>
-    public string ConnectionString { get; private set; }
+    this.ConnectionString = options.Value.ConnectionString;
+    this.MigrationsAssembly = options.Value.MigrationsAssembly;
+  }
 
-    /// <summary>
-    /// The assembly name where migrations are maintained for this context.
-    /// </summary>
-    public string MigrationsAssembly { get; private set; }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="StorageContext">StorageContext</see> class.
-    /// </summary>
-    /// <param name="connectionStringProvider">The connection string that is used to connect to the physical storage.</param>
-    public StorageContextBase(IOptions<StorageContextOptions> options)
-    {
-      this.ConnectionString = options.Value.ConnectionString;
-      this.MigrationsAssembly = options.Value.MigrationsAssembly;
-    }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-      base.OnModelCreating(modelBuilder);
-      this.RegisterEntities(modelBuilder);
-    }
+  protected override void OnModelCreating(ModelBuilder modelBuilder)
+  {
+    base.OnModelCreating(modelBuilder);
+    this.RegisterEntities(modelBuilder);
   }
 }

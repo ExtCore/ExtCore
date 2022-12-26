@@ -3,15 +3,14 @@
 
 using System;
 
-namespace ExtCore.FileStorage
+namespace ExtCore.FileStorage;
+
+/// <summary>
+/// Represents a path too long file storage exception.
+/// </summary>
+public class PathTooLongException : FileStorageException
 {
-  /// <summary>
-  /// Represents a path too long file storage exception.
-  /// </summary>
-  public class PathTooLongException : FileStorageException
-  {
-    public PathTooLongException() : base() { }
-    public PathTooLongException(string message) : base(message) { }
-    public PathTooLongException(string message, Exception innerException) : base(message, innerException) { }
-  }
+  public PathTooLongException() : base() { }
+  public PathTooLongException(string message) : base(message) { }
+  public PathTooLongException(string message, Exception innerException) : base(message, innerException) { }
 }

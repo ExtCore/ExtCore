@@ -3,15 +3,14 @@
 
 using System;
 
-namespace ExtCore.FileStorage
+namespace ExtCore.FileStorage;
+
+/// <summary>
+/// Represents a generic file storage exception.
+/// </summary>
+public class FileStorageException : Exception
 {
-  /// <summary>
-  /// Represents a generic file storage exception.
-  /// </summary>
-  public class FileStorageException : Exception
-  {
-    public FileStorageException() : base() { }
-    public FileStorageException(string message) : base(message) { }
-    public FileStorageException(string message, Exception innerException) : base(message, innerException) { }
-  }
+  public FileStorageException() : base() { }
+  public FileStorageException(string message) : base(message) { }
+  public FileStorageException(string message, Exception innerException) : base(message, innerException) { }
 }

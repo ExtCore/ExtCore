@@ -10,41 +10,40 @@ using ExtCore.Infrastructure.Actions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace ExtCore.FileStorage.Actions
+namespace ExtCore.FileStorage.Actions;
+
+/// <summary>
+/// Implements the <see cref="IConfigureServicesAction">IConfigureServicesAction</see> interface and
+/// registers found implementation of the <see cref="IFileStorage">IFileStorage</see> interface inside the DI.
+/// </summary>
+public class AddFileStorageAction : IConfigureServicesAction
 {
   /// <summary>
-  /// Implements the <see cref="IConfigureServicesAction">IConfigureServicesAction</see> interface and
-  /// registers found implementation of the <see cref="IFileStorage">IFileStorage</see> interface inside the DI.
+  /// Priority of the action. The actions will be executed in the order specified by the priority (from smallest to largest).
   /// </summary>
-  public class AddFileStorageAction : IConfigureServicesAction
+  public int Priority => 1000;
+
+  /// <summary>
+  /// Registers found implementation of the <see cref="IFileStorage">IFileStorage</see> interface inside the DI.
+  /// </summary>
+  /// <param name="services">
+  /// Will be provided by the ExtCore and might be used to register any service inside the DI.
+  /// </param>
+  /// <param name="serviceProvider">
+  /// Will be provided by the ExtCore and might be used to get any service that is registered inside the DI at this moment.
+  /// </param>
+  public void Execute(IServiceCollection services, IServiceProvider serviceProvider)
   {
-    /// <summary>
-    /// Priority of the action. The actions will be executed in the order specified by the priority (from smallest to largest).
-    /// </summary>
-    public int Priority => 1000;
+    Type type = ExtensionManager.GetImplementations<IFileStorage>()?.FirstOrDefault(t => !t.GetTypeInfo().IsAbstract);
 
-    /// <summary>
-    /// Registers found implementation of the <see cref="IFileStorage">IFileStorage</see> interface inside the DI.
-    /// </summary>
-    /// <param name="services">
-    /// Will be provided by the ExtCore and might be used to register any service inside the DI.
-    /// </param>
-    /// <param name="serviceProvider">
-    /// Will be provided by the ExtCore and might be used to get any service that is registered inside the DI at this moment.
-    /// </param>
-    public void Execute(IServiceCollection services, IServiceProvider serviceProvider)
+    if (type == null)
     {
-      Type type = ExtensionManager.GetImplementations<IFileStorage>()?.FirstOrDefault(t => !t.GetTypeInfo().IsAbstract);
+      ILogger logger = serviceProvider.GetService<ILoggerFactory>().CreateLogger("ExtCore.FileStorage");
 
-      if (type == null)
-      {
-        ILogger logger = serviceProvider.GetService<ILoggerFactory>().CreateLogger("ExtCore.FileStorage");
-
-        logger.LogError("Implementation of ExtCore.FileStorage.Abstractions.IFileStorage not found");
-        return;
-      }
-
-      services.AddScoped(typeof(IFileStorage), type);
+      logger.LogError("Implementation of ExtCore.FileStorage.Abstractions.IFileStorage not found");
+      return;
     }
+
+    services.AddScoped(typeof(IFileStorage), type);
   }
 }

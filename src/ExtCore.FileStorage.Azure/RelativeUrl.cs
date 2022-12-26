@@ -4,18 +4,17 @@
 using System;
 using System.Linq;
 
-namespace ExtCore.FileStorage.Azure
+namespace ExtCore.FileStorage.Azure;
+
+public static class RelativeUrl
 {
-  public static class RelativeUrl
+  public static string Combine(params string[] segments)
   {
-    public static string Combine(params string[] segments)
-    {
-      return string.Join(
-        "/",
-        segments.Where(s => !string.IsNullOrEmpty(s)).Select(
-          s => string.Join("/", s.Split(new char[] { '/', '\\' }, StringSplitOptions.RemoveEmptyEntries))
-        ).Where(s => !string.IsNullOrEmpty(s))
-      );
-    }
+    return string.Join(
+      "/",
+      segments.Where(s => !string.IsNullOrEmpty(s)).Select(
+        s => string.Join("/", s.Split(new char[] { '/', '\\' }, StringSplitOptions.RemoveEmptyEntries))
+      ).Where(s => !string.IsNullOrEmpty(s))
+    );
   }
 }
