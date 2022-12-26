@@ -4,12 +4,10 @@
     <Authors>Dmitry Sikorsky</Authors>
     <Copyright>Copyright © 2015 Dmitry Sikorsky</Copyright>
     <VersionPrefix>8.1.0</VersionPrefix>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>8.0</LangVersion>
     <PackageIconUrl>https://extcore.net/images/extcore_framework_logo_s.png</PackageIconUrl>
-    <PackageProjectUrl>https://extcore.net</PackageProjectUrl>
+    <PackageProjectUrl>https://extcore.net/</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/ExtCore/ExtCore</RepositoryUrl>
   </PropertyGroup>
 
 </Project>
