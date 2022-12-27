@@ -10,41 +10,40 @@ using ExtCore.Infrastructure.Actions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace ExtCore.Data.EntityFramework.Actions
+namespace ExtCore.Data.EntityFramework.Actions;
+
+/// <summary>
+/// Implements the <see cref="IConfigureServicesAction">IConfigureServicesAction</see> interface and
+/// registers found implementation of the <see cref="IStorageContext">IStorageContext</see> interface inside the DI.
+/// </summary>
+public class AddStorageContextAction : IConfigureServicesAction
 {
   /// <summary>
-  /// Implements the <see cref="IConfigureServicesAction">IConfigureServicesAction</see> interface and
-  /// registers found implementation of the <see cref="IStorageContext">IStorageContext</see> interface inside the DI.
+  /// Priority of the action. The actions will be executed in the order specified by the priority (from smallest to largest).
   /// </summary>
-  public class AddStorageContextAction : IConfigureServicesAction
+  public int Priority => 1000;
+
+  /// <summary>
+  /// Registers found implementation of the <see cref="IStorageContext">IStorageContext</see> interface inside the DI.
+  /// </summary>
+  /// <param name="services">
+  /// Will be provided by the ExtCore and might be used to register any service inside the DI.
+  /// </param>
+  /// <param name="serviceProvider">
+  /// Will be provided by the ExtCore and might be used to get any service that is registered inside the DI at this moment.
+  /// </param>
+  public void Execute(IServiceCollection services, IServiceProvider serviceProvider)
   {
-    /// <summary>
-    /// Priority of the action. The actions will be executed in the order specified by the priority (from smallest to largest).
-    /// </summary>
-    public int Priority => 1000;
+    Type type = ExtensionManager.GetImplementations<IStorageContext>()?.FirstOrDefault(t => !t.GetTypeInfo().IsAbstract);
 
-    /// <summary>
-    /// Registers found implementation of the <see cref="IStorageContext">IStorageContext</see> interface inside the DI.
-    /// </summary>
-    /// <param name="services">
-    /// Will be provided by the ExtCore and might be used to register any service inside the DI.
-    /// </param>
-    /// <param name="serviceProvider">
-    /// Will be provided by the ExtCore and might be used to get any service that is registered inside the DI at this moment.
-    /// </param>
-    public void Execute(IServiceCollection services, IServiceProvider serviceProvider)
+    if (type == null)
     {
-      Type type = ExtensionManager.GetImplementations<IStorageContext>()?.FirstOrDefault(t => !t.GetTypeInfo().IsAbstract);
+      ILogger logger = serviceProvider.GetService<ILoggerFactory>().CreateLogger("ExtCore.Data.EntityFramework");
 
-      if (type == null)
-      {
-        ILogger logger = serviceProvider.GetService<ILoggerFactory>().CreateLogger("ExtCore.Data.EntityFramework");
-
-        logger.LogError("Implementation of ExtCore.Data.Abstractions.IStorageContext not found");
-        return;
-      }
-
-      services.AddScoped(typeof(IStorageContext), type);
+      logger.LogError("Implementation of ExtCore.Data.Abstractions.IStorageContext not found");
+      return;
     }
+
+    services.AddScoped(typeof(IStorageContext), type);
   }
 }

@@ -3,21 +3,20 @@
 
 using Microsoft.Extensions.Options;
 
-namespace ExtCore.Data.Dapper.Sqlite
+namespace ExtCore.Data.Dapper.Sqlite;
+
+/// <summary>
+/// Implements the <see cref="IStorageContext">IStorageContext</see> interface and represents SQLite database
+/// with the Dapper as the ORM.
+/// </summary>
+public class StorageContext : StorageContextBase
 {
   /// <summary>
-  /// Implements the <see cref="IStorageContext">IStorageContext</see> interface and represents SQLite database
-  /// with the Dapper as the ORM.
+  /// Initializes a new instance of the <see cref="StorageContext">StorageContext</see> class.
   /// </summary>
-  public class StorageContext : StorageContextBase
+  /// <param name="options">The options that are used to connect to the SQLite database.</param>
+  public StorageContext(IOptions<StorageContextOptions> options)
+    : base(options)
   {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="StorageContext">StorageContext</see> class.
-    /// </summary>
-    /// <param name="options">The options that are used to connect to the SQLite database.</param>
-    public StorageContext(IOptions<StorageContextOptions> options)
-      : base(options)
-    {
-    }
   }
 }

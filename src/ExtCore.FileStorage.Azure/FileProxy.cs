@@ -9,260 +9,259 @@ using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using ExtCore.FileStorage.Abstractions;
 
-namespace ExtCore.FileStorage.Azure
+namespace ExtCore.FileStorage.Azure;
+
+/// <summary>
+/// Implements the <see cref="IDirectoryProxy">IDirectoryProxy</see> interface and represents a file in a Azure Storage account.
+/// </summary>
+public class FileProxy : IFileProxy
 {
+  private readonly string connectionString;
+  private readonly string filepath;
+  private readonly string containerName;
+  private readonly string blobName;
+
   /// <summary>
-  /// Implements the <see cref="IDirectoryProxy">IDirectoryProxy</see> interface and represents a file in a Azure Storage account.
+  /// The path of the underlying file relatively to the root one.
   /// </summary>
-  public class FileProxy : IFileProxy
+  public string RelativePath { get; private set; }
+
+  /// <summary>
+  /// The filename of the underlying file.
+  /// </summary>
+  public string Filename { get; private set; }
+
+  /// <summary>
+  /// Initializes a new instance of the <see cref="FileProxy">FileProxy</see> class.
+  /// </summary>
+  /// <param name="connectionString">The Azure Storage account connection string.</param>
+  /// <param name="rootPath">The root path of the underlying file's relative one.</param>
+  /// <param name="relativePath">The path of the underlying file relatively to the root one.</param>
+  /// <param name="filename">The filename of the underlying file.</param>
+  /// <exception cref="ArgumentException"></exception>
+  /// <exception cref="ArgumentNullException"></exception>
+  public FileProxy(string connectionString, string rootPath, string relativePath, string filename)
   {
-    private readonly string connectionString;
-    private readonly string filepath;
-    private readonly string containerName;
-    private readonly string blobName;
+    if (connectionString == string.Empty)
+      throw new ArgumentException($"Value can't be empty. Parameter name: connectionString.");
 
-    /// <summary>
-    /// The path of the underlying file relatively to the root one.
-    /// </summary>
-    public string RelativePath { get; private set; }
+    if (connectionString == null)
+      throw new ArgumentNullException($"Value can't be null. Parameter name: connectionString.", default(Exception));
 
-    /// <summary>
-    /// The filename of the underlying file.
-    /// </summary>
-    public string Filename { get; private set; }
+    if (filename == string.Empty)
+      throw new ArgumentException($"Value can't be empty. Parameter name: filename.");
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="FileProxy">FileProxy</see> class.
-    /// </summary>
-    /// <param name="connectionString">The Azure Storage account connection string.</param>
-    /// <param name="rootPath">The root path of the underlying file's relative one.</param>
-    /// <param name="relativePath">The path of the underlying file relatively to the root one.</param>
-    /// <param name="filename">The filename of the underlying file.</param>
-    /// <exception cref="ArgumentException"></exception>
-    /// <exception cref="ArgumentNullException"></exception>
-    public FileProxy(string connectionString, string rootPath, string relativePath, string filename)
+    if (filename == null)
+      throw new ArgumentNullException($"Value can't be null. Parameter name: filename.", default(Exception));
+
+    this.connectionString = connectionString;
+    this.RelativePath = RelativeUrl.Combine(relativePath);
+    this.Filename = filename;
+    this.filepath = RelativeUrl.Combine(rootPath, this.RelativePath, this.Filename);
+
+    string[] urlSegments = filepath.Split('/');
+
+    this.containerName = urlSegments.First();
+    this.blobName = string.Join("/", urlSegments.Skip(1));
+  }
+
+  /// <summary>
+  /// Checks if the underlying file exists.
+  /// </summary>
+  /// <returns>Returns a flag indicating if the underlying file exists.</returns>
+  public async Task<bool> ExistsAsync()
+  {
+    try
     {
-      if (connectionString == string.Empty)
-        throw new ArgumentException($"Value can't be empty. Parameter name: connectionString.");
+      BlobClient blobClient = await this.GetBlobClient();
 
-      if (connectionString == null)
-        throw new ArgumentNullException($"Value can't be null. Parameter name: connectionString.", default(Exception));
-
-      if (filename == string.Empty)
-        throw new ArgumentException($"Value can't be empty. Parameter name: filename.");
-
-      if (filename == null)
-        throw new ArgumentNullException($"Value can't be null. Parameter name: filename.", default(Exception));
-
-      this.connectionString = connectionString;
-      this.RelativePath = RelativeUrl.Combine(relativePath);
-      this.Filename = filename;
-      this.filepath = RelativeUrl.Combine(rootPath, this.RelativePath, this.Filename);
-
-      string[] urlSegments = filepath.Split('/');
-
-      this.containerName = urlSegments.First();
-      this.blobName = string.Join("/", urlSegments.Skip(1));
+      return await blobClient.ExistsAsync();
     }
 
-    /// <summary>
-    /// Checks if the underlying file exists.
-    /// </summary>
-    /// <returns>Returns a flag indicating if the underlying file exists.</returns>
-    public async Task<bool> ExistsAsync()
+    catch
     {
-      try
-      {
-        BlobClient blobClient = await this.GetBlobClient();
+      return false;
+    }
+  }
 
-        return await blobClient.ExistsAsync();
-      }
+  /// <summary>
+  /// Reads content of the underlying file as a byte array.
+  /// </summary>
+  /// <returns>Content of the underlying file as a byte array.</returns>
+  /// <exception cref="AccessDeniedException"></exception>
+  /// <exception cref="DirectoryNotFoundException"></exception>
+  /// <exception cref="FileNotFoundException"></exception>
+  /// <exception cref="PathTooLongException"></exception>
+  /// <exception cref="FileStorageException"></exception>
+  public async Task<Stream> ReadStreamAsync()
+  {
+    try
+    {
+      BlobClient blobClient = await this.GetBlobClient();
+      MemoryStream stream = new MemoryStream();
 
-      catch
-      {
-        return false;
-      }
+      await blobClient.DownloadToAsync(stream);
+      stream.Position = 0;
+      return stream;
     }
 
-    /// <summary>
-    /// Reads content of the underlying file as a byte array.
-    /// </summary>
-    /// <returns>Content of the underlying file as a byte array.</returns>
-    /// <exception cref="AccessDeniedException"></exception>
-    /// <exception cref="DirectoryNotFoundException"></exception>
-    /// <exception cref="FileNotFoundException"></exception>
-    /// <exception cref="PathTooLongException"></exception>
-    /// <exception cref="FileStorageException"></exception>
-    public async Task<Stream> ReadStreamAsync()
+    catch (Exception e)
     {
-      try
-      {
-        BlobClient blobClient = await this.GetBlobClient();
-        MemoryStream stream = new MemoryStream();
+      throw new FileStorageException($"Generic file storage exception: \"{this.filepath}\". See inner exception for details.", e);
+    }
+  }
 
-        await blobClient.DownloadToAsync(stream);
-        stream.Position = 0;
-        return stream;
-      }
+  /// <summary>
+  /// Reads content of the underlying file as a byte array.
+  /// </summary>
+  /// <returns>Content of the underlying file as a byte array.</returns>
+  /// <exception cref="AccessDeniedException"></exception>
+  /// <exception cref="DirectoryNotFoundException"></exception>
+  /// <exception cref="FileNotFoundException"></exception>
+  /// <exception cref="PathTooLongException"></exception>
+  /// <exception cref="FileStorageException"></exception>
+  public async Task<byte[]> ReadBytesAsync()
+  {
+    try
+    {
+      BlobClient blobClient = await this.GetBlobClient();
+      BlobDownloadResult downloadResult = await blobClient.DownloadContentAsync();
 
-      catch (Exception e)
-      {
-        throw new FileStorageException($"Generic file storage exception: \"{this.filepath}\". See inner exception for details.", e);
-      }
+      return downloadResult.Content.ToArray();
     }
 
-    /// <summary>
-    /// Reads content of the underlying file as a byte array.
-    /// </summary>
-    /// <returns>Content of the underlying file as a byte array.</returns>
-    /// <exception cref="AccessDeniedException"></exception>
-    /// <exception cref="DirectoryNotFoundException"></exception>
-    /// <exception cref="FileNotFoundException"></exception>
-    /// <exception cref="PathTooLongException"></exception>
-    /// <exception cref="FileStorageException"></exception>
-    public async Task<byte[]> ReadBytesAsync()
+    catch (Exception e)
     {
-      try
-      {
-        BlobClient blobClient = await this.GetBlobClient();
-        BlobDownloadResult downloadResult = await blobClient.DownloadContentAsync();
+      throw new FileStorageException($"Generic file storage exception: \"{this.filepath}\". See inner exception for details.", e);
+    }
+  }
 
-        return downloadResult.Content.ToArray();
-      }
+  /// <summary>
+  /// Reads content of the underlying file as a text string.
+  /// </summary>
+  /// <returns>Content of the underlying file as a text string.</returns>
+  /// <exception cref="AccessDeniedException"></exception>
+  /// <exception cref="DirectoryNotFoundException"></exception>
+  /// <exception cref="FileNotFoundException"></exception>
+  /// <exception cref="PathTooLongException"></exception>
+  /// <exception cref="FileStorageException"></exception>
+  public async Task<string> ReadTextAsync()
+  {
+    try
+    {
+      BlobClient blobClient = await this.GetBlobClient();
+      BlobDownloadResult downloadResult = await blobClient.DownloadContentAsync();
 
-      catch (Exception e)
-      {
-        throw new FileStorageException($"Generic file storage exception: \"{this.filepath}\". See inner exception for details.", e);
-      }
+      return downloadResult.Content.ToString();
     }
 
-    /// <summary>
-    /// Reads content of the underlying file as a text string.
-    /// </summary>
-    /// <returns>Content of the underlying file as a text string.</returns>
-    /// <exception cref="AccessDeniedException"></exception>
-    /// <exception cref="DirectoryNotFoundException"></exception>
-    /// <exception cref="FileNotFoundException"></exception>
-    /// <exception cref="PathTooLongException"></exception>
-    /// <exception cref="FileStorageException"></exception>
-    public async Task<string> ReadTextAsync()
+    catch (Exception e)
     {
-      try
-      {
-        BlobClient blobClient = await this.GetBlobClient();
-        BlobDownloadResult downloadResult = await blobClient.DownloadContentAsync();
+      throw new FileStorageException($"Generic file storage exception: \"{this.filepath}\". See inner exception for details.", e);
+    }
+  }
 
-        return downloadResult.Content.ToString();
-      }
+  /// <summary>
+  /// Writes content to the underlying file as a stream.
+  /// </summary>
+  /// <param name="inputStream">Content to write to the underlying file as a stream.</param>
+  /// <exception cref="ArgumentNullException"></exception>
+  /// <exception cref="AccessDeniedException"></exception>
+  /// <exception cref="DirectoryNotFoundException"></exception>
+  /// <exception cref="PathTooLongException"></exception>
+  /// <exception cref="FileStorageException"></exception>
+  public async Task WriteStreamAsync(Stream inputStream)
+  {
+    try
+    {
+      BlobClient blobClient = await this.GetBlobClient();
 
-      catch (Exception e)
-      {
-        throw new FileStorageException($"Generic file storage exception: \"{this.filepath}\". See inner exception for details.", e);
-      }
+      await blobClient.UploadAsync(inputStream);
     }
 
-    /// <summary>
-    /// Writes content to the underlying file as a stream.
-    /// </summary>
-    /// <param name="inputStream">Content to write to the underlying file as a stream.</param>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <exception cref="AccessDeniedException"></exception>
-    /// <exception cref="DirectoryNotFoundException"></exception>
-    /// <exception cref="PathTooLongException"></exception>
-    /// <exception cref="FileStorageException"></exception>
-    public async Task WriteStreamAsync(Stream inputStream)
+    catch (Exception e)
     {
-      try
-      {
-        BlobClient blobClient = await this.GetBlobClient();
+      throw new FileStorageException($"Generic file storage exception: \"{this.filepath}\". See inner exception for details.", e);
+    }
+  }
 
-        await blobClient.UploadAsync(inputStream);
-      }
+  /// <summary>
+  /// Writes content to the underlying file as a byte array.
+  /// </summary>
+  /// <param name="bytes">Content to write to the underlying file as a byte array.</param>
+  /// <exception cref="ArgumentNullException"></exception>
+  /// <exception cref="AccessDeniedException"></exception>
+  /// <exception cref="DirectoryNotFoundException"></exception>
+  /// <exception cref="PathTooLongException"></exception>
+  /// <exception cref="FileStorageException"></exception>
+  public async Task WriteBytesAsync(byte[] bytes)
+  {
+    try
+    {
+      BlobClient blobClient = await this.GetBlobClient();
 
-      catch (Exception e)
-      {
-        throw new FileStorageException($"Generic file storage exception: \"{this.filepath}\". See inner exception for details.", e);
-      }
+      await blobClient.UploadAsync(BinaryData.FromBytes(bytes));
     }
 
-    /// <summary>
-    /// Writes content to the underlying file as a byte array.
-    /// </summary>
-    /// <param name="bytes">Content to write to the underlying file as a byte array.</param>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <exception cref="AccessDeniedException"></exception>
-    /// <exception cref="DirectoryNotFoundException"></exception>
-    /// <exception cref="PathTooLongException"></exception>
-    /// <exception cref="FileStorageException"></exception>
-    public async Task WriteBytesAsync(byte[] bytes)
+    catch (Exception e)
     {
-      try
-      {
-        BlobClient blobClient = await this.GetBlobClient();
+      throw new FileStorageException($"Generic file storage exception: \"{this.filepath}\". See inner exception for details.", e);
+    }
+  }
 
-        await blobClient.UploadAsync(BinaryData.FromBytes(bytes));
-      }
+  /// <summary>
+  /// Writes content to the underlying file as a text string.
+  /// </summary>
+  /// <param name="text">Content to write to the underlying file as a text string.</param>
+  /// <exception cref="ArgumentNullException"></exception>
+  /// <exception cref="AccessDeniedException"></exception>
+  /// <exception cref="DirectoryNotFoundException"></exception>
+  /// <exception cref="PathTooLongException"></exception>
+  /// <exception cref="FileStorageException"></exception>
+  public async Task WriteTextAsync(string text)
+  {
+    try
+    {
+      BlobClient blobClient = await this.GetBlobClient();
 
-      catch (Exception e)
-      {
-        throw new FileStorageException($"Generic file storage exception: \"{this.filepath}\". See inner exception for details.", e);
-      }
+      await blobClient.UploadAsync(BinaryData.FromString(text));
     }
 
-    /// <summary>
-    /// Writes content to the underlying file as a text string.
-    /// </summary>
-    /// <param name="text">Content to write to the underlying file as a text string.</param>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <exception cref="AccessDeniedException"></exception>
-    /// <exception cref="DirectoryNotFoundException"></exception>
-    /// <exception cref="PathTooLongException"></exception>
-    /// <exception cref="FileStorageException"></exception>
-    public async Task WriteTextAsync(string text)
+    catch (Exception e)
     {
-      try
-      {
-        BlobClient blobClient = await this.GetBlobClient();
+      throw new FileStorageException($"Generic file storage exception: \"{this.filepath}\". See inner exception for details.", e);
+    }
+  }
 
-        await blobClient.UploadAsync(BinaryData.FromString(text));
-      }
+  /// <summary>
+  /// Deletes the underlying file.
+  /// </summary>
+  /// <exception cref="AccessDeniedException"></exception>
+  /// <exception cref="DirectoryNotFoundException"></exception>
+  /// <exception cref="FileNotFoundException"></exception>
+  /// <exception cref="PathTooLongException"></exception>
+  /// <exception cref="FileStorageException"></exception>
+  public async Task DeleteAsync()
+  {
+    try
+    {
+      BlobClient blobClient = await this.GetBlobClient();
 
-      catch (Exception e)
-      {
-        throw new FileStorageException($"Generic file storage exception: \"{this.filepath}\". See inner exception for details.", e);
-      }
+      await blobClient.DeleteAsync();
     }
 
-    /// <summary>
-    /// Deletes the underlying file.
-    /// </summary>
-    /// <exception cref="AccessDeniedException"></exception>
-    /// <exception cref="DirectoryNotFoundException"></exception>
-    /// <exception cref="FileNotFoundException"></exception>
-    /// <exception cref="PathTooLongException"></exception>
-    /// <exception cref="FileStorageException"></exception>
-    public async Task DeleteAsync()
+    catch (Exception e)
     {
-      try
-      {
-        BlobClient blobClient = await this.GetBlobClient();
-
-        await blobClient.DeleteAsync();
-      }
-
-      catch (Exception e)
-      {
-        throw new FileStorageException($"Generic file storage exception: \"{this.filepath}\". See inner exception for details.", e);
-      }
+      throw new FileStorageException($"Generic file storage exception: \"{this.filepath}\". See inner exception for details.", e);
     }
+  }
 
-    private async Task<BlobClient> GetBlobClient()
-    {
-      BlobServiceClient blobServiceClient = new BlobServiceClient(this.connectionString);
-      BlobContainerClient blobContainerClient = blobServiceClient.GetBlobContainerClient(this.containerName);
+  private async Task<BlobClient> GetBlobClient()
+  {
+    BlobServiceClient blobServiceClient = new BlobServiceClient(this.connectionString);
+    BlobContainerClient blobContainerClient = blobServiceClient.GetBlobContainerClient(this.containerName);
 
-      await blobContainerClient.CreateIfNotExistsAsync();
-      return blobContainerClient.GetBlobClient(this.blobName);
-    }
+    await blobContainerClient.CreateIfNotExistsAsync();
+    return blobContainerClient.GetBlobClient(this.blobName);
   }
 }

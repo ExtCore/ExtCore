@@ -3,15 +3,14 @@
 
 using System;
 
-namespace ExtCore.FileStorage
+namespace ExtCore.FileStorage;
+
+/// <summary>
+/// Represents a directory not found file storage exception.
+/// </summary>
+public class DirectoryNotFoundException : FileStorageException
 {
-  /// <summary>
-  /// Represents a directory not found file storage exception.
-  /// </summary>
-  public class DirectoryNotFoundException : FileStorageException
-  {
-    public DirectoryNotFoundException() : base() { }
-    public DirectoryNotFoundException(string message) : base(message) { }
-    public DirectoryNotFoundException(string message, Exception innerException) : base(message, innerException) { }
-  }
+  public DirectoryNotFoundException() : base() { }
+  public DirectoryNotFoundException(string message) : base(message) { }
+  public DirectoryNotFoundException(string message, Exception innerException) : base(message, innerException) { }
 }

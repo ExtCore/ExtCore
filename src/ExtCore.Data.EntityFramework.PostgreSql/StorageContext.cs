@@ -4,34 +4,33 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
-namespace ExtCore.Data.EntityFramework.PostgreSql
+namespace ExtCore.Data.EntityFramework.PostgreSql;
+
+/// <summary>
+/// Implements the <see cref="IStorageContext">IStorageContext</see> interface and represents PostgreSQL database
+/// with the Entity Framework Core as the ORM.
+/// </summary>
+public class StorageContext : StorageContextBase
 {
   /// <summary>
-  /// Implements the <see cref="IStorageContext">IStorageContext</see> interface and represents PostgreSQL database
-  /// with the Entity Framework Core as the ORM.
+  /// Initializes a new instance of the <see cref="StorageContext">StorageContext</see> class.
   /// </summary>
-  public class StorageContext : StorageContextBase
+  /// <param name="options">The options that are used to connect to the PostgreSQL database.</param>
+  public StorageContext(IOptions<StorageContextOptions> options) : base(options) { }
+
+  protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
   {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="StorageContext">StorageContext</see> class.
-    /// </summary>
-    /// <param name="options">The options that are used to connect to the PostgreSQL database.</param>
-    public StorageContext(IOptions<StorageContextOptions> options) : base(options) { }
+    base.OnConfiguring(optionsBuilder);
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-      base.OnConfiguring(optionsBuilder);
+    if (string.IsNullOrEmpty(this.MigrationsAssembly))
+      optionsBuilder.UseNpgsql(this.ConnectionString);
 
-      if (string.IsNullOrEmpty(this.MigrationsAssembly))
-        optionsBuilder.UseNpgsql(this.ConnectionString);
-
-      else optionsBuilder.UseNpgsql(
-        this.ConnectionString,
-        options =>
-        {
-          options.MigrationsAssembly(this.MigrationsAssembly);
-        }
-      );
-    }
+    else optionsBuilder.UseNpgsql(
+      this.ConnectionString,
+      options =>
+      {
+        options.MigrationsAssembly(this.MigrationsAssembly);
+      }
+    );
   }
 }
