@@ -25,13 +25,13 @@ public class DefaultAssemblyProvider : IAssemblyProvider
 
   /// <summary>
   /// Gets or sets the predicate that is used to filter discovered assemblies from a specific folder
-  /// before thay have been added to the resulting assemblies set.
+  /// before they have been added to the resulting assemblies set.
   /// </summary>
   public Func<Assembly, bool> IsCandidateAssembly { get; set; }
 
   /// <summary>
   /// Gets or sets the predicate that is used to filter discovered libraries from a web application dependencies
-  /// before thay have been added to the resulting assemblies set.
+  /// before they have been added to the resulting assemblies set.
   /// </summary>
   public Func<Library, bool> IsCandidateCompilationLibrary { get; set; }
 
