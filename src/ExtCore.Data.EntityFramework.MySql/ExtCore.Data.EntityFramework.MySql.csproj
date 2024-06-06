@@ -3,13 +3,13 @@
 
   <PropertyGroup>
     <Description>The ExtCore.Data.EntityFramework extension component. Based on the ExtCore framework.</Description>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <AssemblyName>ExtCore.Data.EntityFramework.MySql</AssemblyName>
     <PackageId>ExtCore.Data.EntityFramework.MySql</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MySql.EntityFrameworkCore" Version="6.0.7" />
+    <PackageReference Include="MySql.EntityFrameworkCore" Version="8.0.2" />
   </ItemGroup>
 
   <ItemGroup>

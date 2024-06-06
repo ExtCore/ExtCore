@@ -3,13 +3,13 @@
 
   <PropertyGroup>
     <Description>The ExtCore.Data.Dapper extension component. Based on the ExtCore framework.</Description>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <AssemblyName>ExtCore.Data.Dapper</AssemblyName>
     <PackageId>ExtCore.Data.Dapper</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.0.123" />
+    <PackageReference Include="Dapper" Version="2.1.35" />
   </ItemGroup>
 
   <ItemGroup>

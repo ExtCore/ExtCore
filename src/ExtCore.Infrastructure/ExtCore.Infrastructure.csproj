@@ -3,7 +3,7 @@
 
   <PropertyGroup>
     <Description>Free, open source and cross-platform framework for creating modular and extendable web applications based on ASP.NET Core.</Description>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <AssemblyName>ExtCore.Infrastructure</AssemblyName>
     <PackageId>ExtCore.Infrastructure</PackageId>
   </PropertyGroup>
